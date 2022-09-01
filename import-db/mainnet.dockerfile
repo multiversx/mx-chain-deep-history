@@ -26,4 +26,5 @@ COPY --from=builder "/lib/libwasmer_linux_amd64.so" "/lib/libwasmer_linux_amd64.
 COPY --from=builder "/workspace/elrond-config-mainnet" "/elrond/config/"
 
 EXPOSE 8080
+WORKDIR /elrond
 ENTRYPOINT ["/elrond/node", "--import-db=/data/import-db", "--working-directory=/data", "--import-db-no-sig-check", "--log-save", "--log-level=*:DEBUG", "--log-logger-name", "--rest-api-interface=0.0.0.0:8080"]
