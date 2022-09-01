@@ -22,7 +22,6 @@ RUN python3 /workspace/adjust_config.py --mode=main --file=/workspace/elrond-con
 FROM ubuntu:20.04
 
 COPY --from=builder "/go/elrond-go/cmd/node/node" "/elrond/"
-COPY --from=builder "/go/elrond-go/cmd/keygenerator/keygenerator" "/elrond/"
 COPY --from=builder "/lib/libwasmer_linux_amd64.so" "/lib/libwasmer_linux_amd64.so"
 COPY --from=builder "/workspace/elrond-config-mainnet" "/elrond/config/"
 
