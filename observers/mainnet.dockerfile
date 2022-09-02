@@ -27,4 +27,4 @@ COPY --from=builder "/workspace/elrond-config-mainnet" "/elrond/config/"
 
 EXPOSE 8080
 WORKDIR /elrond
-ENTRYPOINT ["/elrond/node", "--working-directory=/data", "--log-save", "--log-level=*:INFO", "--log-logger-name", "--rest-api-interface=0.0.0.0:8080", "--validator-key-pem-file=/data/observerKey.pem"]
+ENTRYPOINT ["/elrond/node", "--working-directory=/data", "--log-save", "--log-level=*:DEBUG", "--log-logger-name", "--rest-api-interface=0.0.0.0:8080", "--validator-key-pem-file=/data/observerKey.pem"]
