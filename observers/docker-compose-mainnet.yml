@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+  elrond-observers-mainnet-0:
+    ulimits:
+      nproc: 65535
+    image: elrond-observers-mainnet:latest
+    container_name: elrond-observers-mainnet-0
+    ports:
+      - "1080:8080"
+      - "17370:37373"
+    volumes:
+      - ${HOME}/deep-history-workdir/observers/mainnet/node-0:/data
+    command: --destination-shard-as-observer=0
+    networks:
+      elrond-observers-mainnet:
+        ipv4_address: 12.0.0.10
+    profiles:
+      - donotstart
+
+  elrond-observers-mainnet-1:
+    ulimits:
+      nproc: 65535
+    image: elrond-observers-mainnet:latest
+    container_name: elrond-observers-mainnet-1
+    ports:
+      - "1081:8080"
+      - "17371:37373"
+    volumes:
+      - ${HOME}/deep-history-workdir/observers/mainnet/node-1:/data
+    command: --destination-shard-as-observer=1
+    networks:
+      elrond-observers-mainnet:
+        ipv4_address: 12.0.0.11
+    profiles:
+      - donotstart
+
+  elrond-observers-mainnet-2:
+    ulimits:
+      nproc: 65535
+    image: elrond-observers-mainnet:latest
+    container_name: elrond-observers-mainnet-2
+    ports:
+      - "1082:8080"
+      - "17372:37373"
+    volumes:
+      - ${HOME}/deep-history-workdir/observers/mainnet/node-2:/data
+    command: --destination-shard-as-observer=2
+    networks:
+      elrond-observers-mainnet:
+        ipv4_address: 12.0.0.12
+
+  elrond-observers-mainnet-metachain:
+    ulimits:
+      nproc: 65535
+    image: elrond-observers-mainnet:latest
+    container_name: elrond-observers-mainnet-metachain
+    ports:
+      - "1083:8080"
+      - "17373:37373"
+    volumes:
+      - ${HOME}/deep-history-workdir/observers/mainnet/node-metachain:/data
+    command: --destination-shard-as-observer=metachain
+    networks:
+      elrond-observers-mainnet:
+        ipv4_address: 12.0.0.13
+    profiles:
+      - donotstart
+
+networks:
+  elrond-observers-mainnet:
+    ipam:
+      config:
+        - subnet: 12.0.0.0/24

@@ -15,7 +15,7 @@ RUN cp /go/pkg/mod/github.com/!elrond!network/arwen-wasm-vm@$(cat /go/elrond-go/
 # Adjust configuration files
 COPY "adjust_config.py" /workspace/
 RUN apt-get update && apt-get -y install python3-pip && pip3 install toml
-RUN python3 /workspace/adjust_config.py --mode=main --file=/workspace/elrond-config-devnet/config.toml --num-epochs-to-keep=$ARG NUM_EPOCHS_TO_KEEP && \
+RUN python3 /workspace/adjust_config.py --mode=main --file=/workspace/elrond-config-devnet/config.toml --num-epochs-to-keep=$NUM_EPOCHS_TO_KEEP && \
     python3 /workspace/adjust_config.py --mode=prefs --file=/workspace/elrond-config-devnet/prefs.toml
 
 # ===== SECOND STAGE ======
@@ -27,4 +27,4 @@ COPY --from=builder "/workspace/elrond-config-devnet" "/elrond/config/"
 
 EXPOSE 8080
 WORKDIR /elrond
-ENTRYPOINT ["/elrond/node", "--import-db=/data/import-db", "--working-directory=/data", "--import-db-no-sig-check", "--log-save", "--log-level=*:INFO", "--log-logger-name", "--rest-api-interface=0.0.0.0:8080"]
+ENTRYPOINT ["/elrond/node", "--working-directory=/data", "--log-save", "--log-level=*:INFO", "--log-logger-name", "--rest-api-interface=0.0.0.0:8080", "--validator-key-pem-file=/data/observerKey.pem"]

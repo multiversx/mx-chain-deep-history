@@ -31,9 +31,9 @@ mkdir -p ${DEVNET_DIR}/node-metachain/import-db
 Attach desired databases:
 
 ```
-export START_DB_0=${HOME}/downloads/mainnet_25_mar_2022_shard_0
-export START_DB_1=${HOME}/downloads/mainnet_25_mar_2022_shard_1
-export START_DB_2=${HOME}/downloads/mainnet_25_mar_2022_shard_2
+export START_DB_0=${HOME}/downloads/mainnet_28_mar_2022_shard_0
+export START_DB_1=${HOME}/downloads/mainnet_28_mar_2022_shard_1
+export START_DB_2=${HOME}/downloads/mainnet_28_mar_2022_shard_2
 
 export IMPORT_DB_0=${HOME}/downloads/mainnet_30_mar_2022_shard_0
 export IMPORT_DB_1=${HOME}/downloads/mainnet_30_mar_2022_shard_1
@@ -41,8 +41,8 @@ export IMPORT_DB_2=${HOME}/downloads/mainnet_30_mar_2022_shard_2
 ```
 
 ```
-sudo -R chown ${USER}:${USER} ${MAINNET_DIR}
-sudo -R chown ${USER}:${USER} ${DEVNET_DIR}
+sudo chown -R ${USER}:${USER} ${MAINNET_DIR}
+sudo chown -R ${USER}:${USER} ${DEVNET_DIR}
 
 # Mainnet 0
 rm -rf ${MAINNET_DIR}/node-0/db && cp -r ${START_DB_0} ${MAINNET_DIR}/node-0/db

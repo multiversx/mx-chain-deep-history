@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+  elrond-observers-devnet-0:
+    ulimits:
+      nproc: 65535
+    image: elrond-observers-devnet:latest
+    container_name: elrond-observers-devnet-0
+    ports:
+      - "2080:8080"
+      - "27370:37373"
+    volumes:
+      - ${HOME}/deep-history-workdir/observers/devnet/node-0:/data
+    command: --destination-shard-as-observer=0
+    networks:
+      elrond-observers-devnet:
+        ipv4_address: 12.0.0.10
+    profiles:
+      - donotstart
+
+  elrond-observers-devnet-1:
+    ulimits:
+      nproc: 65535
+    image: elrond-observers-devnet:latest
+    container_name: elrond-observers-devnet-1
+    ports:
+      - "2081:8080"
+      - "27371:37373"
+    volumes:
+      - ${HOME}/deep-history-workdir/observers/devnet/node-1:/data
+    command: --destination-shard-as-observer=1
+    networks:
+      elrond-observers-devnet:
+        ipv4_address: 12.0.0.11
+    profiles:
+      - donotstart
+
+  elrond-observers-devnet-2:
+    ulimits:
+      nproc: 65535
+    image: elrond-observers-devnet:latest
+    container_name: elrond-observers-devnet-2
+    ports:
+      - "2082:8080"
+      - "27372:37373"
+    volumes:
+      - ${HOME}/deep-history-workdir/observers/devnet/node-2:/data
+    command: --destination-shard-as-observer=2
+    networks:
+      elrond-observers-devnet:
+        ipv4_address: 12.0.0.12
+
+  elrond-observers-devnet-metachain:
+    ulimits:
+      nproc: 65535
+    image: elrond-observers-devnet:latest
+    container_name: elrond-observers-devnet-metachain
+    ports:
+      - "2083:8080"
+      - "27373:37373"
+    volumes:
+      - ${HOME}/deep-history-workdir/observers/devnet/node-metachain:/data
+    command: --destination-shard-as-observer=metachain
+    networks:
+      elrond-observers-devnet:
+        ipv4_address: 12.0.0.13
+    profiles:
+      - donotstart
+
+networks:
+  elrond-observers-devnet:
+    ipam:
+      config:
+        - subnet: 12.0.0.0/24
