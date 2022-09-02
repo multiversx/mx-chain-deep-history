@@ -19,12 +19,14 @@ def main(cli_args: List[str]):
     parser.add_argument("--mode", choices=MODES, required=True)
     parser.add_argument("--file", required=True)
     parser.add_argument("--api-simultaneous-requests", type=int, default=256)
+    parser.add_argument("--api-trie-operations-timeout", type=int, default=60000)
     parser.add_argument("--num-epochs-to-keep", type=int, default=1024)
 
     parsed_args = parser.parse_args(cli_args)
     mode = parsed_args.mode
     file = parsed_args.file
     api_simultaneous_requests = parsed_args.api_simultaneous_requests
+    api_trie_operations_timeout = parsed_args.api_trie_operations_timeout
     num_epochs_to_keep = parsed_args.num_epochs_to_keep
 
     data = toml.load(file)
@@ -36,6 +38,7 @@ def main(cli_args: List[str]):
         data["StoragePruning"]["AccountsTrieCleanOldEpochsData"] = False
         data["StoragePruning"]["NumEpochsToKeep"] = num_epochs_to_keep
         data["Antiflood"]["WebServer"]["SimultaneousRequests"] = api_simultaneous_requests
+        data["Antiflood"]["WebServer"]["TrieOperationsDeadlineMilliseconds"] = api_trie_operations_timeout
     elif mode == MODE_PREFS:
         data["Preferences"]["FullArchive"] = True
     else:
