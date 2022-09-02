@@ -4,7 +4,7 @@ services:
   elrond-observers-devnet-0:
     ulimits:
       nproc: 65535
-    image: elrond-observers-devnet:latest
+    image: elrond-observer-devnet:latest
     container_name: elrond-observers-devnet-0
     ports:
       - "2080:8080"
@@ -21,7 +21,7 @@ services:
   elrond-observers-devnet-1:
     ulimits:
       nproc: 65535
-    image: elrond-observers-devnet:latest
+    image: elrond-observer-devnet:latest
     container_name: elrond-observers-devnet-1
     ports:
       - "2081:8080"
@@ -38,7 +38,7 @@ services:
   elrond-observers-devnet-2:
     ulimits:
       nproc: 65535
-    image: elrond-observers-devnet:latest
+    image: elrond-observer-devnet:latest
     container_name: elrond-observers-devnet-2
     ports:
       - "2082:8080"
@@ -53,7 +53,7 @@ services:
   elrond-observers-devnet-metachain:
     ulimits:
       nproc: 65535
-    image: elrond-observers-devnet:latest
+    image: elrond-observer-devnet:latest
     container_name: elrond-observers-devnet-metachain
     ports:
       - "2083:8080"

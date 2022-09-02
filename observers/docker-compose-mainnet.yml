@@ -4,7 +4,7 @@ services:
   elrond-observers-mainnet-0:
     ulimits:
       nproc: 65535
-    image: elrond-observers-mainnet:latest
+    image: elrond-observer-mainnet:latest
     container_name: elrond-observers-mainnet-0
     ports:
       - "1080:8080"
@@ -21,7 +21,7 @@ services:
   elrond-observers-mainnet-1:
     ulimits:
       nproc: 65535
-    image: elrond-observers-mainnet:latest
+    image: elrond-observer-mainnet:latest
     container_name: elrond-observers-mainnet-1
     ports:
       - "1081:8080"
@@ -38,7 +38,7 @@ services:
   elrond-observers-mainnet-2:
     ulimits:
       nproc: 65535
-    image: elrond-observers-mainnet:latest
+    image: elrond-observer-mainnet:latest
     container_name: elrond-observers-mainnet-2
     ports:
       - "1082:8080"
@@ -53,7 +53,7 @@ services:
   elrond-observers-mainnet-metachain:
     ulimits:
       nproc: 65535
-    image: elrond-observers-mainnet:latest
+    image: elrond-observer-mainnet:latest
     container_name: elrond-observers-mainnet-metachain
     ports:
       - "1083:8080"
