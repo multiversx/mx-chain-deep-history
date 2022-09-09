@@ -1,0 +1,160 @@
+version: '3'
+
+services:
+  elrond-observers-mainnet-0:
+    ulimits:
+      nproc: 65535
+    image: elrond-observer-mainnet:latest
+    container_name: elrond-observers-mainnet-0
+    ports:
+      - "1080:8080"
+      - "17370:37373"
+    volumes:
+      - ${BASE_PATH}/deep-history-workdir/observers/mainnet/node-0:/data
+    command: --destination-shard-as-observer=0
+    networks:
+      elrond-observers-mainnet:
+        ipv4_address: 12.0.0.10
+    restart: always
+    profiles:
+      - mainnet
+      - shard-0
+
+  elrond-observers-mainnet-1:
+    ulimits:
+      nproc: 65535
+    image: elrond-observer-mainnet:latest
+    container_name: elrond-observers-mainnet-1
+    ports:
+      - "1081:8080"
+      - "17371:37373"
+    volumes:
+      - ${BASE_PATH}/deep-history-workdir/observers/mainnet/node-1:/data
+    command: --destination-shard-as-observer=1
+    networks:
+      elrond-observers-mainnet:
+        ipv4_address: 12.0.0.11
+    restart: always
+    profiles:
+      - mainnet
+      - shard-1
+
+  elrond-observers-mainnet-2:
+    ulimits:
+      nproc: 65535
+    image: elrond-observer-mainnet:latest
+    container_name: elrond-observers-mainnet-2
+    ports:
+      - "1082:8080"
+      - "17372:37373"
+    volumes:
+      - ${BASE_PATH}/deep-history-workdir/observers/mainnet/node-2:/data
+    command: --destination-shard-as-observer=2
+    networks:
+      elrond-observers-mainnet:
+        ipv4_address: 12.0.0.12
+    restart: always
+    profiles:
+      - mainnet
+      - shard-2
+
+  elrond-observers-mainnet-metachain:
+    ulimits:
+      nproc: 65535
+    image: elrond-observer-mainnet:latest
+    container_name: elrond-observers-mainnet-metachain
+    ports:
+      - "1083:8080"
+      - "17373:37373"
+    volumes:
+      - ${BASE_PATH}/deep-history-workdir/observers/mainnet/node-metachain:/data
+    command: --destination-shard-as-observer=metachain
+    networks:
+      elrond-observers-mainnet:
+        ipv4_address: 12.0.0.13
+    restart: always
+    profiles:
+      - mainnet
+      - shard-metachain
+
+  elrond-observers-devnet-0:
+    ulimits:
+      nproc: 65535
+    image: elrond-observer-devnet:latest
+    container_name: elrond-observers-devnet-0
+    ports:
+      - "2080:8080"
+      - "27370:37373"
+    volumes:
+      - ${BASE_PATH}/deep-history-workdir/observers/devnet/node-0:/data
+    command: --destination-shard-as-observer=0
+    networks:
+      elrond-observers-devnet:
+        ipv4_address: 12.0.0.20
+    restart: always
+    profiles:
+      - devnet
+      - shard-0
+
+  elrond-observers-devnet-1:
+    ulimits:
+      nproc: 65535
+    image: elrond-observer-devnet:latest
+    container_name: elrond-observers-devnet-1
+    ports:
+      - "2081:8080"
+      - "27371:37373"
+    volumes:
+      - ${BASE_PATH}/deep-history-workdir/observers/devnet/node-1:/data
+    command: --destination-shard-as-observer=1
+    networks:
+      elrond-observers-devnet:
+        ipv4_address: 12.0.0.21
+    restart: always
+    profiles:
+      - devnet
+      - shard-1
+
+  elrond-observers-devnet-2:
+    ulimits:
+      nproc: 65535
+    image: elrond-observer-devnet:latest
+    container_name: elrond-observers-devnet-2
+    ports:
+      - "2082:8080"
+      - "27372:37373"
+    volumes:
+      - ${BASE_PATH}/deep-history-workdir/observers/devnet/node-2:/data
+    command: --destination-shard-as-observer=2
+    networks:
+      elrond-observers-devnet:
+        ipv4_address: 12.0.0.22
+    restart: always
+    profiles:
+      - devnet
+      - shard-2
+
+  elrond-observers-devnet-metachain:
+    ulimits:
+      nproc: 65535
+    image: elrond-observer-devnet:latest
+    container_name: elrond-observers-devnet-metachain
+    ports:
+      - "2083:8080"
+      - "27373:37373"
+    volumes:
+      - ${BASE_PATH}/deep-history-workdir/observers/devnet/node-metachain:/data
+    command: --destination-shard-as-observer=metachain
+    networks:
+      elrond-observers-devnet:
+        ipv4_address: 12.0.0.23
+    restart: always
+    profiles:
+      - devnet
+      - shard-metachain
+
+networks:
+  elrond-observers-mainnet:
+    ipam:
+      config:
+        - subnet: 12.0.0.0/24
