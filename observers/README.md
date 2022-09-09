@@ -26,6 +26,7 @@ mkdir -p ${DEVNET_DIR}/node-0
 mkdir -p ${DEVNET_DIR}/node-1
 mkdir -p ${DEVNET_DIR}/node-2
 mkdir -p ${DEVNET_DIR}/node-metachain
+```
 
 ## Run the containers
 
