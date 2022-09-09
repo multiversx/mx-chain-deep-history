@@ -1,0 +1,76 @@
+version: '3'
+
+services:
+  elrond-import-db-devnet-0:
+    ulimits:
+      nproc: 65535
+    image: elrond-import-db-devnet:latest
+    container_name: elrond-import-db-devnet-0
+    ports:
+      - "5080:8080"
+      - "57370:37373"
+    volumes:
+      - ${HOME}/deep-history-workdir/import-db/devnet/node-0:/data
+    command: --destination-shard-as-observer=0
+    networks:
+      elrond-import-db-devnet:
+        ipv4_address: 11.0.0.10
+    profiles:
+      - donotstart
+
+  elrond-import-db-devnet-1:
+    ulimits:
+      nproc: 65535
+    image: elrond-import-db-devnet:latest
+    container_name: elrond-import-db-devnet-1
+    ports:
+      - "5081:8080"
+      - "57371:37373"
+    volumes:
+      - ${HOME}/deep-history-workdir/import-db/devnet/node-1:/data
+    command: --destination-shard-as-observer=1
+    networks:
+      elrond-import-db-devnet:
+        ipv4_address: 11.0.0.11
+    profiles:
+      - donotstart
+
+  elrond-import-db-devnet-2:
+    ulimits:
+      nproc: 65535
+    image: elrond-import-db-devnet:latest
+    container_name: elrond-import-db-devnet-2
+    ports:
+      - "5082:8080"
+      - "57372:37373"
+    volumes:
+      - ${HOME}/deep-history-workdir/import-db/devnet/node-2:/data
+    command: --destination-shard-as-observer=2
+    networks:
+      elrond-import-db-devnet:
+        ipv4_address: 11.0.0.12
+    profiles:
+      - donotstart
+
+  elrond-import-db-devnet-metachain:
+    ulimits:
+      nproc: 65535
+    image: elrond-import-db-devnet:latest
+    container_name: elrond-import-db-devnet-metachain
+    ports:
+      - "5083:8080"
+      - "57373:37373"
+    volumes:
+      - ${HOME}/deep-history-workdir/import-db/devnet/node-metachain:/data
+    command: --destination-shard-as-observer=metachain
+    networks:
+      elrond-import-db-devnet:
+        ipv4_address: 11.0.0.13
+    profiles:
+      - donotstart
+
+networks:
+  elrond-import-db-devnet:
+    ipam:
+      config:
+        - subnet: 11.0.0.0/24
