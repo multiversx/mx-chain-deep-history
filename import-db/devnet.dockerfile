@@ -5,7 +5,7 @@ ARG NUM_EPOCHS_TO_KEEP
 WORKDIR /workspace
 RUN git clone https://github.com/ElrondNetwork/elrond-config-devnet --branch=rc-2022-july --depth=1
 WORKDIR /go
-RUN git clone https://github.com/ElrondNetwork/elrond-go.git --branch=v1.3.37 --single-branch
+RUN git clone https://github.com/ElrondNetwork/elrond-go.git --branch=rc/2022-july --single-branch
 
 # Build node
 WORKDIR /go/elrond-go/cmd/node
@@ -15,7 +15,7 @@ RUN cp /go/pkg/mod/github.com/!elrond!network/arwen-wasm-vm@$(cat /go/elrond-go/
 # Adjust configuration files
 COPY "adjust_config.py" /workspace/
 RUN apt-get update && apt-get -y install python3-pip && pip3 install toml
-RUN python3 /workspace/adjust_config.py --mode=main --file=/workspace/elrond-config-devnet/config.toml --num-epochs-to-keep=$ARG NUM_EPOCHS_TO_KEEP && \
+RUN python3 /workspace/adjust_config.py --mode=main --file=/workspace/elrond-config-devnet/config.toml --num-epochs-to-keep=$NUM_EPOCHS_TO_KEEP && \
     python3 /workspace/adjust_config.py --mode=prefs --file=/workspace/elrond-config-devnet/prefs.toml
 
 # ===== SECOND STAGE ======

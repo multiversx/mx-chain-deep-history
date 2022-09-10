@@ -13,12 +13,11 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/mainnet/node-0:/data
     command: --destination-shard-as-observer=0
     networks:
-      elrond-import-db-mainnet:
+      elrond-import-db:
         ipv4_address: 10.0.0.10
     restart: always
     profiles:
-      - mainnet
-      - shard-0
+      - mainnet-0
 
   elrond-import-db-mainnet-1:
     ulimits:
@@ -32,12 +31,11 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/mainnet/node-1:/data
     command: --destination-shard-as-observer=1
     networks:
-      elrond-import-db-mainnet:
+      elrond-import-db:
         ipv4_address: 10.0.0.11
     restart: always
     profiles:
-      - mainnet
-      - shard-1
+      - mainnet-1
 
   elrond-import-db-mainnet-2:
     ulimits:
@@ -51,12 +49,11 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/mainnet/node-2:/data
     command: --destination-shard-as-observer=2
     networks:
-      elrond-import-db-mainnet:
+      elrond-import-db:
         ipv4_address: 10.0.0.12
     restart: always
     profiles:
-      - mainnet
-      - shard-2
+      - mainnet-2
 
   elrond-import-db-mainnet-metachain:
     ulimits:
@@ -70,12 +67,11 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/mainnet/node-metachain:/data
     command: --destination-shard-as-observer=metachain
     networks:
-      elrond-import-db-mainnet:
+      elrond-import-db:
         ipv4_address: 10.0.0.13
     restart: always
     profiles:
-      - mainnet
-      - shard-metachain
+      - mainnet-metachain
 
   elrond-import-db-devnet-0:
     ulimits:
@@ -89,12 +85,11 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/devnet/node-0:/data
     command: --destination-shard-as-observer=0
     networks:
-      elrond-import-db-devnet:
+      elrond-import-db:
         ipv4_address: 10.0.0.20
     restart: always
     profiles:
-      - devnet
-      - shard-0
+      - devnet-0
 
   elrond-import-db-devnet-1:
     ulimits:
@@ -108,12 +103,11 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/devnet/node-1:/data
     command: --destination-shard-as-observer=1
     networks:
-      elrond-import-db-devnet:
+      elrond-import-db:
         ipv4_address: 10.0.0.21
     restart: always
     profiles:
-      - devnet
-      - shard-1
+      - devnet-1
 
   elrond-import-db-devnet-2:
     ulimits:
@@ -127,12 +121,11 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/devnet/node-2:/data
     command: --destination-shard-as-observer=2
     networks:
-      elrond-import-db-devnet:
+      elrond-import-db:
         ipv4_address: 10.0.0.22
     restart: always
     profiles:
-      - devnet
-      - shard-2
+      - devnet-2
 
   elrond-import-db-devnet-metachain:
     ulimits:
@@ -146,15 +139,14 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/devnet/node-metachain:/data
     command: --destination-shard-as-observer=metachain
     networks:
-      elrond-import-db-devnet:
+      elrond-import-db:
         ipv4_address: 10.0.0.23
     restart: always
     profiles:
-      - devnet
-      - shard-metachain
+      - devnet-metachain
 
 networks:
-  elrond-import-db-mainnet:
+  elrond-import-db:
     ipam:
       config:
         - subnet: 10.0.0.0/24

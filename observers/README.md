@@ -32,8 +32,8 @@ mkdir -p ${DEVNET_DIR}/node-metachain
 ## Run the containers
 
 ```
-docker compose --file ./docker-compose-mainnet.yml --env-file ./custom.env --profile mainnet --profile shard-0 --project-name observers-mainnet up --detach
-docker compose --file ./docker-compose-devnet.yml --env-file ./custom.env --profile devnet --profile shard-0 --project-name observers-devnet up --detach
+docker compose --file ./docker-compose.yml --env-file ./custom.env --profile mainnet-0 --project-name observers-mainnet up --detach
+docker compose --file ./docker-compose.yml --env-file ./custom.env --profile devnet-0 --project-name observers-devnet up --detach
 ```
 
 ## Stop the containers

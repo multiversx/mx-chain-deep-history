@@ -3,8 +3,8 @@
 ## Build the Docker images
 
 ```
-docker image build --build-arg NUM_EPOCHS_TO_KEEP=128 --no-cache . -t elrond-import-db-mainnet:latest -f ./mainnet.dockerfile 
-docker image build --build-arg NUM_EPOCHS_TO_KEEP=128 --no-cache . -t elrond-import-db-devnet:latest -f ./devnet.dockerfile
+docker image build --build-arg NUM_EPOCHS_TO_KEEP=1024 --no-cache . -t elrond-import-db-mainnet:latest -f ./mainnet.dockerfile 
+docker image build --build-arg NUM_EPOCHS_TO_KEEP=1024 --no-cache . -t elrond-import-db-devnet:latest -f ./devnet.dockerfile
 ```
 
 ## Prepare filesystem
@@ -36,8 +36,8 @@ As desired, download, extract and attach node databases to `import-db` and `db` 
 ## Run the containers
 
 ```
-docker compose --file ./docker-compose.yml --env-file ./custom.env --profile mainnet --profile shard-0 --project-name import-db-mainnet up --detach
-docker compose --file ./docker-compose.yml --env-file ./custom.env --profile devnet --profile shard-0 --project-name import-db-devnet up --detach
+docker compose --file ./docker-compose.yml --env-file ./custom.env --profile mainnet-0 --project-name import-db-mainnet up --detach
+docker compose --file ./docker-compose.yml --env-file ./custom.env --profile devnet-0 --project-name import-db-devnet up --detach
 ```
 
 ## Stop the containers

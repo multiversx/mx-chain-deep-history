@@ -5,7 +5,7 @@ ARG NUM_EPOCHS_TO_KEEP
 WORKDIR /workspace
 RUN git clone https://github.com/ElrondNetwork/elrond-config-devnet --branch=rc-2022-july --depth=1
 WORKDIR /go
-RUN git clone https://github.com/ElrondNetwork/elrond-go.git --branch=v1.3.37 --single-branch
+RUN git clone https://github.com/ElrondNetwork/elrond-go.git --branch=rc/2022-july --single-branch
 
 # Build node
 WORKDIR /go/elrond-go/cmd/node
