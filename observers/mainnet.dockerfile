@@ -2,7 +2,7 @@ FROM golang:1.17.6 as builder
 
 # Clone repositories
 WORKDIR /workspace
-RUN git clone https://github.com/ElrondNetwork/elrond-config-mainnet --branch=V1.3.42.0-rosetta1 --depth=1
+RUN git clone https://github.com/ElrondNetwork/elrond-config-mainnet --branch=v1.3.42.0-rosetta1 --depth=1
 WORKDIR /go
 RUN git clone https://github.com/ElrondNetwork/elrond-go.git --branch=v1.3.42-rosetta1 --single-branch
 
