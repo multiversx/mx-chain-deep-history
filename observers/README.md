@@ -3,8 +3,8 @@
 ## Build the Docker images
 
 ```
-docker image build --build-arg NUM_EPOCHS_TO_KEEP=1024 --no-cache . -t elrond-observer-mainnet:latest -f ./mainnet.dockerfile 
-docker image build --build-arg NUM_EPOCHS_TO_KEEP=1024 --no-cache . -t elrond-observer-devnet:latest -f ./devnet.dockerfile
+docker image build --no-cache . -t elrond-observer-mainnet:latest -f ./mainnet.dockerfile 
+docker image build --no-cache . -t elrond-observer-devnet:latest -f ./devnet.dockerfile
 ```
 
 ## Prepare filesystem

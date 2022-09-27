@@ -1,5 +1,4 @@
 FROM golang:1.17.6 as builder
-ARG NUM_EPOCHS_TO_KEEP
 
 # Clone repositories
 WORKDIR /workspace
