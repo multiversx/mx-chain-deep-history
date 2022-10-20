@@ -1,5 +1,4 @@
 FROM golang:1.17.6 as builder
-ARG NUM_EPOCHS_TO_KEEP
 
 # Clone repositories
 WORKDIR /workspace
@@ -15,7 +14,7 @@ RUN cp /go/pkg/mod/github.com/!elrond!network/arwen-wasm-vm@$(cat /go/elrond-go/
 # Adjust configuration files
 COPY "adjust_config.py" /workspace/
 RUN apt-get update && apt-get -y install python3-pip && pip3 install toml
-RUN python3 /workspace/adjust_config.py --mode=main --file=/workspace/elrond-config-devnet/config.toml --num-epochs-to-keep=$NUM_EPOCHS_TO_KEEP && \
+RUN python3 /workspace/adjust_config.py --mode=main --file=/workspace/elrond-config-devnet/config.toml && \
     python3 /workspace/adjust_config.py --mode=prefs --file=/workspace/elrond-config-devnet/prefs.toml
 
 # ===== SECOND STAGE ======

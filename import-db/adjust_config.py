@@ -18,12 +18,10 @@ def main(cli_args: List[str]):
     parser = ArgumentParser()
     parser.add_argument("--mode", choices=MODES, required=True)
     parser.add_argument("--file", required=True)
-    parser.add_argument("--num-epochs-to-keep", type=int, default=128)
 
     parsed_args = parser.parse_args(cli_args)
     mode = parsed_args.mode
     file = parsed_args.file
-    num_epochs_to_keep = parsed_args.num_epochs_to_keep
 
     data = toml.load(file)
 
@@ -31,8 +29,8 @@ def main(cli_args: List[str]):
         data["GeneralSettings"]["StartInEpochEnabled"] = False
         data["DbLookupExtensions"]["Enabled"] = True
         data["StateTriesConfig"]["AccountsStatePruningEnabled"] = False
+        data["StoragePruning"]["ObserverCleanOldEpochsData"] = False
         data["StoragePruning"]["AccountsTrieCleanOldEpochsData"] = False
-        data["StoragePruning"]["NumEpochsToKeep"] = num_epochs_to_keep
     elif mode == MODE_PREFS:
         data["Preferences"]["FullArchive"] = True
     else:
