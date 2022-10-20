@@ -33,6 +33,7 @@ def main(cli_args: List[str]):
         data["GeneralSettings"]["StartInEpochEnabled"] = False
         data["DbLookupExtensions"]["Enabled"] = True
         data["StateTriesConfig"]["AccountsStatePruningEnabled"] = False
+        data["StoragePruning"]["ObserverCleanOldEpochsData"] = False
         data["StoragePruning"]["AccountsTrieCleanOldEpochsData"] = False
         data["Antiflood"]["WebServer"]["SimultaneousRequests"] = api_simultaneous_requests
         data["Antiflood"]["WebServer"]["TrieOperationsDeadlineMilliseconds"] = api_trie_operations_timeout
