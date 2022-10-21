@@ -1,4 +1,3 @@
-
 import logging
 import subprocess
 import sys
@@ -6,7 +5,8 @@ from argparse import ArgumentParser
 from pathlib import Path
 from typing import List
 
-from wizard import ux
+from wizard import io, ux
+from wizard.archives import ImportDbArchivesController
 from wizard.constants import (DEFAULT_ELROND_CONFIG_TAG, DEFAULT_ELROND_GO_TAG,
                               NETWORKS, SHARDS, SRC_IMPORT_DB)
 
@@ -19,9 +19,11 @@ def main(cli_args: List[str]):
     parser = ArgumentParser()
     parser.add_argument("--network", choices=NETWORKS, required=False)
     parser.add_argument("--shards", nargs="+", required=False)
+    parser.add_argument("--num-parallel-downloads", type=int, default=2)
     parsed_args = parser.parse_args(cli_args)
     network: str = parsed_args.network
     shards: List[str] = parsed_args.shards
+    num_parallel_downloads = parsed_args.num_parallel_downloads
 
     if not check_docker():
         return
@@ -32,10 +34,10 @@ def main(cli_args: List[str]):
     if not shards:
         shards = ux.ask_input_strings("Which shards (CSV)?", SHARDS)
 
-    wizard_import_db(network, shards)
+    wizard_import_db(network, shards, num_parallel_downloads)
 
 
-def wizard_import_db(network: str, shards: List[str]):
+def wizard_import_db(network: str, shards: List[str], num_parallel_downloads: int):
     image_name = f"elrond-deep-history-import-db-{network}"
 
     tags = get_available_image_tags(image_name)
@@ -50,6 +52,13 @@ def wizard_import_db(network: str, shards: List[str]):
         image_tag = ux.ask_choose_option(f"Pick a tag of the Docker image {image_name}:", tags)
 
     workspace = Path(ux.ask_input_string("Set a workspace", str(Path.home() / "deep-history-workspace")))
+
+    for shard in shards:
+        io.get_node_import_db_path(workspace, network, shard).mkdir(parents=True, exist_ok=True)
+        io.get_node_db_path(workspace, network, shard).mkdir(parents=True, exist_ok=True)
+
+    archives_controller = ImportDbArchivesController(workspace, network, shards, num_parallel_downloads)
+    archives_controller.download()
 
 
 def check_docker():

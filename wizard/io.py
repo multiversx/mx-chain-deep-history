@@ -7,3 +7,7 @@ def get_downloads_path(workspace: Path):
 
 def get_node_import_db_path(workspace: Path, network: str, shard: str) -> Path:
     return workspace / network / f"node-{shard}" / "import-db"
+
+
+def get_node_db_path(workspace: Path, network: str, shard: str) -> Path:
+    return workspace / network / f"node-{shard}" / "db"
