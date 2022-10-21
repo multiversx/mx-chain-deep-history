@@ -1,13 +1,30 @@
 # Import DB
 
-## Build the Docker images
+## Explicit setup
+
+### Build the Docker images
+
+Devnet:
 
 ```
-docker image build --no-cache . -t elrond-import-db-mainnet:latest -f ./mainnet.dockerfile 
-docker image build --no-cache . -t elrond-import-db-devnet:latest -f ./devnet.dockerfile
+docker image build \
+    --build-arg ELROND_CONFIG_NAME=elrond-config-devnet \
+    --build-arg ELROND_CONFIG_TAG=release-D1.3.46.0 \
+    --build-arg ELROND_GO_TAG=v1.3.46 \
+    --no-cache . -t elrond-deep-history-import-db-devnet:latest -f ./Dockerfile 
 ```
 
-## Prepare filesystem
+Mainnet:
+
+```
+docker image build \
+    --build-arg ELROND_CONFIG_NAME=elrond-config-mainnet \
+    --build-arg ELROND_CONFIG_TAG=release-v1.3.46.0 \
+    --build-arg ELROND_GO_TAG=v1.3.46 \
+    --no-cache . -t elrond-deep-history-import-db-mainnet:latest -f ./Dockerfile 
+```
+
+### Prepare filesystem
 
 ```
 export BASE_PATH=/home/elrond
@@ -29,18 +46,19 @@ mkdir -p ${DEVNET_DIR}/node-2/import-db
 mkdir -p ${DEVNET_DIR}/node-metachain/import-db
 ```
 
-## Attach databases
+### Attach databases
 
 As desired, download, extract and attach node databases to `import-db` and `db` folders.
 
-## Run the containers
+### Run the containers
 
 ```
-docker compose --file ./docker-compose.yml --env-file ./custom.env --profile mainnet-0 --project-name import-db-mainnet up --detach
-docker compose --file ./docker-compose.yml --env-file ./custom.env --profile devnet-0 --project-name import-db-devnet up --detach
+docker compose --file ./docker-compose.yml --env-file ./custom.env --profile mainnet-0 --project-name import-db-mainnet up --user $(id -u):$(id -g) --detach
+
+docker compose --file ./docker-compose.yml --env-file ./custom.env --profile devnet-0 --project-name import-db-devnet up --user $(id -u):$(id -g) --detach
 ```
 
-## Stop the containers
+### Stop the containers
 
 ```
 docker compose --project-name import-db-mainnet down

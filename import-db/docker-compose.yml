@@ -1,11 +1,11 @@
 version: '3'
 
 services:
-  elrond-import-db-mainnet-0:
+  elrond-deep-history-import-db-mainnet-0:
     ulimits:
       nproc: 65535
-    image: elrond-import-db-mainnet:latest
-    container_name: elrond-import-db-mainnet-0
+    image: elrond-deep-history-import-db-mainnet:latest
+    container_name: elrond-deep-history-import-db-mainnet-0
     ports:
       - "4080:8080"
       - "47370:37373"
@@ -13,17 +13,17 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/mainnet/node-0:/data
     command: --destination-shard-as-observer=0
     networks:
-      elrond-import-db:
+      elrond-deep-history-import-db:
         ipv4_address: 10.0.0.10
     restart: always
     profiles:
       - mainnet-0
 
-  elrond-import-db-mainnet-1:
+  elrond-deep-history-import-db-mainnet-1:
     ulimits:
       nproc: 65535
-    image: elrond-import-db-mainnet:latest
-    container_name: elrond-import-db-mainnet-1
+    image: elrond-deep-history-import-db-mainnet:latest
+    container_name: elrond-deep-history-import-db-mainnet-1
     ports:
       - "4081:8080"
       - "47371:37373"
@@ -31,17 +31,17 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/mainnet/node-1:/data
     command: --destination-shard-as-observer=1
     networks:
-      elrond-import-db:
+      elrond-deep-history-import-db:
         ipv4_address: 10.0.0.11
     restart: always
     profiles:
       - mainnet-1
 
-  elrond-import-db-mainnet-2:
+  elrond-deep-history-import-db-mainnet-2:
     ulimits:
       nproc: 65535
-    image: elrond-import-db-mainnet:latest
-    container_name: elrond-import-db-mainnet-2
+    image: elrond-deep-history-import-db-mainnet:latest
+    container_name: elrond-deep-history-import-db-mainnet-2
     ports:
       - "4082:8080"
       - "47372:37373"
@@ -49,17 +49,17 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/mainnet/node-2:/data
     command: --destination-shard-as-observer=2
     networks:
-      elrond-import-db:
+      elrond-deep-history-import-db:
         ipv4_address: 10.0.0.12
     restart: always
     profiles:
       - mainnet-2
 
-  elrond-import-db-mainnet-metachain:
+  elrond-deep-history-import-db-mainnet-metachain:
     ulimits:
       nproc: 65535
-    image: elrond-import-db-mainnet:latest
-    container_name: elrond-import-db-mainnet-metachain
+    image: elrond-deep-history-import-db-mainnet:latest
+    container_name: elrond-deep-history-import-db-mainnet-metachain
     ports:
       - "4083:8080"
       - "47373:37373"
@@ -67,17 +67,17 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/mainnet/node-metachain:/data
     command: --destination-shard-as-observer=metachain
     networks:
-      elrond-import-db:
+      elrond-deep-history-import-db:
         ipv4_address: 10.0.0.13
     restart: always
     profiles:
       - mainnet-metachain
 
-  elrond-import-db-devnet-0:
+  elrond-deep-history-import-db-devnet-0:
     ulimits:
       nproc: 65535
-    image: elrond-import-db-devnet:latest
-    container_name: elrond-import-db-devnet-0
+    image: elrond-deep-history-import-db-devnet:latest
+    container_name: elrond-deep-history-import-db-devnet-0
     ports:
       - "5080:8080"
       - "57370:37373"
@@ -85,17 +85,17 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/devnet/node-0:/data
     command: --destination-shard-as-observer=0
     networks:
-      elrond-import-db:
+      elrond-deep-history-import-db:
         ipv4_address: 10.0.0.20
     restart: always
     profiles:
       - devnet-0
 
-  elrond-import-db-devnet-1:
+  elrond-deep-history-import-db-devnet-1:
     ulimits:
       nproc: 65535
-    image: elrond-import-db-devnet:latest
-    container_name: elrond-import-db-devnet-1
+    image: elrond-deep-history-import-db-devnet:latest
+    container_name: elrond-deep-history-import-db-devnet-1
     ports:
       - "5081:8080"
       - "57371:37373"
@@ -103,17 +103,17 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/devnet/node-1:/data
     command: --destination-shard-as-observer=1
     networks:
-      elrond-import-db:
+      elrond-deep-history-import-db:
         ipv4_address: 10.0.0.21
     restart: always
     profiles:
       - devnet-1
 
-  elrond-import-db-devnet-2:
+  elrond-deep-history-import-db-devnet-2:
     ulimits:
       nproc: 65535
-    image: elrond-import-db-devnet:latest
-    container_name: elrond-import-db-devnet-2
+    image: elrond-deep-history-import-db-devnet:latest
+    container_name: elrond-deep-history-import-db-devnet-2
     ports:
       - "5082:8080"
       - "57372:37373"
@@ -121,17 +121,17 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/devnet/node-2:/data
     command: --destination-shard-as-observer=2
     networks:
-      elrond-import-db:
+      elrond-deep-history-import-db:
         ipv4_address: 10.0.0.22
     restart: always
     profiles:
       - devnet-2
 
-  elrond-import-db-devnet-metachain:
+  elrond-deep-history-import-db-devnet-metachain:
     ulimits:
       nproc: 65535
-    image: elrond-import-db-devnet:latest
-    container_name: elrond-import-db-devnet-metachain
+    image: elrond-deep-history-import-db-devnet:latest
+    container_name: elrond-deep-history-import-db-devnet-metachain
     ports:
       - "5083:8080"
       - "57373:37373"
@@ -139,14 +139,14 @@ services:
       - ${BASE_PATH}/deep-history-workdir/import-db/devnet/node-metachain:/data
     command: --destination-shard-as-observer=metachain
     networks:
-      elrond-import-db:
+      elrond-deep-history-import-db:
         ipv4_address: 10.0.0.23
     restart: always
     profiles:
       - devnet-metachain
 
 networks:
-  elrond-import-db:
+  elrond-deep-history-import-db:
     ipam:
       config:
         - subnet: 10.0.0.0/24
