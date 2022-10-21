@@ -1,0 +1,44 @@
+{
+    "networks": {
+        "devnet": {
+            "shards": {
+                "0": {
+                    "oldestArchive": "https://",
+                    "newestArchive": "https://"
+                },
+                "1": {
+                    "oldestArchive": "https://",
+                    "newestArchive": "https://"
+                },
+                "2": {
+                    "oldestArchive": "https://",
+                    "newestArchive": "https://"
+                },
+                "metachain": {
+                    "oldestArchive": "https://",
+                    "newestArchive": "https://"
+                }
+            }
+        },
+        "mainnet": {
+            "shards": {
+                "0": {
+                    "oldestArchive": "https://",
+                    "newestArchive": "https://"
+                },
+                "1": {
+                    "oldestArchive": "https://",
+                    "newestArchive": "https://"
+                },
+                "2": {
+                    "oldestArchive": "https://",
+                    "newestArchive": "https://"
+                },
+                "metachain": {
+                    "oldestArchive": "https://",
+                    "newestArchive": "https://"
+                }
+            }
+        }
+    }
+}
