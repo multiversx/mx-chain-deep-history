@@ -10,7 +10,7 @@ services:
       - "1080:8080"
       - "17370:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/observers/mainnet/node-0:/data
+      - ${BASE_PATH}/observers/mainnet/node-0:/data
     command: --destination-shard-as-observer=0 --serialize-snapshots --disable-consensus-watchdog
     networks:
       elrond-observers:
@@ -28,7 +28,7 @@ services:
       - "1081:8080"
       - "17371:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/observers/mainnet/node-1:/data
+      - ${BASE_PATH}/observers/mainnet/node-1:/data
     command: --destination-shard-as-observer=1 --serialize-snapshots --disable-consensus-watchdog
     networks:
       elrond-observers:
@@ -46,7 +46,7 @@ services:
       - "1082:8080"
       - "17372:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/observers/mainnet/node-2:/data
+      - ${BASE_PATH}/observers/mainnet/node-2:/data
     command: --destination-shard-as-observer=2 --serialize-snapshots --disable-consensus-watchdog
     networks:
       elrond-observers:
@@ -64,7 +64,7 @@ services:
       - "1083:8080"
       - "17373:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/observers/mainnet/node-metachain:/data
+      - ${BASE_PATH}/observers/mainnet/node-metachain:/data
     command: --destination-shard-as-observer=metachain --serialize-snapshots --disable-consensus-watchdog
     networks:
       elrond-observers:
@@ -82,7 +82,7 @@ services:
       - "2080:8080"
       - "27370:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/observers/devnet/node-0:/data
+      - ${BASE_PATH}/observers/devnet/node-0:/data
     command: --destination-shard-as-observer=0 --serialize-snapshots --disable-consensus-watchdog
     networks:
       elrond-observers:
@@ -100,7 +100,7 @@ services:
       - "2081:8080"
       - "27371:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/observers/devnet/node-1:/data
+      - ${BASE_PATH}/observers/devnet/node-1:/data
     command: --destination-shard-as-observer=1 --serialize-snapshots --disable-consensus-watchdog
     networks:
       elrond-observers:
@@ -118,7 +118,7 @@ services:
       - "2082:8080"
       - "27372:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/observers/devnet/node-2:/data
+      - ${BASE_PATH}/observers/devnet/node-2:/data
     command: --destination-shard-as-observer=2 --serialize-snapshots --disable-consensus-watchdog
     networks:
       elrond-observers:
@@ -136,7 +136,7 @@ services:
       - "2083:8080"
       - "27373:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/observers/devnet/node-metachain:/data
+      - ${BASE_PATH}/observers/devnet/node-metachain:/data
     command: --destination-shard-as-observer=metachain --serialize-snapshots --disable-consensus-watchdog
     networks:
       elrond-observers:

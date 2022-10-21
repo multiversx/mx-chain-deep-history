@@ -10,7 +10,7 @@ services:
       - "4080:8080"
       - "47370:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/import-db/mainnet/node-0:/data
+      - ${BASE_PATH}/import-db/mainnet/node-0:/data
     command: --destination-shard-as-observer=0
     networks:
       elrond-deep-history-import-db:
@@ -28,7 +28,7 @@ services:
       - "4081:8080"
       - "47371:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/import-db/mainnet/node-1:/data
+      - ${BASE_PATH}/import-db/mainnet/node-1:/data
     command: --destination-shard-as-observer=1
     networks:
       elrond-deep-history-import-db:
@@ -46,7 +46,7 @@ services:
       - "4082:8080"
       - "47372:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/import-db/mainnet/node-2:/data
+      - ${BASE_PATH}/import-db/mainnet/node-2:/data
     command: --destination-shard-as-observer=2
     networks:
       elrond-deep-history-import-db:
@@ -64,7 +64,7 @@ services:
       - "4083:8080"
       - "47373:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/import-db/mainnet/node-metachain:/data
+      - ${BASE_PATH}/import-db/mainnet/node-metachain:/data
     command: --destination-shard-as-observer=metachain
     networks:
       elrond-deep-history-import-db:
@@ -82,7 +82,7 @@ services:
       - "5080:8080"
       - "57370:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/import-db/devnet/node-0:/data
+      - ${BASE_PATH}/import-db/devnet/node-0:/data
     command: --destination-shard-as-observer=0
     networks:
       elrond-deep-history-import-db:
@@ -100,7 +100,7 @@ services:
       - "5081:8080"
       - "57371:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/import-db/devnet/node-1:/data
+      - ${BASE_PATH}/import-db/devnet/node-1:/data
     command: --destination-shard-as-observer=1
     networks:
       elrond-deep-history-import-db:
@@ -118,7 +118,7 @@ services:
       - "5082:8080"
       - "57372:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/import-db/devnet/node-2:/data
+      - ${BASE_PATH}/import-db/devnet/node-2:/data
     command: --destination-shard-as-observer=2
     networks:
       elrond-deep-history-import-db:
@@ -136,7 +136,7 @@ services:
       - "5083:8080"
       - "57373:37373"
     volumes:
-      - ${BASE_PATH}/deep-history-workdir/import-db/devnet/node-metachain:/data
+      - ${BASE_PATH}/import-db/devnet/node-metachain:/data
     command: --destination-shard-as-observer=metachain
     networks:
       elrond-deep-history-import-db:

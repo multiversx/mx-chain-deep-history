@@ -27,9 +27,10 @@ docker image build \
 ### Prepare filesystem
 
 ```
-export BASE_PATH=/home/elrond
-export MAINNET_DIR=${BASE_PATH}/deep-history-workdir/import-db/mainnet
-export DEVNET_DIR=${BASE_PATH}/deep-history-workdir/import-db/devnet
+source default.env
+
+export MAINNET_DIR=${BASE_PATH}/import-db/mainnet
+export DEVNET_DIR=${BASE_PATH}/import-db/devnet
 ```
 
 Create empty folders:

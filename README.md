@@ -9,5 +9,5 @@ Scripts, docker definitions and utility tools for creating and managing observer
 Run the following script and follow the provided instructions:
 
 ```
-python3 ./wizard.py
+python3 ./wizard/import-db.py --network=devnet --shards 0 1 2 metachain
 ```

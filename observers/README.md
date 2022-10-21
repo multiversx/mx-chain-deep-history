@@ -10,9 +10,10 @@ docker image build --no-cache . -t elrond-observer-devnet:latest -f ./devnet.doc
 ## Prepare filesystem
 
 ```
-export BASE_PATH=/home/elrond
-export MAINNET_DIR=${BASE_PATH}/deep-history-workdir/observers/mainnet
-export DEVNET_DIR=${BASE_PATH}/deep-history-workdir/observers/devnet
+source default.env
+
+export MAINNET_DIR=${BASE_PATH}/observers/mainnet
+export DEVNET_DIR=${BASE_PATH}/observers/devnet
 ```
 
 Create empty folders:
@@ -31,9 +32,17 @@ mkdir -p ${DEVNET_DIR}/node-metachain
 
 ## Run the containers
 
+First, create a `custom.env` file, following the example of `default.env`. Then, run the setup using `docker-compose`.
+
+Devnet:
+
+```
+docker compose --file ./docker-compose.yml --env-file ./custom.env --profile devnet-0 --project-name observers-devnet up --detach
+
+Mainnet:
+
 ```
 docker compose --file ./docker-compose.yml --env-file ./custom.env --profile mainnet-0 --project-name observers-mainnet up --detach
-docker compose --file ./docker-compose.yml --env-file ./custom.env --profile devnet-0 --project-name observers-devnet up --detach
 ```
 
 ## Stop the containers
