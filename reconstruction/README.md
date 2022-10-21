@@ -18,23 +18,33 @@ DOCKER_USER=$(id -u):$(id -g) docker compose --file ./docker-compose.yml \
     run -it --rm elrond-deep-history-reconstruction-bootstrap
 ```
 
-### Run the containers
+Once the bootstrap step is ready, you can proceed with running the reconstruction containers.
+
+For devnet:
 
 ```
-docker compose --file ./docker-compose.yml --env-file ./custom.env --profile mainnet-0 --project-name import-db-mainnet up --user $(id -u):$(id -g) --detach
+DOCKER_USER=$(id -u):$(id -g) docker compose --file ./docker-compose.yml \
+    --profile devnet-0 --profile devnet-1 --profile devnet-2 --profile devnet-metachain \
+    --project-name deep-history-reconstruction up --detach
+```
 
-docker compose --file ./docker-compose.yml --env-file ./custom.env --profile devnet-0 --project-name import-db-devnet up --user $(id -u):$(id -g) --detach
+For mainnet:
+
+```
+DOCKER_USER=$(id -u):$(id -g) docker compose --file ./docker-compose.yml \
+    --profile mainnet-0 --profile mainnet-1 --profile mainnet-2 --profile mainnet-metachain \
+    --project-name deep-history-reconstruction-mainnet up --detach
 ```
 
 ## For contributors (developers)
 
-### Build (and push) the Docker images
+### Build the Docker images
 
 Bootstrap:
 
 ```
 docker image build \
-    --no-cache . -t elrondnetwork/elrond-deep-history-reconstruction-bootstrap:latest -f ./Bootstrap.dockerfile 
+    --no-cache . -t elrondnetwork/elrond-deep-history-reconstruction-bootstrap:latest -f ./Bootstrap.dockerfile
 ```
 
 Node (devnet):
