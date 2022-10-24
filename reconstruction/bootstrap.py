@@ -42,21 +42,22 @@ def main(cli_args: List[str]):
             db_folder.mkdir(parents=True, exist_ok=True)
             import_db_folder.mkdir(parents=True, exist_ok=True)
 
-            if len(os.listdir(db_folder)) > 0:
-                raise Exception(f"Folder isn't empty: {db_folder}")
-            if len(os.listdir(import_db_folder)) > 0:
-                raise Exception(f"Folder isn't empty: {import_db_folder}")
+            db_is_empty = len(os.listdir(db_folder)) == 0
+            db_import_is_empty = len(os.listdir(import_db_folder)) == 0
 
-            oldest_archive_url = shard_value.get("oldestArchive")
-            newest_archive_url = shard_value.get("newestArchive")
-            if not oldest_archive_url or not newest_archive_url:
-                raise Exception(f"URLs missing for shard: {shard_key}")
+            if db_is_empty:
+                oldest_archive_url = shard_value.get("oldestArchive")
+                oldest_archive_path = download_archive_if_missing(oldest_archive_url, downloads_folder, network_key, shard_key, "oldest")
+                extract_archive(oldest_archive_path, db_folder.parent)
+            else:
+                pass
 
-            oldest_archive_path = download_archive_if_missing(oldest_archive_url, downloads_folder, network_key, shard_key, "oldest")
-            newest_archive_path = download_archive_if_missing(newest_archive_url, downloads_folder, network_key, shard_key, "newest")
-
-            extract_archive(oldest_archive_path, db_folder.parent)
-            extract_archive(newest_archive_path, import_db_folder)
+            if db_import_is_empty:
+                newest_archive_url = shard_value.get("newestArchive")
+                newest_archive_path = download_archive_if_missing(newest_archive_url, downloads_folder, network_key, shard_key, "newest")
+                extract_archive(newest_archive_path, import_db_folder)
+            else:
+                pass
 
             generate_validator_key(node_folder)
 
