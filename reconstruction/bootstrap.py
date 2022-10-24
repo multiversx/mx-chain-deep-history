@@ -50,14 +50,14 @@ def main(cli_args: List[str]):
                 oldest_archive_path = download_archive_if_missing(oldest_archive_url, downloads_folder, network_key, shard_key, "oldest")
                 extract_archive(oldest_archive_path, db_folder.parent)
             else:
-                pass
+                logger.info(f"Skipping download & extraction, since folder isn't empty: {db_folder}")
 
             if db_import_is_empty:
                 newest_archive_url = shard_value.get("newestArchive")
                 newest_archive_path = download_archive_if_missing(newest_archive_url, downloads_folder, network_key, shard_key, "newest")
                 extract_archive(newest_archive_path, import_db_folder)
             else:
-                pass
+                logger.info(f"Skipping download & extraction, since folder isn't empty: {import_db_folder}")
 
             generate_validator_key(node_folder)
 
