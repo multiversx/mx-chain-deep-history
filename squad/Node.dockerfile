@@ -32,4 +32,4 @@ COPY --from=builder "/workspace/config" "/elrond/config/"
 EXPOSE 8080
 WORKDIR /elrond
 # TODO: For elrond-go v1.4.0 (upcoming), use the flag `--no-key`.
-ENTRYPOINT ["/elrond/node", "--working-directory=/data", "--log-save", "--log-level=*:DEBUG", "--log-logger-name", "--rest-api-interface=0.0.0.0:8080", "--validator-key-pem-file=/data/observerKey.pem"]
+ENTRYPOINT ["/elrond/node", "--working-directory=/data", "--log-save", "--log-level=*:DEBUG", "--log-logger-name", "--rest-api-interface=0.0.0.0:8080", "--validator-key-pem-file=/data/validatorKey.pem"]

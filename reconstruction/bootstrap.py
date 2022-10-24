@@ -33,36 +33,59 @@ def main(cli_args: List[str]):
         shards: Dict[str, Any] = network_value.get("shards", dict())
 
         for shard_key, shard_value in shards.items():
-            db_folder = workspace / network_key / f"node-{shard_key}" / "db"
-            import_db_folder = workspace / network_key / f"node-{shard_key}" / "import-db"
+            logger.info(f"Setting up: network = {network_key}, shard = {shard_key}")
+
+            node_folder = workspace / network_key / f"node-{shard_key}"
+            db_folder = node_folder / "db"
+            import_db_folder = node_folder / "import-db"
 
             db_folder.mkdir(parents=True, exist_ok=True)
             import_db_folder.mkdir(parents=True, exist_ok=True)
-
-            oldest_archive_url = shard_value.get("oldestArchive", "")
-            newest_archive_url = shard_value.get("newestArchive", "")
-
-            oldest_archive_extension = "".join(Path(oldest_archive_url).suffixes).strip(".")
-            newest_archive_extension = "".join(Path(oldest_archive_url).suffixes).strip(".")
-
-            oldest_file_path = downloads_folder / f"{network_key}-{shard_key}-oldest.{oldest_archive_extension}"
-            newest_file_path = downloads_folder / f"{network_key}-{shard_key}-newest.{newest_archive_extension}"
-            temporary_file_path = downloads_folder / "downloading.archive"
-
-            if oldest_archive_url and not oldest_file_path.exists():
-                subprocess.run(["wget", "-O", str(temporary_file_path), oldest_archive_url]).check_returncode()
-                shutil.move(str(temporary_file_path), oldest_file_path)
-            if newest_archive_url and not newest_file_path.exists():
-                subprocess.run(["wget", "-O", str(temporary_file_path), newest_archive_url]).check_returncode()
-                shutil.move(str(temporary_file_path), newest_file_path)
 
             if len(os.listdir(db_folder)) > 0:
                 raise Exception(f"Folder isn't empty: {db_folder}")
             if len(os.listdir(import_db_folder)) > 0:
                 raise Exception(f"Folder isn't empty: {import_db_folder}")
 
-            shutil.unpack_archive(oldest_file_path, db_folder.parent)
-            shutil.unpack_archive(newest_file_path, import_db_folder)
+            oldest_archive_url = shard_value.get("oldestArchive")
+            newest_archive_url = shard_value.get("newestArchive")
+            if not oldest_archive_url or not newest_archive_url:
+                raise Exception(f"URLs missing for shard: {shard_key}")
+
+            oldest_archive_path = download_archive_if_missing(oldest_archive_url, downloads_folder, network_key, shard_key, "oldest")
+            newest_archive_path = download_archive_if_missing(newest_archive_url, downloads_folder, network_key, shard_key, "newest")
+
+            extract_archive(oldest_archive_path, db_folder.parent)
+            extract_archive(newest_archive_path, import_db_folder)
+
+            generate_validator_key(node_folder)
+
+
+def download_archive_if_missing(archive_url: str, downloads_folder: Path, network_key: str, shard_key: str, tag: str):
+    logger.info(f"download_archive_if_missing(), url = {archive_url}")
+
+    archive_extension = "".join(Path(archive_url).suffixes).strip(".")
+    file_path = downloads_folder / f"{network_key}-{shard_key}-{tag}.{archive_extension}"
+    temporary_file_path = downloads_folder / f"{file_path}.downloading"
+
+    if file_path.exists():
+        logger.info(f"File already exists, skipping download: file = {file_path}")
+        return file_path
+
+    subprocess.run(["wget", "-O", str(temporary_file_path), archive_url]).check_returncode()
+    shutil.move(str(temporary_file_path), file_path)
+    return file_path
+
+
+def extract_archive(archive_path: Path, destination_folder: Path):
+    logger.info(f"extract_archive(), archive = {archive_path}, destination = {destination_folder}")
+    shutil.unpack_archive(archive_path, destination_folder)
+
+
+def generate_validator_key(node_folder: Path):
+    # TODO: For elrond-go v1.4.0 (upcoming), use the flag `--no-key` instead of generating keys.
+    if not (node_folder / "validatorKey.pem").exists():
+        subprocess.run(["/keygenerator"], cwd=node_folder).check_returncode()
 
 
 if __name__ == "__main__":
