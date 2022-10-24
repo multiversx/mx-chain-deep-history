@@ -15,7 +15,7 @@ Then, bootstrap the reconstruction (download and extract the necessary archives,
 ```
 DOCKER_USER=$(id -u):$(id -g) docker compose --file ./docker-compose.yml \
     --project-name deep-history-reconstruction \
-    run -it --rm elrond-deep-history-reconstruction-bootstrap
+    run -it --rm deep-history-reconstruction-bootstrap
 ```
 
 Once the bootstrap step is ready, you can proceed with running the reconstruction containers.
@@ -44,7 +44,7 @@ Bootstrap:
 
 ```
 docker image build \
-    --no-cache . -t elrondnetwork/elrond-deep-history-reconstruction-bootstrap:latest -f ./Bootstrap.dockerfile
+    --no-cache . -t elrondnetwork/deep-history-reconstruction-bootstrap:latest -f ./Bootstrap.dockerfile
 ```
 
 Node (devnet):
@@ -53,7 +53,7 @@ Node (devnet):
 docker image build \
     --build-arg ELROND_CONFIG_NAME=elrond-config-devnet \
     --build-arg ELROND_CONFIG_TAG=release-D1.3.46.0 \
-    --no-cache . -t elrondnetwork/elrond-deep-history-reconstruction-devnet:latest -f ./Node.dockerfile 
+    --no-cache . -t elrondnetwork/deep-history-reconstruction-devnet:latest -f ./Node.dockerfile 
 ```
 
 Node (mainnet):
@@ -62,5 +62,5 @@ Node (mainnet):
 docker image build \
     --build-arg ELROND_CONFIG_NAME=elrond-config-mainnet \
     --build-arg ELROND_CONFIG_TAG=release-v1.3.46.0 \
-    --no-cache . -t elrondnetwork/elrond-deep-history-reconstruction-mainnet:latest -f ./Node.dockerfile 
+    --no-cache . -t elrondnetwork/deep-history-reconstruction-mainnet:latest -f ./Node.dockerfile 
 ```

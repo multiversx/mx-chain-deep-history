@@ -1,11 +1,11 @@
 version: '3'
 
 services:
-  elrond-observers-mainnet-0:
+  deep-history-observer-mainnet-0:
     ulimits:
       nproc: 65535
-    image: elrond-observer-mainnet:latest
-    container_name: elrond-observers-mainnet-0
+    image: elrondnetwork/deep-history-observer-mainnet:latest
+    container_name: deep-history-observer-mainnet-0
     ports:
       - "1080:8080"
       - "17370:37373"
@@ -13,17 +13,17 @@ services:
       - ${BASE_PATH}/observers/mainnet/node-0:/data
     command: --destination-shard-as-observer=0 --serialize-snapshots --disable-consensus-watchdog
     networks:
-      elrond-observers:
+      deep-history-squad:
         ipv4_address: 12.0.0.10
     restart: always
     profiles:
       - mainnet-0
 
-  elrond-observers-mainnet-1:
+  deep-history-observer-mainnet-1:
     ulimits:
       nproc: 65535
-    image: elrond-observer-mainnet:latest
-    container_name: elrond-observers-mainnet-1
+    image: elrondnetwork/deep-history-observer-mainnet:latest
+    container_name: deep-history-observer-mainnet-1
     ports:
       - "1081:8080"
       - "17371:37373"
@@ -31,17 +31,17 @@ services:
       - ${BASE_PATH}/observers/mainnet/node-1:/data
     command: --destination-shard-as-observer=1 --serialize-snapshots --disable-consensus-watchdog
     networks:
-      elrond-observers:
+      deep-history-squad:
         ipv4_address: 12.0.0.11
     restart: always
     profiles:
       - mainnet-1
 
-  elrond-observers-mainnet-2:
+  deep-history-observer-mainnet-2:
     ulimits:
       nproc: 65535
-    image: elrond-observer-mainnet:latest
-    container_name: elrond-observers-mainnet-2
+    image: elrondnetwork/deep-history-observer-mainnet:latest
+    container_name: deep-history-observer-mainnet-2
     ports:
       - "1082:8080"
       - "17372:37373"
@@ -49,17 +49,17 @@ services:
       - ${BASE_PATH}/observers/mainnet/node-2:/data
     command: --destination-shard-as-observer=2 --serialize-snapshots --disable-consensus-watchdog
     networks:
-      elrond-observers:
+      deep-history-squad:
         ipv4_address: 12.0.0.12
     restart: always
     profiles:
       - mainnet-2
 
-  elrond-observers-mainnet-metachain:
+  deep-history-observer-mainnet-metachain:
     ulimits:
       nproc: 65535
-    image: elrond-observer-mainnet:latest
-    container_name: elrond-observers-mainnet-metachain
+    image: elrondnetwork/deep-history-observer-mainnet:latest
+    container_name: deep-history-observer-mainnet-metachain
     ports:
       - "1083:8080"
       - "17373:37373"
@@ -67,17 +67,17 @@ services:
       - ${BASE_PATH}/observers/mainnet/node-metachain:/data
     command: --destination-shard-as-observer=metachain --serialize-snapshots --disable-consensus-watchdog
     networks:
-      elrond-observers:
+      deep-history-squad:
         ipv4_address: 12.0.0.13
     restart: always
     profiles:
       - mainnet-metachain
 
-  elrond-observers-devnet-0:
+  deep-history-observer-devnet-0:
     ulimits:
       nproc: 65535
-    image: elrond-observer-devnet:latest
-    container_name: elrond-observers-devnet-0
+    image: elrondnetwork/deep-history-observer-devnet:latest
+    container_name: deep-history-observer-devnet-0
     ports:
       - "2080:8080"
       - "27370:37373"
@@ -85,17 +85,17 @@ services:
       - ${BASE_PATH}/observers/devnet/node-0:/data
     command: --destination-shard-as-observer=0 --serialize-snapshots --disable-consensus-watchdog
     networks:
-      elrond-observers:
+      deep-history-squad:
         ipv4_address: 12.0.0.20
     restart: always
     profiles:
       - devnet-0
 
-  elrond-observers-devnet-1:
+  deep-history-observer-devnet-1:
     ulimits:
       nproc: 65535
-    image: elrond-observer-devnet:latest
-    container_name: elrond-observers-devnet-1
+    image: elrondnetwork/deep-history-observer-devnet:latest
+    container_name: deep-history-observer-devnet-1
     ports:
       - "2081:8080"
       - "27371:37373"
@@ -103,17 +103,17 @@ services:
       - ${BASE_PATH}/observers/devnet/node-1:/data
     command: --destination-shard-as-observer=1 --serialize-snapshots --disable-consensus-watchdog
     networks:
-      elrond-observers:
+      deep-history-squad:
         ipv4_address: 12.0.0.21
     restart: always
     profiles:
       - devnet-1
 
-  elrond-observers-devnet-2:
+  deep-history-observer-devnet-2:
     ulimits:
       nproc: 65535
-    image: elrond-observer-devnet:latest
-    container_name: elrond-observers-devnet-2
+    image: elrondnetwork/deep-history-observer-devnet:latest
+    container_name: deep-history-observer-devnet-2
     ports:
       - "2082:8080"
       - "27372:37373"
@@ -121,17 +121,17 @@ services:
       - ${BASE_PATH}/observers/devnet/node-2:/data
     command: --destination-shard-as-observer=2 --serialize-snapshots --disable-consensus-watchdog
     networks:
-      elrond-observers:
+      deep-history-squad:
         ipv4_address: 12.0.0.22
     restart: always
     profiles:
       - devnet-2
 
-  elrond-observers-devnet-metachain:
+  deep-history-observer-devnet-metachain:
     ulimits:
       nproc: 65535
-    image: elrond-observer-devnet:latest
-    container_name: elrond-observers-devnet-metachain
+    image: elrondnetwork/deep-history-observer-devnet:latest
+    container_name: deep-history-observer-devnet-metachain
     ports:
       - "2083:8080"
       - "27373:37373"
@@ -139,14 +139,14 @@ services:
       - ${BASE_PATH}/observers/devnet/node-metachain:/data
     command: --destination-shard-as-observer=metachain --serialize-snapshots --disable-consensus-watchdog
     networks:
-      elrond-observers:
+      deep-history-squad:
         ipv4_address: 12.0.0.23
     restart: always
     profiles:
       - devnet-metachain
 
 networks:
-  elrond-observers:
+  deep-history-squad:
     ipam:
       config:
         - subnet: 12.0.0.0/24
