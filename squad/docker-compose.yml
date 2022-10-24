@@ -10,7 +10,7 @@ services:
       - "1080:8080"
       - "17370:37373"
     volumes:
-      - ${BASE_PATH}/observers/mainnet/node-0:/data
+      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-0:/data
     command: --destination-shard-as-observer=0 --serialize-snapshots --disable-consensus-watchdog
     networks:
       deep-history-squad:
@@ -28,7 +28,7 @@ services:
       - "1081:8080"
       - "17371:37373"
     volumes:
-      - ${BASE_PATH}/observers/mainnet/node-1:/data
+      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-1:/data
     command: --destination-shard-as-observer=1 --serialize-snapshots --disable-consensus-watchdog
     networks:
       deep-history-squad:
@@ -46,7 +46,7 @@ services:
       - "1082:8080"
       - "17372:37373"
     volumes:
-      - ${BASE_PATH}/observers/mainnet/node-2:/data
+      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-2:/data
     command: --destination-shard-as-observer=2 --serialize-snapshots --disable-consensus-watchdog
     networks:
       deep-history-squad:
@@ -64,7 +64,7 @@ services:
       - "1083:8080"
       - "17373:37373"
     volumes:
-      - ${BASE_PATH}/observers/mainnet/node-metachain:/data
+      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-metachain:/data
     command: --destination-shard-as-observer=metachain --serialize-snapshots --disable-consensus-watchdog
     networks:
       deep-history-squad:
@@ -72,6 +72,23 @@ services:
     restart: always
     profiles:
       - mainnet-metachain
+
+  deep-history-proxy-mainnet:
+    ulimits:
+      nproc: 65535
+    image: elrondnetwork/deep-history-proxy-mainnet:latest
+    container_name: deep-history-observer-mainnet-0
+    ports:
+      - "1080:8080"
+      - "17370:37373"
+    volumes:
+      - ${DEEP_HISTORY_WORKSPACE}/mainnet/proxy:/data
+    networks:
+      deep-history-squad:
+        ipv4_address: 12.0.0.14
+    restart: always
+    profiles:
+      - mainnet-proxy
 
   deep-history-observer-devnet-0:
     ulimits:
@@ -82,7 +99,7 @@ services:
       - "2080:8080"
       - "27370:37373"
     volumes:
-      - ${BASE_PATH}/observers/devnet/node-0:/data
+      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-0:/data
     command: --destination-shard-as-observer=0 --serialize-snapshots --disable-consensus-watchdog
     networks:
       deep-history-squad:
@@ -100,7 +117,7 @@ services:
       - "2081:8080"
       - "27371:37373"
     volumes:
-      - ${BASE_PATH}/observers/devnet/node-1:/data
+      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-1:/data
     command: --destination-shard-as-observer=1 --serialize-snapshots --disable-consensus-watchdog
     networks:
       deep-history-squad:
@@ -118,7 +135,7 @@ services:
       - "2082:8080"
       - "27372:37373"
     volumes:
-      - ${BASE_PATH}/observers/devnet/node-2:/data
+      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-2:/data
     command: --destination-shard-as-observer=2 --serialize-snapshots --disable-consensus-watchdog
     networks:
       deep-history-squad:
@@ -136,7 +153,7 @@ services:
       - "2083:8080"
       - "27373:37373"
     volumes:
-      - ${BASE_PATH}/observers/devnet/node-metachain:/data
+      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-metachain:/data
     command: --destination-shard-as-observer=metachain --serialize-snapshots --disable-consensus-watchdog
     networks:
       deep-history-squad:
@@ -144,6 +161,23 @@ services:
     restart: always
     profiles:
       - devnet-metachain
+
+  deep-history-proxy-devnet:
+    ulimits:
+      nproc: 65535
+    image: elrondnetwork/deep-history-proxy-devnet:latest
+    container_name: deep-history-observer-devnet-0
+    ports:
+      - "1080:8080"
+      - "17370:37373"
+    volumes:
+      - ${DEEP_HISTORY_WORKSPACE}/devnet/proxy:/data
+    networks:
+      deep-history-squad:
+        ipv4_address: 12.0.0.24
+    restart: always
+    profiles:
+      - devnet-proxy
 
 networks:
   deep-history-squad:

@@ -1,4 +1,44 @@
-# Observers
+# Observing Squad
+
+## For contributors (developers)
+
+### Build the Docker images
+
+Proxy (devnet):
+
+```
+docker image build \
+    --build-arg NETWORK=devnet \
+    --build-arg ELROND_PROXY_TAG=deep-history-24 \
+    --no-cache . -t elrondnetwork/deep-history-proxy-devnet:latest -f ./Proxy.dockerfile
+```
+
+Proxy (mainnet):
+
+```
+docker image build \
+    --build-arg NETWORK=mainnet \
+    --build-arg ELROND_PROXY_TAG=deep-history-24 \
+    --no-cache . -t elrondnetwork/deep-history-proxy-mainnet:latest -f ./Proxy.dockerfile
+```
+
+Node (devnet):
+
+```
+docker image build \
+    --build-arg ELROND_CONFIG_NAME=elrond-config-devnet \
+    --build-arg ELROND_CONFIG_TAG=release-D1.3.47.0 \
+    --no-cache . -t elrondnetwork/deep-history-reconstruction-devnet:latest -f ./Node.dockerfile 
+```
+
+Node (mainnet):
+
+```
+docker image build \
+    --build-arg ELROND_CONFIG_NAME=elrond-config-mainnet \
+    --build-arg ELROND_CONFIG_TAG=release-v1.3.47.0 \
+    --no-cache . -t elrondnetwork/deep-history-reconstruction-mainnet:latest -f ./Node.dockerfile 
+```
 
 ## Build the Docker images
 
@@ -7,47 +47,3 @@ docker image build --no-cache . -t elrond-observer-mainnet:latest -f ./mainnet.d
 docker image build --no-cache . -t elrond-observer-devnet:latest -f ./devnet.dockerfile
 ```
 
-## Prepare filesystem
-
-```
-source default.env
-
-export MAINNET_DIR=${BASE_PATH}/observers/mainnet
-export DEVNET_DIR=${BASE_PATH}/observers/devnet
-```
-
-Create empty folders:
-
-```
-mkdir -p ${MAINNET_DIR}/node-0
-mkdir -p ${MAINNET_DIR}/node-1
-mkdir -p ${MAINNET_DIR}/node-2
-mkdir -p ${MAINNET_DIR}/node-metachain
-
-mkdir -p ${DEVNET_DIR}/node-0
-mkdir -p ${DEVNET_DIR}/node-1
-mkdir -p ${DEVNET_DIR}/node-2
-mkdir -p ${DEVNET_DIR}/node-metachain
-```
-
-## Run the containers
-
-First, create a `custom.env` file, following the example of `default.env`. Then, run the setup using `docker-compose`.
-
-Devnet:
-
-```
-docker compose --file ./docker-compose.yml --env-file ./custom.env --profile devnet-0 --project-name observers-devnet up --detach
-
-Mainnet:
-
-```
-docker compose --file ./docker-compose.yml --env-file ./custom.env --profile mainnet-0 --project-name observers-mainnet up --detach
-```
-
-## Stop the containers
-
-```
-docker compose --project-name observers-mainnet down
-docker compose --project-name observers-devnet down
-```
