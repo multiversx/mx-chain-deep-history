@@ -19,8 +19,8 @@ RUN cp /go/pkg/mod/github.com/!elrond!network/arwen-wasm-vm@$(cat /go/elrond-go/
 # https://github.com/ElrondNetwork/elrond-go/pull/4605
 COPY "adjust_config.py" /workspace/
 RUN apt-get update && apt-get -y install python3-pip && pip3 install toml
-RUN python3 /workspace/adjust_config.py --mode=main --file=/workspace/elrond-config/config.toml && \
-    python3 /workspace/adjust_config.py --mode=prefs --file=/workspace/elrond-config/prefs.toml
+RUN python3 /workspace/adjust_config.py --mode=main --file=/workspace/config/config.toml && \
+    python3 /workspace/adjust_config.py --mode=prefs --file=/workspace/config/prefs.toml
 
 # ===== SECOND STAGE ======
 FROM ubuntu:20.04
