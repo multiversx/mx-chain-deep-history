@@ -1,13 +1,70 @@
-# deep-history
+# Deep-history Observing Squad
 
-**Work in progress, stay tuned for updates!**
+## For integrators
 
-Scripts, docker definitions and utility tools for creating and managing observers with historical lookup support.
+See [docs.elrond.com](https://docs.elrond.com/integrators/deep-history-squad).
 
-## Automatic setup
+## For contributors (developers)
 
-Run the following script and follow the provided instructions:
+### Build the Docker images
+
+Bootstrap:
 
 ```
-python3 ./wizard/import-db.py --network=devnet --shards 0 1 2 metachain
+docker image build \
+    --no-cache . -t elrondnetwork/deep-history-reconstruction-bootstrap:latest -f ./Bootstrap.dockerfile
+```
+
+Node (devnet):
+
+```
+docker image build \
+    --build-arg ELROND_CONFIG_NAME=elrond-config-devnet \
+    --build-arg ELROND_CONFIG_TAG=release-D1.3.47.0 \
+    --no-cache . -t elrondnetwork/deep-history-reconstruction-devnet:latest -f ./Node.dockerfile 
+```
+
+Node (mainnet):
+
+```
+docker image build \
+    --build-arg ELROND_CONFIG_NAME=elrond-config-mainnet \
+    --build-arg ELROND_CONFIG_TAG=release-v1.3.47.0 \
+    --no-cache . -t elrondnetwork/deep-history-reconstruction-mainnet:latest -f ./Node.dockerfile 
+```
+
+Proxy (devnet):
+
+```
+docker image build \
+    --build-arg NETWORK=devnet \
+    --build-arg ELROND_PROXY_TAG=deep-history-24 \
+    --no-cache . -t elrondnetwork/deep-history-proxy-devnet:latest -f ./Proxy.dockerfile
+```
+
+Proxy (mainnet):
+
+```
+docker image build \
+    --build-arg NETWORK=mainnet \
+    --build-arg ELROND_PROXY_TAG=deep-history-24 \
+    --no-cache . -t elrondnetwork/deep-history-proxy-mainnet:latest -f ./Proxy.dockerfile
+```
+
+Node (devnet):
+
+```
+docker image build \
+    --build-arg ELROND_CONFIG_NAME=elrond-config-devnet \
+    --build-arg ELROND_CONFIG_TAG=release-D1.3.47.0 \
+    --no-cache . -t elrondnetwork/deep-history-reconstruction-devnet:latest -f ./Node.dockerfile 
+```
+
+Node (mainnet):
+
+```
+docker image build \
+    --build-arg ELROND_CONFIG_NAME=elrond-config-mainnet \
+    --build-arg ELROND_CONFIG_TAG=release-v1.3.47.0 \
+    --no-cache . -t elrondnetwork/deep-history-reconstruction-mainnet:latest -f ./Node.dockerfile 
 ```
