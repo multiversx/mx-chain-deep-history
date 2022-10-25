@@ -46,16 +46,16 @@ def main(cli_args: List[str]):
             db_import_is_empty = len(os.listdir(import_db_folder)) == 0
 
             if db_is_empty:
-                oldest_archive_url = shard_value.get("oldestArchive")
-                oldest_archive_path = download_archive_if_missing(oldest_archive_url, downloads_folder, network_key, shard_key, "oldest")
-                extract_archive(oldest_archive_path, db_folder.parent)
+                start_milestone_url = shard_value.get("startMilestone")
+                start_milestone_path = download_archive_if_missing(start_milestone_url, downloads_folder, network_key, shard_key, "start")
+                extract_archive(start_milestone_path, db_folder.parent)
             else:
                 logger.info(f"Skipping download & extraction, since folder isn't empty: {db_folder}")
 
             if db_import_is_empty:
-                newest_archive_url = shard_value.get("newestArchive")
-                newest_archive_path = download_archive_if_missing(newest_archive_url, downloads_folder, network_key, shard_key, "newest")
-                extract_archive(newest_archive_path, import_db_folder)
+                target_milestone_url = shard_value.get("targetMilestone")
+                target_milestone_path = download_archive_if_missing(target_milestone_url, downloads_folder, network_key, shard_key, "target")
+                extract_archive(target_milestone_path, import_db_folder)
             else:
                 logger.info(f"Skipping download & extraction, since folder isn't empty: {import_db_folder}")
 

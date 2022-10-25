@@ -3,40 +3,40 @@
         "devnet": {
             "shards": {
                 "0": {
-                    "oldestArchive": "https://",
-                    "newestArchive": "https://"
+                    "startMilestone": "",
+                    "targetMilestone": ""
                 },
                 "1": {
-                    "oldestArchive": "https://",
-                    "newestArchive": "https://"
+                    "startMilestone": "",
+                    "targetMilestone": ""
                 },
                 "2": {
-                    "oldestArchive": "https://",
-                    "newestArchive": "https://"
+                    "startMilestone": "",
+                    "targetMilestone": ""
                 },
                 "metachain": {
-                    "oldestArchive": "https://",
-                    "newestArchive": "https://"
+                    "startMilestone": "",
+                    "targetMilestone": ""
                 }
             }
         },
         "mainnet": {
             "shards": {
                 "0": {
-                    "oldestArchive": "https://",
-                    "newestArchive": "https://"
+                    "startMilestone": "",
+                    "targetMilestone": ""
                 },
                 "1": {
-                    "oldestArchive": "https://",
-                    "newestArchive": "https://"
+                    "startMilestone": "",
+                    "targetMilestone": ""
                 },
                 "2": {
-                    "oldestArchive": "https://",
-                    "newestArchive": "https://"
+                    "startMilestone": "",
+                    "targetMilestone": ""
                 },
                 "metachain": {
-                    "oldestArchive": "https://",
-                    "newestArchive": "https://"
+                    "startMilestone": "",
+                    "targetMilestone": ""
                 }
             }
         }
