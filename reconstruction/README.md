@@ -2,20 +2,17 @@
 
 ## For integrators
 
-First, decide on a path to serve as a **workspace**. For example, `/home/elrond/deep-history-workspace` - export it as an environment variable:
-
-```
-export DEEP_HISTORY_WORKSPACE=/home/elrond/deep-history-workspace
-```
+First, decide on a path to serve as a **workspace**. For example, `~/deep-history-workspace`.
 
 Afterwards, prepare a configuration file called `reconstruction.json`, following the example of `default.reconstruction.json`, and save it in the chosen workspace. For the fields `oldestArchive` and `newestArchive`, you can use URLs towards the Elrond public archive (which are available [on request](https://t.me/ElrondDevelopers)).
 
 Then, bootstrap the reconstruction (download and extract the necessary archives, to be used by `import-db`, under the hood) as follows:
 
 ```
-DOCKER_USER=$(id -u):$(id -g) docker compose --file ./docker-compose.yml \
-    --project-name deep-history-reconstruction \
-    run -it --rm deep-history-reconstruction-bootstrap
+DEEP_HISTORY_WORKSPACE=${HOME}/deep-history-workspace DOCKER_USER=$(id -u):$(id -g) docker compose \
+    --file ./docker-compose.yml \
+    --profile bootstrap \
+    --project-name deep-history-reconstruction up --detach
 ```
 
 Once the bootstrap step is ready, you can proceed with running the reconstruction containers.
@@ -23,7 +20,8 @@ Once the bootstrap step is ready, you can proceed with running the reconstructio
 For devnet:
 
 ```
-DOCKER_USER=$(id -u):$(id -g) docker compose --file ./docker-compose.yml \
+DEEP_HISTORY_WORKSPACE=${HOME}/deep-history-workspace DOCKER_USER=$(id -u):$(id -g) docker compose \
+    --file ./docker-compose.yml \
     --profile devnet-0 --profile devnet-1 --profile devnet-2 --profile devnet-metachain \
     --project-name deep-history-reconstruction up --detach
 ```
@@ -31,7 +29,8 @@ DOCKER_USER=$(id -u):$(id -g) docker compose --file ./docker-compose.yml \
 For mainnet:
 
 ```
-DOCKER_USER=$(id -u):$(id -g) docker compose --file ./docker-compose.yml \
+DEEP_HISTORY_WORKSPACE=${HOME}/deep-history-workspace DOCKER_USER=$(id -u):$(id -g) docker compose \
+    --file ./docker-compose.yml \
     --profile mainnet-0 --profile mainnet-1 --profile mainnet-2 --profile mainnet-metachain \
     --project-name deep-history-reconstruction-mainnet up --detach
 ```

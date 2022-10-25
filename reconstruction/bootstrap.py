@@ -46,16 +46,16 @@ def main(cli_args: List[str]):
             db_import_is_empty = len(os.listdir(import_db_folder)) == 0
 
             if db_is_empty:
-                start_milestone_url = shard_value.get("startMilestone")
-                start_milestone_path = download_archive_if_missing(start_milestone_url, downloads_folder, network_key, shard_key, "start")
-                extract_archive(start_milestone_path, db_folder.parent)
+                start_capsule_url = shard_value["startCapsule"]
+                start_capsule_path = download_archive_if_missing(start_capsule_url, downloads_folder, network_key, shard_key, "start")
+                extract_archive(start_capsule_path, db_folder.parent)
             else:
                 logger.info(f"Skipping download & extraction, since folder isn't empty: {db_folder}")
 
             if db_import_is_empty:
-                target_milestone_url = shard_value.get("targetMilestone")
-                target_milestone_path = download_archive_if_missing(target_milestone_url, downloads_folder, network_key, shard_key, "target")
-                extract_archive(target_milestone_path, import_db_folder)
+                target_capsule_url = shard_value["targetCapsule"]
+                target_capsule_path = download_archive_if_missing(target_capsule_url, downloads_folder, network_key, shard_key, "target")
+                extract_archive(target_capsule_path, import_db_folder)
             else:
                 logger.info(f"Skipping download & extraction, since folder isn't empty: {import_db_folder}")
 
@@ -84,6 +84,8 @@ def extract_archive(archive_path: Path, destination_folder: Path):
 
 
 def generate_validator_key(node_folder: Path):
+    logger.info(f"generate_validator_key(), folder = {node_folder}")
+
     # TODO: For elrond-go v1.4.0 (upcoming), use the flag `--no-key` instead of generating keys.
     if not (node_folder / "validatorKey.pem").exists():
         subprocess.run(["/keygenerator"], cwd=node_folder).check_returncode()
