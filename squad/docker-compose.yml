@@ -79,8 +79,7 @@ services:
     image: elrondnetwork/deep-history-proxy-mainnet:latest
     container_name: deep-history-observer-mainnet-0
     ports:
-      - "1080:8080"
-      - "17370:37373"
+      - "8080:8080"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/proxy:/data
     networks:
@@ -168,8 +167,7 @@ services:
     image: elrondnetwork/deep-history-proxy-devnet:latest
     container_name: deep-history-observer-devnet-0
     ports:
-      - "1080:8080"
-      - "17370:37373"
+      - "9090:8080"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/proxy:/data
     networks:
