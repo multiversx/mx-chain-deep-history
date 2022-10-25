@@ -24,7 +24,7 @@ services:
       - "47370:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-0:/data
-    command: --destination-shard-as-observer=0
+    command: --destination-shard-as-observer=0 --import-db=/data/import-db --import-db-no-sig-check
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.10
@@ -42,7 +42,7 @@ services:
       - "47371:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-1:/data
-    command: --destination-shard-as-observer=1
+    command: --destination-shard-as-observer=1 --import-db=/data/import-db --import-db-no-sig-check
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.11
@@ -60,7 +60,7 @@ services:
       - "47372:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-2:/data
-    command: --destination-shard-as-observer=2
+    command: --destination-shard-as-observer=2 --import-db=/data/import-db --import-db-no-sig-check
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.12
@@ -78,7 +78,7 @@ services:
       - "47373:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-metachain:/data
-    command: --destination-shard-as-observer=metachain
+    command: --destination-shard-as-observer=metachain --import-db=/data/import-db --import-db-no-sig-check
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.13
@@ -96,7 +96,7 @@ services:
       - "57370:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-0:/data
-    command: --destination-shard-as-observer=0
+    command: --destination-shard-as-observer=0 --import-db=/data/import-db --import-db-no-sig-check
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.20
@@ -114,7 +114,7 @@ services:
       - "57371:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-1:/data
-    command: --destination-shard-as-observer=1
+    command: --destination-shard-as-observer=1 --import-db=/data/import-db --import-db-no-sig-check
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.21
@@ -132,7 +132,7 @@ services:
       - "57372:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-2:/data
-    command: --destination-shard-as-observer=2
+    command: --destination-shard-as-observer=2 --import-db=/data/import-db --import-db-no-sig-check
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.22
@@ -150,7 +150,7 @@ services:
       - "57373:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-metachain:/data
-    command: --destination-shard-as-observer=metachain
+    command: --destination-shard-as-observer=metachain --import-db=/data/import-db --import-db-no-sig-check
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.23
