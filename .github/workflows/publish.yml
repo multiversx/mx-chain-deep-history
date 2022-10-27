@@ -45,4 +45,4 @@ jobs:
           push: true
           platforms: linux/amd64
           file: ./Dockerfile
-          tags: deep-history:latest
+          tags: elrondnetwork/deep-history:latest
