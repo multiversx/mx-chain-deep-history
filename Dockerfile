@@ -21,11 +21,11 @@ RUN git clone https://github.com/ElrondNetwork/elrond-proxy-go.git --branch=${PR
 # Build node, proxy and keygenerator:
 WORKDIR /go/elrond-go-devnet/cmd/node
 RUN go build -i -v -ldflags="-X main.appVersion=$(git describe --tags --long --dirty --always)"
-RUN cp /go/pkg/mod/github.com/!elrond!network/arwen-wasm-vm@$(cat /go/elrond-go/go.mod | grep arwen-wasm-vm | sed 's/.* //' | tail -n 1)/wasmer/libwasmer_linux_amd64.so /lib/libwasmer_linux_amd64.so
+RUN cp /go/pkg/mod/github.com/!elrond!network/arwen-wasm-vm@$(cat /go/elrond-go-devnet/go.mod | grep arwen-wasm-vm | sed 's/.* //' | tail -n 1)/wasmer/libwasmer_linux_amd64.so /lib/libwasmer_linux_amd64.so
 
 WORKDIR /go/elrond-go-mainnet/cmd/node
 RUN go build -i -v -ldflags="-X main.appVersion=$(git describe --tags --long --dirty --always)"
-RUN cp /go/pkg/mod/github.com/!elrond!network/arwen-wasm-vm@$(cat /go/elrond-go/go.mod | grep arwen-wasm-vm | sed 's/.* //' | tail -n 1)/wasmer/libwasmer_linux_amd64.so /lib/libwasmer_linux_amd64.so
+RUN cp /go/pkg/mod/github.com/!elrond!network/arwen-wasm-vm@$(cat /go/elrond-go-mainnet/go.mod | grep arwen-wasm-vm | sed 's/.* //' | tail -n 1)/wasmer/libwasmer_linux_amd64.so /lib/libwasmer_linux_amd64.so
 
 WORKDIR /go/elrond-proxy-go-devnet/cmd/proxy
 RUN go build
@@ -57,9 +57,9 @@ RUN apt-get update && apt-get install -y wget python3.10
 # We are sharing libwasmer among "elrond-go-devnet" and "elrond-go-mainnet" (no workaround on this yet - left as future work).
 COPY --from=builder "/lib/libwasmer_linux_amd64.so" "/lib/libwasmer_linux_amd64.so"
 COPY --from=builder "/workspace/elrond-config-devnet" "/elrond/devnet/node/config/"
-COPY --from=builder "/workspace/elrond-go-devnet/cmd/node/node" "/elrond/devnet/node/"
+COPY --from=builder "/go/elrond-go-devnet/cmd/node/node" "/elrond/devnet/node/"
 COPY --from=builder "/workspace/elrond-config-mainnet" "/elrond/mainnet/node/config/"
-COPY --from=builder "/workspace/elrond-go-mainnet/cmd/node/node" "/elrond/mainnet/node/"
+COPY --from=builder "/go/elrond-go-mainnet/cmd/node/node" "/elrond/mainnet/node/"
 
 # Copy proxy:
 COPY --from=builder "/go/elrond-proxy-go-devnet/cmd/proxy/proxy" "/elrond/devnet/proxy/"

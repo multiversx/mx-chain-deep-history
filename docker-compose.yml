@@ -15,7 +15,7 @@ services:
     working_dir: "/"
     entrypoint:
       [
-        "python3",
+        "python3.10",
         "/bootstrap.py",
         "--workspace",
         "workspace"
@@ -51,7 +51,8 @@ services:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.10
     profiles:
-      - mainnet-0
+      - reconstruction-mainnet
+      - reconstruction-mainnet-0
 
   deep-history-reconstruction-mainnet-1:
     ulimits:
@@ -81,7 +82,8 @@ services:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.11
     profiles:
-      - mainnet-1
+      - reconstruction-mainnet
+      - reconstruction-mainnet-1
 
   deep-history-reconstruction-mainnet-2:
     ulimits:
@@ -111,7 +113,8 @@ services:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.12
     profiles:
-      - mainnet-2
+      - reconstruction-mainnet
+      - reconstruction-mainnet-2
 
   deep-history-reconstruction-mainnet-metachain:
     ulimits:
@@ -141,7 +144,8 @@ services:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.13
     profiles:
-      - mainnet-metachain
+      - reconstruction-mainnet
+      - reconstruction-mainnet-metachain
 
   deep-history-reconstruction-devnet-0:
     ulimits:
@@ -171,7 +175,8 @@ services:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.20
     profiles:
-      - devnet-0
+      - reconstruction-devnet
+      - reconstruction-devnet-0
 
   deep-history-reconstruction-devnet-1:
     ulimits:
@@ -201,7 +206,8 @@ services:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.21
     profiles:
-      - devnet-1
+      - reconstruction-devnet
+      - reconstruction-devnet-1
 
   deep-history-reconstruction-devnet-2:
     ulimits:
@@ -231,7 +237,8 @@ services:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.22
     profiles:
-      - devnet-2
+      - reconstruction-devnet
+      - reconstruction-devnet-2
 
   deep-history-reconstruction-devnet-metachain:
     ulimits:
@@ -261,7 +268,8 @@ services:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.23
     profiles:
-      - devnet-metachain
+      - reconstruction-devnet
+      - reconstruction-devnet-metachain
 
   deep-history-observer-mainnet-0:
     ulimits:
@@ -292,7 +300,8 @@ services:
         ipv4_address: 12.0.0.10
     restart: always
     profiles:
-      - mainnet-0
+      - squad-mainnet
+      - squad-mainnet-0
 
   deep-history-observer-mainnet-1:
     ulimits:
@@ -323,7 +332,8 @@ services:
         ipv4_address: 12.0.0.11
     restart: always
     profiles:
-      - mainnet-1
+      - squad-mainnet
+      - squad-mainnet-1
 
   deep-history-observer-mainnet-2:
     ulimits:
@@ -354,7 +364,8 @@ services:
         ipv4_address: 12.0.0.12
     restart: always
     profiles:
-      - mainnet-2
+      - squad-mainnet
+      - squad-mainnet-2
 
   deep-history-observer-mainnet-metachain:
     ulimits:
@@ -385,7 +396,8 @@ services:
         ipv4_address: 12.0.0.13
     restart: always
     profiles:
-      - mainnet-metachain
+      - squad-mainnet
+      - squad-mainnet-metachain
 
   deep-history-proxy-mainnet:
     ulimits:
@@ -409,7 +421,8 @@ services:
         ipv4_address: 12.0.0.14
     restart: always
     profiles:
-      - mainnet-proxy
+      - squad-mainnet
+      - squad-mainnet-proxy
 
   deep-history-observer-devnet-0:
     ulimits:
@@ -440,7 +453,8 @@ services:
         ipv4_address: 12.0.0.20
     restart: always
     profiles:
-      - devnet-0
+      - squad-devnet
+      - squad-devnet-0
 
   deep-history-observer-devnet-1:
     ulimits:
@@ -471,7 +485,8 @@ services:
         ipv4_address: 12.0.0.21
     restart: always
     profiles:
-      - devnet-1
+      - squad-devnet
+      - squad-devnet-1
 
   deep-history-observer-devnet-2:
     ulimits:
@@ -502,7 +517,8 @@ services:
         ipv4_address: 12.0.0.22
     restart: always
     profiles:
-      - devnet-2
+      - squad-devnet
+      - squad-devnet-2
 
   deep-history-observer-devnet-metachain:
     ulimits:
@@ -533,7 +549,8 @@ services:
         ipv4_address: 12.0.0.23
     restart: always
     profiles:
-      - devnet-metachain
+      - squad-devnet
+      - squad-devnet-metachain
 
   deep-history-proxy-devnet:
     ulimits:
@@ -557,7 +574,8 @@ services:
         ipv4_address: 12.0.0.24
     restart: always
     profiles:
-      - devnet-proxy
+      - squad-devnet
+      - squad-devnet-proxy
 
 networks:
   deep-history-reconstruction:
