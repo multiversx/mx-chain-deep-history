@@ -43,3 +43,6 @@ COPY --from=builder "/workspace/elrond-config-mainnet" "/elrond/mainnet/config/"
 COPY --from=builder "/workspace/elrond-go-mainnet/cmd/node/node" "/elrond/mainnet/node"
 
 EXPOSE 8080
+
+LABEL elrond-config-devnet=${CONFIG_DEVNET_TAG}
+LABEL elrond-config-mainnet=${CONFIG_MAINNET_TAG}

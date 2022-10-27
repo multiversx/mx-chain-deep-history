@@ -28,3 +28,6 @@ COPY --from=builder "/go/elrond-proxy-go-mainnet/cmd/proxy/proxy" "/elrond/mainn
 COPY --from=builder "/go/elrond-proxy-go-mainnet/cmd/proxy/config" "/elrond/mainnet/config/"
 
 EXPOSE 8080
+
+LABEL elrond-proxy-go-devnet=${PROXY_DEVNET_TAG}
+LABEL elrond-proxy-go-mainnet=${PROXY_MAINNET_TAG}
