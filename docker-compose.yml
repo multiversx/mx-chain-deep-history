@@ -18,7 +18,7 @@ services:
         "python3.10",
         "/bootstrap.py",
         "--workspace",
-        "workspace"
+        "/workspace"
       ]
     profiles:
       - bootstrap
@@ -579,18 +579,22 @@ services:
 
 networks:
   deep-history-reconstruction-mainnet:
+    name: "deep-history-reconstruction-mainnet"
     ipam:
       config:
         - subnet: 20.0.0.0/24
   deep-history-reconstruction-devnet:
+    name: "deep-history-reconstruction-devnet"
     ipam:
       config:
         - subnet: 21.0.0.0/24
   deep-history-squad-mainnet:
+    name: "deep-history-squad-mainnet"
     ipam:
       config:
         - subnet: 22.0.0.0/24
   deep-history-squad-devnet:
+    name: "deep-history-squad-devnet"
     ipam:
       config:
         - subnet: 23.0.0.0/24
