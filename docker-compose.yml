@@ -1,13 +1,15 @@
 version: '3'
 
+# TODO: For elrond-go v1.4.0 (upcoming), use the flag `--no-key` when starting the observers, instead of passing `--validator-key`.
+
 services:
   deep-history-reconstruction-bootstrap:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
     tty: true
-    image: elrondnetwork/deep-history-reconstruction-bootstrap:latest
-    container_name: deep-history-reconstruction-bootstrap
+    image: elrondnetwork/deep-history-bootstrap:latest
+    container_name: deep-history-bootstrap
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}:/workspace
     profiles:
@@ -17,14 +19,26 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history-reconstruction-mainnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-reconstruction-mainnet-0
     ports:
       - "4080:8080"
       - "47370:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-0:/data
-    command: --destination-shard-as-observer=0 --import-db=/data/import-db --import-db-no-sig-check
+    working_dir: "/elrond/mainnet"
+    entrypoint:
+      [
+        "/elrond/mainnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=0",
+        "--import-db=/data/import-db",
+        "--import-db-no-sig-check"
+      ]
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.10
@@ -35,14 +49,26 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history-reconstruction-mainnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-reconstruction-mainnet-1
     ports:
       - "4081:8080"
       - "47371:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-1:/data
-    command: --destination-shard-as-observer=1 --import-db=/data/import-db --import-db-no-sig-check
+    working_dir: "/elrond/mainnet"
+    entrypoint:
+      [
+        "/elrond/mainnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=1",
+        "--import-db=/data/import-db",
+        "--import-db-no-sig-check"
+      ]
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.11
@@ -53,14 +79,26 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history-reconstruction-mainnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-reconstruction-mainnet-2
     ports:
       - "4082:8080"
       - "47372:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-2:/data
-    command: --destination-shard-as-observer=2 --import-db=/data/import-db --import-db-no-sig-check
+    working_dir: "/elrond/mainnet"
+    entrypoint:
+      [
+        "/elrond/mainnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=2",
+        "--import-db=/data/import-db",
+        "--import-db-no-sig-check"
+      ]
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.12
@@ -71,14 +109,26 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history-reconstruction-mainnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-reconstruction-mainnet-metachain
     ports:
       - "4083:8080"
       - "47373:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-metachain:/data
-    command: --destination-shard-as-observer=metachain --import-db=/data/import-db --import-db-no-sig-check
+    working_dir: "/elrond/mainnet"
+    entrypoint:
+      [
+        "/elrond/mainnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=metachain",
+        "--import-db=/data/import-db",
+        "--import-db-no-sig-check"
+      ]
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.13
@@ -89,14 +139,26 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history-reconstruction-devnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-reconstruction-devnet-0
     ports:
       - "5080:8080"
       - "57370:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-0:/data
-    command: --destination-shard-as-observer=0 --import-db=/data/import-db --import-db-no-sig-check
+    working_dir: "/elrond/devnet"
+    entrypoint:
+      [
+        "/elrond/devnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=0",
+        "--import-db=/data/import-db",
+        "--import-db-no-sig-check"
+      ]
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.20
@@ -107,14 +169,26 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history-reconstruction-devnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-reconstruction-devnet-1
     ports:
       - "5081:8080"
       - "57371:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-1:/data
-    command: --destination-shard-as-observer=1 --import-db=/data/import-db --import-db-no-sig-check
+    working_dir: "/elrond/devnet"
+    entrypoint:
+      [
+        "/elrond/devnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=1",
+        "--import-db=/data/import-db",
+        "--import-db-no-sig-check"
+      ]
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.21
@@ -125,14 +199,26 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history-reconstruction-devnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-reconstruction-devnet-2
     ports:
       - "5082:8080"
       - "57372:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-2:/data
-    command: --destination-shard-as-observer=2 --import-db=/data/import-db --import-db-no-sig-check
+    working_dir: "/elrond/devnet"
+    entrypoint:
+      [
+        "/elrond/devnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=2",
+        "--import-db=/data/import-db",
+        "--import-db-no-sig-check"
+      ]
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.22
@@ -143,14 +229,26 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history-reconstruction-devnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-reconstruction-devnet-metachain
     ports:
       - "5083:8080"
       - "57373:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-metachain:/data
-    command: --destination-shard-as-observer=metachain --import-db=/data/import-db --import-db-no-sig-check
+    working_dir: "/elrond/devnet"
+    entrypoint:
+      [
+        "/elrond/devnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=metachain",
+        "--import-db=/data/import-db",
+        "--import-db-no-sig-check"
+      ]
     networks:
       deep-history-reconstruction:
         ipv4_address: 10.0.0.23
@@ -160,14 +258,27 @@ services:
   deep-history-observer-mainnet-0:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history-observer-mainnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-observer-mainnet-0
     ports:
       - "1080:8080"
       - "17370:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-0:/data
-    command: --destination-shard-as-observer=0 --serialize-snapshots --disable-consensus-watchdog
+    working_dir: "/elrond/mainnet"
+    entrypoint:
+      [
+        "/elrond/mainnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=0",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
+        "--validator-key-pem-file=/data/validatorKey.pem"
+      ]
     networks:
       deep-history-squad:
         ipv4_address: 12.0.0.10
@@ -178,14 +289,27 @@ services:
   deep-history-observer-mainnet-1:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history-observer-mainnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-observer-mainnet-1
     ports:
       - "1081:8080"
       - "17371:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-1:/data
-    command: --destination-shard-as-observer=1 --serialize-snapshots --disable-consensus-watchdog
+    working_dir: "/elrond/mainnet"
+    entrypoint:
+      [
+        "/elrond/mainnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=1",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
+        "--validator-key-pem-file=/data/validatorKey.pem"
+      ]
     networks:
       deep-history-squad:
         ipv4_address: 12.0.0.11
@@ -196,14 +320,27 @@ services:
   deep-history-observer-mainnet-2:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history-observer-mainnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-observer-mainnet-2
     ports:
       - "1082:8080"
       - "17372:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-2:/data
-    command: --destination-shard-as-observer=2 --serialize-snapshots --disable-consensus-watchdog
+    working_dir: "/elrond/mainnet"
+    entrypoint:
+      [
+        "/elrond/mainnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=2",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
+        "--validator-key-pem-file=/data/validatorKey.pem"
+      ]
     networks:
       deep-history-squad:
         ipv4_address: 12.0.0.12
@@ -214,14 +351,27 @@ services:
   deep-history-observer-mainnet-metachain:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history-observer-mainnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-observer-mainnet-metachain
     ports:
       - "1083:8080"
       - "17373:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-metachain:/data
-    command: --destination-shard-as-observer=metachain --serialize-snapshots --disable-consensus-watchdog
+    working_dir: "/elrond/mainnet"
+    entrypoint:
+      [
+        "/elrond/mainnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=metachain",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
+        "--validator-key-pem-file=/data/validatorKey.pem"
+      ]
     networks:
       deep-history-squad:
         ipv4_address: 12.0.0.13
@@ -232,12 +382,20 @@ services:
   deep-history-proxy-mainnet:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history-proxy-mainnet:latest
-    container_name: deep-history-observer-mainnet-0
+    image: elrondnetwork/deep-history-proxy:latest
+    container_name: deep-history-proxy-mainnet
     ports:
       - "8080:8080"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/proxy:/data
+    working_dir: "/elrond/mainnet"
+    entrypoint:
+      [
+        "/elrond/mainnet/proxy",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG"
+      ]
     networks:
       deep-history-squad:
         ipv4_address: 12.0.0.14
@@ -248,14 +406,27 @@ services:
   deep-history-observer-devnet-0:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history-observer-devnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-observer-devnet-0
     ports:
       - "2080:8080"
       - "27370:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-0:/data
-    command: --destination-shard-as-observer=0 --serialize-snapshots --disable-consensus-watchdog
+    working_dir: "/elrond/devnet"
+    entrypoint:
+      [
+        "/elrond/devnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=0",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
+        "--validator-key-pem-file=/data/validatorKey.pem"
+      ]
     networks:
       deep-history-squad:
         ipv4_address: 12.0.0.20
@@ -266,14 +437,27 @@ services:
   deep-history-observer-devnet-1:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history-observer-devnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-observer-devnet-1
     ports:
       - "2081:8080"
       - "27371:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-1:/data
-    command: --destination-shard-as-observer=1 --serialize-snapshots --disable-consensus-watchdog
+    working_dir: "/elrond/devnet"
+    entrypoint:
+      [
+        "/elrond/devnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=1",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
+        "--validator-key-pem-file=/data/validatorKey.pem"
+      ]
     networks:
       deep-history-squad:
         ipv4_address: 12.0.0.21
@@ -284,14 +468,27 @@ services:
   deep-history-observer-devnet-2:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history-observer-devnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-observer-devnet-2
     ports:
       - "2082:8080"
       - "27372:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-2:/data
-    command: --destination-shard-as-observer=2 --serialize-snapshots --disable-consensus-watchdog
+    working_dir: "/elrond/devnet"
+    entrypoint:
+      [
+        "/elrond/devnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=2",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
+        "--validator-key-pem-file=/data/validatorKey.pem"
+      ]
     networks:
       deep-history-squad:
         ipv4_address: 12.0.0.22
@@ -302,14 +499,27 @@ services:
   deep-history-observer-devnet-metachain:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history-observer-devnet:latest
+    image: elrondnetwork/deep-history-observer:latest
     container_name: deep-history-observer-devnet-metachain
     ports:
       - "2083:8080"
       - "27373:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-metachain:/data
-    command: --destination-shard-as-observer=metachain --serialize-snapshots --disable-consensus-watchdog
+    working_dir: "/elrond/devnet"
+    entrypoint:
+      [
+        "/elrond/devnet/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=metachain",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
+        "--validator-key-pem-file=/data/validatorKey.pem"
+      ]
     networks:
       deep-history-squad:
         ipv4_address: 12.0.0.23
@@ -320,12 +530,20 @@ services:
   deep-history-proxy-devnet:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history-proxy-devnet:latest
-    container_name: deep-history-observer-devnet-0
+    image: elrondnetwork/deep-history-proxy:latest
+    container_name: deep-history-proxy-devnet
     ports:
       - "9090:8080"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/proxy:/data
+    working_dir: "/elrond/devnet"
+    entrypoint:
+      [
+        "/elrond/devnet/proxy",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG"
+      ]
     networks:
       deep-history-squad:
         ipv4_address: 12.0.0.24

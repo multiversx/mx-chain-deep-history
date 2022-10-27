@@ -44,6 +44,8 @@ def main(cli_args: List[str]):
     elif mode == MODE_PREFS:
         data["Preferences"]["FullArchive"] = True
     elif mode == MODE_PROXY:
+        del data["FullHistoryNodes"]
+
         if network == "devnet":
             data["Observers"] = [
                 {
