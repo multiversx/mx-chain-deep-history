@@ -38,11 +38,10 @@ jobs:
           tags: elrondnetwork/deep-history:${{ github.ref_name }}
 
       - name: Push to "latest"
-        if: ${{ inputs.latest }} == true
         uses: docker/build-push-action@v3
         with:
           context: .
-          push: true
+          push: ${{ inputs.latest }} == true
           platforms: linux/amd64
           file: ./Dockerfile
           tags: elrondnetwork/deep-history:latest
