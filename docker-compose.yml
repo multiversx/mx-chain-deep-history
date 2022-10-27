@@ -48,8 +48,8 @@ services:
         "--import-db-no-sig-check"
       ]
     networks:
-      deep-history-reconstruction:
-        ipv4_address: 10.0.0.10
+      deep-history-reconstruction-mainnet:
+        ipv4_address: 20.0.0.10
     profiles:
       - reconstruction-mainnet
       - reconstruction-mainnet-0
@@ -79,8 +79,8 @@ services:
         "--import-db-no-sig-check"
       ]
     networks:
-      deep-history-reconstruction:
-        ipv4_address: 10.0.0.11
+      deep-history-reconstruction-mainnet:
+        ipv4_address: 20.0.0.11
     profiles:
       - reconstruction-mainnet
       - reconstruction-mainnet-1
@@ -110,8 +110,8 @@ services:
         "--import-db-no-sig-check"
       ]
     networks:
-      deep-history-reconstruction:
-        ipv4_address: 10.0.0.12
+      deep-history-reconstruction-mainnet:
+        ipv4_address: 20.0.0.12
     profiles:
       - reconstruction-mainnet
       - reconstruction-mainnet-2
@@ -141,8 +141,8 @@ services:
         "--import-db-no-sig-check"
       ]
     networks:
-      deep-history-reconstruction:
-        ipv4_address: 10.0.0.13
+      deep-history-reconstruction-mainnet:
+        ipv4_address: 20.0.0.13
     profiles:
       - reconstruction-mainnet
       - reconstruction-mainnet-metachain
@@ -172,8 +172,8 @@ services:
         "--import-db-no-sig-check"
       ]
     networks:
-      deep-history-reconstruction:
-        ipv4_address: 10.0.0.20
+      deep-history-reconstruction-devnet:
+        ipv4_address: 21.0.0.10
     profiles:
       - reconstruction-devnet
       - reconstruction-devnet-0
@@ -203,8 +203,8 @@ services:
         "--import-db-no-sig-check"
       ]
     networks:
-      deep-history-reconstruction:
-        ipv4_address: 10.0.0.21
+      deep-history-reconstruction-devnet:
+        ipv4_address: 21.0.0.11
     profiles:
       - reconstruction-devnet
       - reconstruction-devnet-1
@@ -234,8 +234,8 @@ services:
         "--import-db-no-sig-check"
       ]
     networks:
-      deep-history-reconstruction:
-        ipv4_address: 10.0.0.22
+      deep-history-reconstruction-devnet:
+        ipv4_address: 21.0.0.12
     profiles:
       - reconstruction-devnet
       - reconstruction-devnet-2
@@ -265,8 +265,8 @@ services:
         "--import-db-no-sig-check"
       ]
     networks:
-      deep-history-reconstruction:
-        ipv4_address: 10.0.0.23
+      deep-history-reconstruction-devnet:
+        ipv4_address: 21.0.0.13
     profiles:
       - reconstruction-devnet
       - reconstruction-devnet-metachain
@@ -296,8 +296,8 @@ services:
         "--validator-key-pem-file=/data/validatorKey.pem"
       ]
     networks:
-      deep-history-squad:
-        ipv4_address: 12.0.0.10
+      deep-history-squad-mainnet:
+        ipv4_address: 22.0.0.10
     restart: always
     profiles:
       - squad-mainnet
@@ -328,8 +328,8 @@ services:
         "--validator-key-pem-file=/data/validatorKey.pem"
       ]
     networks:
-      deep-history-squad:
-        ipv4_address: 12.0.0.11
+      deep-history-squad-mainnet:
+        ipv4_address: 22.0.0.11
     restart: always
     profiles:
       - squad-mainnet
@@ -360,8 +360,8 @@ services:
         "--validator-key-pem-file=/data/validatorKey.pem"
       ]
     networks:
-      deep-history-squad:
-        ipv4_address: 12.0.0.12
+      deep-history-squad-mainnet:
+        ipv4_address: 22.0.0.12
     restart: always
     profiles:
       - squad-mainnet
@@ -392,8 +392,8 @@ services:
         "--validator-key-pem-file=/data/validatorKey.pem"
       ]
     networks:
-      deep-history-squad:
-        ipv4_address: 12.0.0.13
+      deep-history-squad-mainnet:
+        ipv4_address: 22.0.0.13
     restart: always
     profiles:
       - squad-mainnet
@@ -417,8 +417,8 @@ services:
         "--log-level=*:DEBUG"
       ]
     networks:
-      deep-history-squad:
-        ipv4_address: 12.0.0.14
+      deep-history-squad-mainnet:
+        ipv4_address: 22.0.0.100
     restart: always
     profiles:
       - squad-mainnet
@@ -449,8 +449,8 @@ services:
         "--validator-key-pem-file=/data/validatorKey.pem"
       ]
     networks:
-      deep-history-squad:
-        ipv4_address: 12.0.0.20
+      deep-history-squad-devnet:
+        ipv4_address: 23.0.0.10
     restart: always
     profiles:
       - squad-devnet
@@ -481,8 +481,8 @@ services:
         "--validator-key-pem-file=/data/validatorKey.pem"
       ]
     networks:
-      deep-history-squad:
-        ipv4_address: 12.0.0.21
+      deep-history-squad-devnet:
+        ipv4_address: 23.0.0.11
     restart: always
     profiles:
       - squad-devnet
@@ -513,8 +513,8 @@ services:
         "--validator-key-pem-file=/data/validatorKey.pem"
       ]
     networks:
-      deep-history-squad:
-        ipv4_address: 12.0.0.22
+      deep-history-squad-devnet:
+        ipv4_address: 23.0.0.12
     restart: always
     profiles:
       - squad-devnet
@@ -545,8 +545,8 @@ services:
         "--validator-key-pem-file=/data/validatorKey.pem"
       ]
     networks:
-      deep-history-squad:
-        ipv4_address: 12.0.0.23
+      deep-history-squad-devnet:
+        ipv4_address: 23.0.0.13
     restart: always
     profiles:
       - squad-devnet
@@ -570,19 +570,27 @@ services:
         "--log-level=*:DEBUG"
       ]
     networks:
-      deep-history-squad:
-        ipv4_address: 12.0.0.24
+      deep-history-squad-devnet:
+        ipv4_address: 23.0.0.100
     restart: always
     profiles:
       - squad-devnet
       - squad-devnet-proxy
 
 networks:
-  deep-history-reconstruction:
+  deep-history-reconstruction-mainnet:
     ipam:
       config:
-        - subnet: 10.0.0.0/24
-  deep-history-squad:
+        - subnet: 20.0.0.0/24
+  deep-history-reconstruction-devnet:
     ipam:
       config:
-        - subnet: 12.0.0.0/24
+        - subnet: 21.0.0.0/24
+  deep-history-squad-mainnet:
+    ipam:
+      config:
+        - subnet: 22.0.0.0/24
+  deep-history-squad-devnet:
+    ipam:
+      config:
+        - subnet: 23.0.0.0/24

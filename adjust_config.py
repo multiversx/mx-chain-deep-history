@@ -50,38 +50,38 @@ def main(cli_args: List[str]):
             data["Observers"] = [
                 {
                     "ShardId": 0,
-                    "Address": "http://12.0.0.20:8080"
+                    "Address": "http://23.0.0.10:8080"
                 },
                 {
                     "ShardId": 1,
-                    "Address": "http://12.0.0.21:8080"
+                    "Address": "http://23.0.0.11:8080"
                 },
                 {
                     "ShardId": 2,
-                    "Address": "http://12.0.0.22:8080"
+                    "Address": "http://23.0.0.12:8080"
                 },
                 {
                     "ShardId": 4294967295,
-                    "Address": "http://12.0.0.23:8080"
+                    "Address": "http://23.0.0.13:8080"
                 },
             ]
         elif network == "mainnet":
             data["Observers"] = [
                 {
                     "ShardId": 0,
-                    "Address": "http://12.0.0.10:8080"
+                    "Address": "http://22.0.0.10:8080"
                 },
                 {
                     "ShardId": 1,
-                    "Address": "http://12.0.0.11:8080"
+                    "Address": "http://22.0.0.11:8080"
                 },
                 {
                     "ShardId": 2,
-                    "Address": "http://12.0.0.12:8080"
+                    "Address": "http://22.0.0.12:8080"
                 },
                 {
                     "ShardId": 4294967295,
-                    "Address": "http://12.0.0.13:8080"
+                    "Address": "http://22.0.0.13:8080"
                 },
             ]
         else:
