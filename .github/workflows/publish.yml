@@ -1,0 +1,12 @@
+name: Build & publish
+
+on:
+  workflow_dispatch:
+
+jobs:
+  empty:
+    name: empty
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
