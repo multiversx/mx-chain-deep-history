@@ -1,5 +1,15 @@
-# deep-history
+# Deep-history Observing Squad
 
-**Work in progress, stay tuned for updates!**
+## For integrators
 
-Scripts, docker definitions and utility tools for creating and managing observers with historical lookup support.
+See [docs.elrond.com](https://docs.elrond.com/integrators/deep-history-squad).
+
+## For contributors (developers)
+
+### Build the Docker images
+
+Bootstrap:
+
+```
+docker image build . -t elrondnetwork/deep-history:latest -f ./Dockerfile
+```
