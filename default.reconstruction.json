@@ -3,40 +3,40 @@
         "devnet": {
             "shards": {
                 "0": {
-                    "startCapsule": "",
-                    "targetCapsule": ""
+                    "oldestArchive": "",
+                    "newestArchive": ""
                 },
                 "1": {
-                    "startCapsule": "",
-                    "targetCapsule": ""
+                    "oldestArchive": "",
+                    "newestArchive": ""
                 },
                 "2": {
-                    "startCapsule": "",
-                    "targetCapsule": ""
+                    "oldestArchive": "",
+                    "newestArchive": ""
                 },
                 "metachain": {
-                    "startCapsule": "",
-                    "targetCapsule": ""
+                    "oldestArchive": "",
+                    "newestArchive": ""
                 }
             }
         },
         "mainnet": {
             "shards": {
                 "0": {
-                    "startCapsule": "",
-                    "targetCapsule": ""
+                    "oldestArchive": "",
+                    "newestArchive": ""
                 },
                 "1": {
-                    "startCapsule": "",
-                    "targetCapsule": ""
+                    "oldestArchive": "",
+                    "newestArchive": ""
                 },
                 "2": {
-                    "startCapsule": "",
-                    "targetCapsule": ""
+                    "oldestArchive": "",
+                    "newestArchive": ""
                 },
                 "metachain": {
-                    "startCapsule": "",
-                    "targetCapsule": ""
+                    "oldestArchive": "",
+                    "newestArchive": ""
                 }
             }
         }
