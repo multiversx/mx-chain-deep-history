@@ -1,5 +1,3 @@
-
-
 import json
 import logging
 import os
@@ -12,6 +10,9 @@ from typing import Any, Dict, List
 
 logger = logging.getLogger("bootstrap")
 
+NETWORKS = ["devnet", "mainnet"]
+SHARDS = ["0", "1", "2", "metachain"]
+
 
 def main(cli_args: List[str]):
     logging.basicConfig(level=logging.DEBUG)
@@ -22,6 +23,8 @@ def main(cli_args: List[str]):
     workspace = Path(parsed_args.workspace)
     downloads_folder = workspace / "downloads"
     downloads_folder.mkdir(parents=True, exist_ok=True)
+
+    sketch_folders_structure(workspace)
 
     config_path = workspace / "reconstruction.json"
     with open(config_path) as f:
@@ -38,9 +41,6 @@ def main(cli_args: List[str]):
             node_folder = workspace / network_key / f"node-{shard_key}"
             db_folder = node_folder / "db"
             import_db_folder = node_folder / "import-db"
-
-            db_folder.mkdir(parents=True, exist_ok=True)
-            import_db_folder.mkdir(parents=True, exist_ok=True)
 
             db_is_empty = len(os.listdir(db_folder)) == 0
             db_import_is_empty = len(os.listdir(import_db_folder)) == 0
@@ -59,6 +59,18 @@ def main(cli_args: List[str]):
             else:
                 logger.info(f"Skipping download & extraction, since folder isn't empty: {import_db_folder}")
 
+
+def sketch_folders_structure(workspace: Path):
+    for network in NETWORKS:
+        for shard in SHARDS:
+            node_folder = workspace / network / f"node-{shard}"
+            db_folder = node_folder / "db"
+            import_db_folder = node_folder / "import-db"
+
+            db_folder.mkdir(parents=True, exist_ok=True)
+            import_db_folder.mkdir(parents=True, exist_ok=True)
+
+            # TODO: For elrond-go v1.4.0 (upcoming), use the flag `--no-key` instead of using the keygenerator.
             generate_validator_key(node_folder)
 
 
