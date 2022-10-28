@@ -1,9 +1,9 @@
 FROM golang:1.17.6 as builder
 
 ARG CONFIG_DEVNET_TAG=D1.3.48.0-hf-fix
-ARG CONFIG_MAINNET_TAG=release-v1.3.48.0
-ARG PROXY_DEVNET_TAG=deep-history-24
-ARG PROXY_MAINNET_TAG=deep-history-24
+ARG CONFIG_MAINNET_TAG=v1.3.48.0
+ARG PROXY_DEVNET_TAG=v1.1.26
+ARG PROXY_MAINNET_TAG=v1.1.26
 
 RUN apt-get update && apt-get -y install python3-pip && pip3 install toml
 
