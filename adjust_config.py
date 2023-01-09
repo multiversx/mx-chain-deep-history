@@ -5,9 +5,11 @@ from typing import List
 import toml
 
 """
-python3 ./adjust_config.py --mode=main --file=/go/elrond-config-devnet/config.toml
-python3 ./adjust_config.py --mode=prefs --file=/go/elrond-config-devnet/prefs.toml
-python3 ./adjust_config.py --mode=proxy --file=/go/elrond-proxy-go/cmd/proxy/config/config.toml
+Example:
+
+python3 ./adjust_config.py --mode=main --file=config.toml
+python3 ./adjust_config.py --mode=prefs --file=prefs.toml
+python3 ./adjust_config.py --mode=proxy --file=proxy/config/config.toml
 """
 
 MODE_MAIN = "main"

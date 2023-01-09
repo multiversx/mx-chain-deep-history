@@ -2,7 +2,7 @@
 
 ## For integrators
 
-See [docs.elrond.com](https://docs.elrond.com/integrators/deep-history-squad).
+See [docs.multiversx.com](https://docs.multiversx.com/integrators/deep-history-squad).
 
 ## For contributors (developers)
 
@@ -11,5 +11,5 @@ See [docs.elrond.com](https://docs.elrond.com/integrators/deep-history-squad).
 Bootstrap:
 
 ```
-docker image build . -t elrondnetwork/deep-history:latest -f ./Dockerfile
+docker image build . -t multiversx/deep-history:latest -f ./Dockerfile
 ```

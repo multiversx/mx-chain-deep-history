@@ -1,6 +1,6 @@
 version: '3'
 
-# TODO: For elrond-go v1.4.0 (upcoming), use the flag `--no-key` when starting the observers, instead of passing `--validator-key`.
+# TODO: For mx-chain-go v1.4.0 (upcoming), use the flag `--no-key` when starting the observers, instead of passing `--validator-key`.
 
 services:
   deep-history-reconstruction-bootstrap:
@@ -8,7 +8,7 @@ services:
       nproc: 65535
     user: ${DOCKER_USER}
     tty: true
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-bootstrap
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}:/workspace
@@ -27,17 +27,17 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-reconstruction-mainnet-0
     ports:
       - "4080:8080"
       - "47370:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-0:/data
-    working_dir: "/elrond/mainnet/node"
+    working_dir: "/mainnet/node"
     entrypoint:
       [
-        "/elrond/mainnet/node/node",
+        "/mainnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -58,17 +58,17 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-reconstruction-mainnet-1
     ports:
       - "4081:8080"
       - "47371:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-1:/data
-    working_dir: "/elrond/mainnet/node"
+    working_dir: "/mainnet/node"
     entrypoint:
       [
-        "/elrond/mainnet/node/node",
+        "/mainnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -89,17 +89,17 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-reconstruction-mainnet-2
     ports:
       - "4082:8080"
       - "47372:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-2:/data
-    working_dir: "/elrond/mainnet/node"
+    working_dir: "/mainnet/node"
     entrypoint:
       [
-        "/elrond/mainnet/node/node",
+        "/mainnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -120,17 +120,17 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-reconstruction-mainnet-metachain
     ports:
       - "4083:8080"
       - "47373:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-metachain:/data
-    working_dir: "/elrond/mainnet/node"
+    working_dir: "/mainnet/node"
     entrypoint:
       [
-        "/elrond/mainnet/node/node",
+        "/mainnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -151,17 +151,17 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-reconstruction-devnet-0
     ports:
       - "5080:8080"
       - "57370:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-0:/data
-    working_dir: "/elrond/devnet/node"
+    working_dir: "/devnet/node"
     entrypoint:
       [
-        "/elrond/devnet/node/node",
+        "/devnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -182,17 +182,17 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-reconstruction-devnet-1
     ports:
       - "5081:8080"
       - "57371:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-1:/data
-    working_dir: "/elrond/devnet/node"
+    working_dir: "/devnet/node"
     entrypoint:
       [
-        "/elrond/devnet/node/node",
+        "/devnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -213,17 +213,17 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-reconstruction-devnet-2
     ports:
       - "5082:8080"
       - "57372:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-2:/data
-    working_dir: "/elrond/devnet/node"
+    working_dir: "/devnet/node"
     entrypoint:
       [
-        "/elrond/devnet/node/node",
+        "/devnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -244,17 +244,17 @@ services:
     ulimits:
       nproc: 65535
     user: ${DOCKER_USER}
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-reconstruction-devnet-metachain
     ports:
       - "5083:8080"
       - "57373:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-metachain:/data
-    working_dir: "/elrond/devnet/node"
+    working_dir: "/devnet/node"
     entrypoint:
       [
-        "/elrond/devnet/node/node",
+        "/devnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -274,17 +274,17 @@ services:
   deep-history-observer-mainnet-0:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-observer-mainnet-0
     ports:
       - "1080:8080"
       - "17370:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-0:/data
-    working_dir: "/elrond/mainnet/node"
+    working_dir: "/mainnet/node"
     entrypoint:
       [
-        "/elrond/mainnet/node/node",
+        "/mainnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -306,17 +306,17 @@ services:
   deep-history-observer-mainnet-1:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-observer-mainnet-1
     ports:
       - "1081:8080"
       - "17371:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-1:/data
-    working_dir: "/elrond/mainnet/node"
+    working_dir: "/mainnet/node"
     entrypoint:
       [
-        "/elrond/mainnet/node/node",
+        "/mainnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -338,17 +338,17 @@ services:
   deep-history-observer-mainnet-2:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-observer-mainnet-2
     ports:
       - "1082:8080"
       - "17372:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-2:/data
-    working_dir: "/elrond/mainnet/node"
+    working_dir: "/mainnet/node"
     entrypoint:
       [
-        "/elrond/mainnet/node/node",
+        "/mainnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -370,17 +370,17 @@ services:
   deep-history-observer-mainnet-metachain:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-observer-mainnet-metachain
     ports:
       - "1083:8080"
       - "17373:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-metachain:/data
-    working_dir: "/elrond/mainnet/node"
+    working_dir: "/mainnet/node"
     entrypoint:
       [
-        "/elrond/mainnet/node/node",
+        "/mainnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -402,16 +402,16 @@ services:
   deep-history-proxy-mainnet:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-proxy-mainnet
     ports:
       - "8080:8080"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/mainnet/proxy:/data
-    working_dir: "/elrond/mainnet/proxy"
+    working_dir: "/mainnet/proxy"
     entrypoint:
       [
-        "/elrond/mainnet/proxy/proxy",
+        "/mainnet/proxy/proxy",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG"
@@ -427,17 +427,17 @@ services:
   deep-history-observer-devnet-0:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-observer-devnet-0
     ports:
       - "2080:8080"
       - "27370:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-0:/data
-    working_dir: "/elrond/devnet/node"
+    working_dir: "/devnet/node"
     entrypoint:
       [
-        "/elrond/devnet/node/node",
+        "/devnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -459,17 +459,17 @@ services:
   deep-history-observer-devnet-1:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-observer-devnet-1
     ports:
       - "2081:8080"
       - "27371:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-1:/data
-    working_dir: "/elrond/devnet/node"
+    working_dir: "/devnet/node"
     entrypoint:
       [
-        "/elrond/devnet/node/node",
+        "/devnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -491,17 +491,17 @@ services:
   deep-history-observer-devnet-2:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-observer-devnet-2
     ports:
       - "2082:8080"
       - "27372:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-2:/data
-    working_dir: "/elrond/devnet/node"
+    working_dir: "/devnet/node"
     entrypoint:
       [
-        "/elrond/devnet/node/node",
+        "/devnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -523,17 +523,17 @@ services:
   deep-history-observer-devnet-metachain:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-observer-devnet-metachain
     ports:
       - "2083:8080"
       - "27373:37373"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/node-metachain:/data
-    working_dir: "/elrond/devnet/node"
+    working_dir: "/devnet/node"
     entrypoint:
       [
-        "/elrond/devnet/node/node",
+        "/devnet/node/node",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG",
@@ -555,16 +555,16 @@ services:
   deep-history-proxy-devnet:
     ulimits:
       nproc: 65535
-    image: elrondnetwork/deep-history:latest
+    image: multiversx/deep-history:latest
     container_name: deep-history-proxy-devnet
     ports:
       - "9090:8080"
     volumes:
       - ${DEEP_HISTORY_WORKSPACE}/devnet/proxy:/data
-    working_dir: "/elrond/devnet/proxy"
+    working_dir: "/devnet/proxy"
     entrypoint:
       [
-        "/elrond/devnet/proxy/proxy",
+        "/devnet/proxy/proxy",
         "--working-directory=/data",
         "--log-save",
         "--log-level=*:DEBUG"
