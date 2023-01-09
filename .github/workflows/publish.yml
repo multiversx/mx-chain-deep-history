@@ -35,7 +35,7 @@ jobs:
           push: true
           platforms: linux/amd64
           file: ./Dockerfile
-          tags: elrondnetwork/deep-history:${{ github.ref_name }}
+          tags: multiversx/deep-history:${{ github.ref_name }}
 
       - name: Push to "latest"
         uses: docker/build-push-action@v3
@@ -44,4 +44,4 @@ jobs:
           push: ${{ inputs.latest }}
           platforms: linux/amd64
           file: ./Dockerfile
-          tags: elrondnetwork/deep-history:latest
+          tags: multiversx/deep-history:latest

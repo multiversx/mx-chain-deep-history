@@ -70,7 +70,7 @@ def sketch_folders_structure(workspace: Path):
             db_folder.mkdir(parents=True, exist_ok=True)
             import_db_folder.mkdir(parents=True, exist_ok=True)
 
-            # TODO: For elrond-go v1.4.0 (upcoming), use the flag `--no-key` instead of using the keygenerator.
+            # TODO: For mx-chain-go v1.4.0 (upcoming), use the flag `--no-key` instead of using the keygenerator.
             generate_validator_key(node_folder)
 
 
@@ -98,7 +98,7 @@ def extract_archive(archive_path: Path, destination_folder: Path):
 def generate_validator_key(node_folder: Path):
     logger.info(f"generate_validator_key(), folder = {node_folder}")
 
-    # TODO: For elrond-go v1.4.0 (upcoming), use the flag `--no-key` instead of generating keys.
+    # TODO: For mx-chain-go v1.4.0 (upcoming), use the flag `--no-key` instead of generating keys.
     if not (node_folder / "validatorKey.pem").exists():
         subprocess.run(["/keygenerator"], cwd=node_folder).check_returncode()
 
