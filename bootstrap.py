@@ -10,7 +10,7 @@ from typing import Any, Dict, List
 
 logger = logging.getLogger("bootstrap")
 
-NETWORKS = ["devnet", "mainnet"]
+NETWORKS = ["testnet", "devnet", "mainnet"]
 SHARDS = ["0", "1", "2", "metachain"]
 
 
@@ -70,9 +70,6 @@ def sketch_folders_structure(workspace: Path):
             db_folder.mkdir(parents=True, exist_ok=True)
             import_db_folder.mkdir(parents=True, exist_ok=True)
 
-            # TODO: For mx-chain-go v1.4.0 (upcoming), use the flag `--no-key` instead of using the keygenerator.
-            generate_validator_key(node_folder)
-
 
 def download_archive_if_missing(archive_url: str, downloads_folder: Path, network_key: str, shard_key: str, tag: str):
     logger.info(f"download_archive_if_missing(), url = {archive_url}")
@@ -93,14 +90,6 @@ def download_archive_if_missing(archive_url: str, downloads_folder: Path, networ
 def extract_archive(archive_path: Path, destination_folder: Path):
     logger.info(f"extract_archive(), archive = {archive_path}, destination = {destination_folder}")
     shutil.unpack_archive(archive_path, destination_folder)
-
-
-def generate_validator_key(node_folder: Path):
-    logger.info(f"generate_validator_key(), folder = {node_folder}")
-
-    # TODO: For mx-chain-go v1.4.0 (upcoming), use the flag `--no-key` instead of generating keys.
-    if not (node_folder / "validatorKey.pem").exists():
-        subprocess.run(["/keygenerator"], cwd=node_folder).check_returncode()
 
 
 if __name__ == "__main__":

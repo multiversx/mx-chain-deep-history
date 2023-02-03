@@ -41,14 +41,33 @@ def main(cli_args: List[str]):
         data["StateTriesConfig"]["AccountsStatePruningEnabled"] = False
         data["StoragePruning"]["ObserverCleanOldEpochsData"] = False
         data["StoragePruning"]["AccountsTrieCleanOldEpochsData"] = False
-        data["Antiflood"]["WebServer"]["SimultaneousRequests"] = api_simultaneous_requests
-        data["Antiflood"]["WebServer"]["TrieOperationsDeadlineMilliseconds"] = api_trie_operations_timeout
+        data["WebServerAntiflood"]["SimultaneousRequests"] = api_simultaneous_requests
+        data["WebServerAntiflood"]["TrieOperationsDeadlineMilliseconds"] = api_trie_operations_timeout
     elif mode == MODE_PREFS:
         data["Preferences"]["FullArchive"] = True
     elif mode == MODE_PROXY:
         del data["FullHistoryNodes"]
 
-        if network == "devnet":
+        if network == "testnet":
+            data["Observers"] = [
+                {
+                    "ShardId": 0,
+                    "Address": "http://24.0.0.10:8080"
+                },
+                {
+                    "ShardId": 1,
+                    "Address": "http://24.0.0.11:8080"
+                },
+                {
+                    "ShardId": 2,
+                    "Address": "http://24.0.0.12:8080"
+                },
+                {
+                    "ShardId": 4294967295,
+                    "Address": "http://24.0.0.13:8080"
+                },
+            ]
+        elif network == "devnet":
             data["Observers"] = [
                 {
                     "ShardId": 0,
