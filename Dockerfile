@@ -71,9 +71,9 @@ COPY --from=builder "/go/mx-chain-go-testnet/cmd/node/node" "/testnet/node/"
 COPY --from=builder "/go/mx-chain-go-devnet/cmd/node/node" "/devnet/node/"
 COPY --from=builder "/go/mx-chain-go-mainnet/cmd/node/node" "/mainnet/node/"
 
-COPY --from=builder "/go/mx-chain-go-testnet/cmd/node/libwasmer_linux_amd64.so" "/app/testnet/"
-COPY --from=builder "/go/mx-chain-go-devnet/cmd/node/libwasmer_linux_amd64.so" "/app/devnet/"
-COPY --from=builder "/go/mx-chain-go-mainnet/cmd/node/libwasmer_linux_amd64.so" "/app/mainnet/"
+COPY --from=builder "/go/mx-chain-go-testnet/cmd/node/libwasmer_linux_amd64.so" "/testnet/node/"
+COPY --from=builder "/go/mx-chain-go-devnet/cmd/node/libwasmer_linux_amd64.so" "/devnet/node/"
+COPY --from=builder "/go/mx-chain-go-mainnet/cmd/node/libwasmer_linux_amd64.so" "/mainnet/node/"
 
 # Copy proxy (config, binary):
 COPY --from=builder "/go/mx-chain-proxy-go-testnet/cmd/proxy/config" "/testnet/proxy/config/"
