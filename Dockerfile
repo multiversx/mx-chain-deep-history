@@ -3,9 +3,9 @@ FROM golang:1.17.6 as builder
 ARG CONFIG_TESTNET_TAG=T1.4.8.0
 ARG CONFIG_DEVNET_TAG=D1.4.8.0
 ARG CONFIG_MAINNET_TAG=v1.4.8.0
-ARG PROXY_TESTNET_TAG=v1.1.33
-ARG PROXY_DEVNET_TAG=v1.1.33
-ARG PROXY_MAINNET_TAG=v1.1.33
+ARG PROXY_TESTNET_TAG=v1.1.34
+ARG PROXY_DEVNET_TAG=v1.1.34
+ARG PROXY_MAINNET_TAG=v1.1.34
 
 RUN apt-get update && apt-get -y install python3-pip && pip3 install toml
 
@@ -26,15 +26,15 @@ RUN git clone https://github.com/multiversx/mx-chain-proxy-go.git --branch=${PRO
 # Build node and proxy
 WORKDIR /go/mx-chain-go-testnet/cmd/node
 RUN go build -i -v -ldflags="-X main.appVersion=$(git describe --tags --long --dirty --always)"
-RUN cp /go/pkg/mod/github.com/multiversx/mx-chain-vm-v1_4-go@$(cat /go/mx-chain-go-testnet/go.mod | grep mx-chain-vm-v1_4-go | sed 's/.* //' | tail -n 1)/wasmer/libwasmer_linux_amd64.so /go/mx-chain-go-testnet/cmd/node/libwasmer_linux_amd64.so
+RUN cp /go/pkg/mod/github.com/multiversx/$(cat /go/mx-chain-go-testnet/go.mod | grep mx-chain-vm-v | sort -n | tail -n -1| awk -F '/' '{print$3}'| sed 's/ /@/g')/wasmer/libwasmer_linux_amd64.so /go/mx-chain-go-testnet/cmd/node/libwasmer_linux_amd64.so
 
 WORKDIR /go/mx-chain-go-devnet/cmd/node
 RUN go build -i -v -ldflags="-X main.appVersion=$(git describe --tags --long --dirty --always)"
-RUN cp /go/pkg/mod/github.com/multiversx/mx-chain-vm-v1_4-go@$(cat /go/mx-chain-go-devnet/go.mod | grep mx-chain-vm-v1_4-go | sed 's/.* //' | tail -n 1)/wasmer/libwasmer_linux_amd64.so /go/mx-chain-go-devnet/cmd/node/libwasmer_linux_amd64.so
+RUN cp /go/pkg/mod/github.com/multiversx/$(cat /go/mx-chain-go-devnet/go.mod | grep mx-chain-vm-v | sort -n | tail -n -1| awk -F '/' '{print$3}'| sed 's/ /@/g')/wasmer/libwasmer_linux_amd64.so /go/mx-chain-go-devnet/cmd/node/libwasmer_linux_amd64.so
 
 WORKDIR /go/mx-chain-go-mainnet/cmd/node
 RUN go build -i -v -ldflags="-X main.appVersion=$(git describe --tags --long --dirty --always)"
-RUN cp /go/pkg/mod/github.com/multiversx/mx-chain-vm-v1_4-go@$(cat /go/mx-chain-go-mainnet/go.mod | grep mx-chain-vm-v1_4-go | sed 's/.* //' | tail -n 1)/wasmer/libwasmer_linux_amd64.so /go/mx-chain-go-mainnet/cmd/node/libwasmer_linux_amd64.so
+RUN cp /go/pkg/mod/github.com/multiversx/$(cat /go/mx-chain-go-mainnet/go.mod | grep mx-chain-vm-v | sort -n | tail -n -1| awk -F '/' '{print$3}'| sed 's/ /@/g')/wasmer/libwasmer_linux_amd64.so /go/mx-chain-go-mainnet/cmd/node/libwasmer_linux_amd64.so
 
 WORKDIR /go/mx-chain-proxy-go-testnet/cmd/proxy
 RUN go build
