@@ -44,6 +44,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=0",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-0",
         "--import-db=/data/import-db",
         "--import-db-no-sig-check"
       ]
@@ -77,6 +78,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=1",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-1",
         "--import-db=/data/import-db",
         "--import-db-no-sig-check"
       ]
@@ -110,6 +112,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=2",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-2",
         "--import-db=/data/import-db",
         "--import-db-no-sig-check"
       ]
@@ -143,6 +146,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=metachain",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-metachain",
         "--import-db=/data/import-db",
         "--import-db-no-sig-check"
       ]
@@ -176,6 +180,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=0",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-0",
         "--import-db=/data/import-db",
         "--import-db-no-sig-check"
       ]
@@ -209,6 +214,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=1",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-1",
         "--import-db=/data/import-db",
         "--import-db-no-sig-check"
       ]
@@ -242,6 +248,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=2",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-2",
         "--import-db=/data/import-db",
         "--import-db-no-sig-check"
       ]
@@ -275,6 +282,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=metachain",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-metachain",
         "--import-db=/data/import-db",
         "--import-db-no-sig-check"
       ]
@@ -307,6 +315,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=0",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-0",
         "--serialize-snapshots",
         "--disable-consensus-watchdog",
         "--no-key"
@@ -341,6 +350,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=1",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-1",
         "--serialize-snapshots",
         "--disable-consensus-watchdog",
         "--no-key"
@@ -375,6 +385,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=2",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-2",
         "--serialize-snapshots",
         "--disable-consensus-watchdog",
         "--no-key"
@@ -409,6 +420,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=metachain",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-metachain",
         "--serialize-snapshots",
         "--disable-consensus-watchdog",
         "--no-key"
@@ -468,6 +480,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=0",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-0",
         "--serialize-snapshots",
         "--disable-consensus-watchdog",
         "--no-key"
@@ -502,6 +515,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=1",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-1",
         "--serialize-snapshots",
         "--disable-consensus-watchdog",
         "--no-key"
@@ -536,6 +550,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=2",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-2",
         "--serialize-snapshots",
         "--disable-consensus-watchdog",
         "--no-key"
@@ -570,6 +585,7 @@ services:
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=metachain",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-metachain",
         "--serialize-snapshots",
         "--disable-consensus-watchdog",
         "--no-key"
