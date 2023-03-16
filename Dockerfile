@@ -25,15 +25,15 @@ RUN git clone https://github.com/multiversx/mx-chain-proxy-go.git --branch=${PRO
 
 # Build node and proxy
 WORKDIR /go/mx-chain-go-testnet/cmd/node
-RUN go build -i -v -ldflags="-X main.appVersion=$(git describe --tags --long --dirty --always)"
+RUN go build -i -v -ldflags="-X main.appVersion=$(git --git-dir /repos/mx-chain-testnet-config/.git describe --tags --long --dirty --always)"
 RUN cp /go/pkg/mod/github.com/multiversx/$(cat /go/mx-chain-go-testnet/go.mod | grep mx-chain-vm-v | sort -n | tail -n -1| awk -F '/' '{print$3}'| sed 's/ /@/g')/wasmer/libwasmer_linux_amd64.so /go/mx-chain-go-testnet/cmd/node/libwasmer_linux_amd64.so
 
 WORKDIR /go/mx-chain-go-devnet/cmd/node
-RUN go build -i -v -ldflags="-X main.appVersion=$(git describe --tags --long --dirty --always)"
+RUN go build -i -v -ldflags="-X main.appVersion=$(git --git-dir /repos/mx-chain-devnet-config/.git describe --tags --long --dirty --always)"
 RUN cp /go/pkg/mod/github.com/multiversx/$(cat /go/mx-chain-go-devnet/go.mod | grep mx-chain-vm-v | sort -n | tail -n -1| awk -F '/' '{print$3}'| sed 's/ /@/g')/wasmer/libwasmer_linux_amd64.so /go/mx-chain-go-devnet/cmd/node/libwasmer_linux_amd64.so
 
 WORKDIR /go/mx-chain-go-mainnet/cmd/node
-RUN go build -i -v -ldflags="-X main.appVersion=$(git describe --tags --long --dirty --always)"
+RUN go build -i -v -ldflags="-X main.appVersion=$(git --git-dir /repos/mx-chain-mainnet-config/.git describe --tags --long --dirty --always)"
 RUN cp /go/pkg/mod/github.com/multiversx/$(cat /go/mx-chain-go-mainnet/go.mod | grep mx-chain-vm-v | sort -n | tail -n -1| awk -F '/' '{print$3}'| sed 's/ /@/g')/wasmer/libwasmer_linux_amd64.so /go/mx-chain-go-mainnet/cmd/node/libwasmer_linux_amd64.so
 
 WORKDIR /go/mx-chain-proxy-go-testnet/cmd/proxy
