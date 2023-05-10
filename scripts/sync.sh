@@ -26,7 +26,7 @@ run_observer() {
         return 1
     fi
 
-    docker run \
+    docker run -d \
         --user $(id -u):$(id -g) \
         --name deep-history-observer-${MX_NETWORK}-${MX_SHARD} \
         --volume ${MX_WORKSPACE}/data:/data \

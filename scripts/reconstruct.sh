@@ -50,7 +50,7 @@ run_import_db() {
         return 1
     fi
 
-    docker run \
+    docker run -d \
         --user $(id -u):$(id -g) \
         --name deep-history-reconstruct-${MX_NETWORK}-${MX_SHARD} \
         --volume ${MX_WORKSPACE}/data:/data \
