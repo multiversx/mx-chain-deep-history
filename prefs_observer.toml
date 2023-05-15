@@ -9,6 +9,7 @@
        { File = "config.toml", Path = "StateTriesConfig.SnapshotsEnabled", Value = "false" },
        { File = "config.toml", Path = "StoragePruning.ObserverCleanOldEpochsData", Value = "false" },
        { File = "config.toml", Path = "StoragePruning.AccountsTrieCleanOldEpochsData", Value = "false" },
+       { File = "config.toml", Path = "PeerStatePruningEnabled.PeerStatePruningEnabled", Value = "true" },
        { File = "config.toml", Path = "WebServerAntiflood.SimultaneousRequests", Value = "256" },
        { File = "config.toml", Path = "WebServerAntiflood.TrieOperationsDeadlineMilliseconds", Value = "300000" }
    ]

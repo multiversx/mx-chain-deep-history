@@ -2,6 +2,7 @@ version: '3'
 
 services:
   deep-history-observer-mainnet-0:
+    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -10,7 +11,7 @@ services:
       - "1080:8080"
       - "17370:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-0:/data
+      - ${MX_WORKSPACE_ROOT}/mainnet/node-0/data:/data
     working_dir: "/mainnet/node"
     environment:
       - LD_LIBRARY_PATH=/mainnet/node
@@ -37,6 +38,7 @@ services:
       - squad-mainnet-0
 
   deep-history-observer-mainnet-1:
+    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -45,7 +47,7 @@ services:
       - "1081:8080"
       - "17371:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-1:/data
+      - ${MX_WORKSPACE_ROOT}/mainnet/node-1/data:/data
     working_dir: "/mainnet/node"
     environment:
       - LD_LIBRARY_PATH=/mainnet/node
@@ -72,6 +74,7 @@ services:
       - squad-mainnet-1
 
   deep-history-observer-mainnet-2:
+    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -80,7 +83,7 @@ services:
       - "1082:8080"
       - "17372:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-2:/data
+      - ${MX_WORKSPACE_ROOT}/mainnet/node-2/data:/data
     working_dir: "/mainnet/node"
     environment:
       - LD_LIBRARY_PATH=/mainnet/node
@@ -107,6 +110,7 @@ services:
       - squad-mainnet-2
 
   deep-history-observer-mainnet-metachain:
+    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -115,7 +119,7 @@ services:
       - "1083:8080"
       - "17373:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-metachain:/data
+      - ${MX_WORKSPACE_ROOT}/mainnet/node-metachain/data:/data
     working_dir: "/mainnet/node"
     environment:
       - LD_LIBRARY_PATH=/mainnet/node
@@ -142,6 +146,7 @@ services:
       - squad-mainnet-metachain
 
   deep-history-proxy-mainnet:
+    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -149,7 +154,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/mainnet/proxy:/data
+      - ${MX_WORKSPACE_ROOT}/mainnet/proxy/data:/data
     working_dir: "/mainnet/proxy"
     entrypoint:
       [
@@ -167,6 +172,7 @@ services:
       - squad-mainnet-proxy
 
   deep-history-observer-devnet-0:
+    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -175,7 +181,7 @@ services:
       - "2080:8080"
       - "27370:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-0:/data
+      - ${MX_WORKSPACE_ROOT}/devnet/node-0/data:/data
     working_dir: "/devnet/node"
     environment:
       - LD_LIBRARY_PATH=/devnet/node
@@ -200,6 +206,7 @@ services:
       - squad-devnet-0
 
   deep-history-observer-devnet-1:
+    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -208,7 +215,7 @@ services:
       - "2081:8080"
       - "27371:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-1:/data
+      - ${MX_WORKSPACE_ROOT}/devnet/node-1/data:/data
     working_dir: "/devnet/node"
     environment:
       - LD_LIBRARY_PATH=/devnet/node
@@ -233,6 +240,7 @@ services:
       - squad-devnet-1
 
   deep-history-observer-devnet-2:
+    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -241,7 +249,7 @@ services:
       - "2082:8080"
       - "27372:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-2:/data
+      - ${MX_WORKSPACE_ROOT}/devnet/node-2/data:/data
     working_dir: "/devnet/node"
     environment:
       - LD_LIBRARY_PATH=/devnet/node
@@ -266,6 +274,7 @@ services:
       - squad-devnet-2
 
   deep-history-observer-devnet-metachain:
+    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -274,7 +283,7 @@ services:
       - "2083:8080"
       - "27373:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-metachain:/data
+      - ${MX_WORKSPACE_ROOT}/devnet/node-metachain/data:/data
     working_dir: "/devnet/node"
     environment:
       - LD_LIBRARY_PATH=/devnet/node
@@ -299,6 +308,7 @@ services:
       - squad-devnet-metachain
 
   deep-history-proxy-devnet:
+    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -306,7 +316,7 @@ services:
     ports:
       - "9090:8080"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/devnet/proxy:/data
+      - ${MX_WORKSPACE_ROOT}/devnet/proxy/data:/data
     working_dir: "/devnet/proxy"
     entrypoint:
       [

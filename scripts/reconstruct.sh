@@ -16,7 +16,7 @@ then
     exit 1
 fi
 
-MX_WORKSPACE=$MX_WORKSPACE_ROOT/$MX_NETWORK/$MX_SHARD
+MX_WORKSPACE=$MX_WORKSPACE_ROOT/$MX_NETWORK/node-$MX_SHARD
 
 # Downloads (and extracts) a regular, "full-history", daily archive.
 download_daily_archive() {
