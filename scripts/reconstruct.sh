@@ -29,7 +29,7 @@ download_daily_archive() {
     mkdir -p $MX_WORKSPACE/daily_archive
 
     echo "Downloading archive ..."
-    wget -O $MX_WORKSPACE/daily_archive/archive $URL_DAILY_ARCHIVE || return 1
+    wget -O $MX_WORKSPACE/daily_archive/archive $MX_URL_DAILY_ARCHIVE || return 1
 
     echo "Extracting archive" $MX_WORKSPACE/daily_archive/archive "..."
     tar -xf  $MX_WORKSPACE/daily_archive/archive -C $MX_WORKSPACE/daily_archive || return 1
