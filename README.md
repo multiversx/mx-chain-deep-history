@@ -35,7 +35,7 @@ Upon reconstruction, one can individually start the observers for each shard (ex
 export MX_WORKSPACE_ROOT=$HOME/deep-history-workspace
 export DOCKER_USER=$(id -u):$(id -g)
 
-docker compose --env-file my-env.env \
+docker compose \
     --file ./docker-compose.yml \
     --profile squad-mainnet-0 \
     --project-name my-project up --detach
