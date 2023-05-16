@@ -2,7 +2,7 @@
 
 Also see [docs.multiversx.com](https://docs.multiversx.com/integrators/deep-history-squad).
 
-A Deep History Squad holds the **entire trie data**, and it can be used to reconstruct the state of the network at any point in time.
+A Deep History Squad holds the **entire trie data**, and it can be used to reconstruct the state of the network for each past block.
 
 ## For integrators
 
@@ -13,10 +13,10 @@ Under the hood, the **reconstruction** process relies on the `import-db` feature
 Here's an example of how to reconstruct the databases for a shard:
 
 ```
-export MX_NETWORK=mainnet
-export MX_SHARD=1
+export MX_NETWORK=devnet
+export MX_SHARD=metachain
 export MX_WORKSPACE_ROOT=$HOME/deep-history-workspace
-export MX_URL_DAILY_ARCHIVE=https://multiversx.com/example/example/example-${SHARD}.tar.gz
+export MX_URL_DAILY_ARCHIVE=https://elrond-mainnet-db-archive.fra1.digitaloceanspaces.com/elrond-public-devnet/devnet-1648551600/01-Jul-2022/DevNet-Full-History-DB-Shard-metachain.tar.gz
 
 source ./scripts/reconstruct.sh && download_daily_archive
 source ./scripts/reconstruct.sh && prepare_import_db
