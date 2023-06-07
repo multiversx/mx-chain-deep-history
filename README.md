@@ -8,8 +8,6 @@ See [docs.multiversx.com](https://docs.multiversx.com/integrators/deep-history-s
 
 ### Build the Docker images
 
-Bootstrap:
-
 ```
 docker image build . -t multiversx/deep-history:latest -f ./Dockerfile
 ```
