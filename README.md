@@ -9,5 +9,5 @@ See [docs.multiversx.com](https://docs.multiversx.com/integrators/deep-history-s
 ### Build the Docker images
 
 ```
-docker image build . -t multiversx/deep-history:latest -f ./Dockerfile
+docker image build --network=host . -t multiversx/deep-history:latest -f ./Dockerfile
 ```
