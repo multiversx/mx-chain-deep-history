@@ -45,6 +45,7 @@ RUN python3 /workspace/adjust_proxy_config.py --network=testnet --file=/go/mx-ch
 WORKDIR /go/mx-chain-go-testnet/cmd/node
 RUN go build -v -ldflags="-X main.appVersion=$(git --git-dir /workspace/mx-chain-testnet-config/.git describe --tags --long --dirty --always)"
 RUN cp /go/pkg/mod/github.com/multiversx/$(cat /go/mx-chain-go-testnet/go.mod | grep mx-chain-vm-v | sort -n | tail -n -1| awk -F '/' '{print$3}'| sed 's/ /@/g')/wasmer/libwasmer_linux_amd64.so /go/mx-chain-go-testnet/cmd/node/libwasmer_linux_amd64.so
+RUN cp /go/pkg/mod/github.com/multiversx/$(cat /go/mx-chain-go-testnet/go.mod | grep mx-chain-vm-go | sort -n | tail -n -1| awk -F '/' '{print$3}'| sed 's/ /@/g')/wasmer2/libvmexeccapi.so /go/mx-chain-go-testnet/cmd/node/libvmexeccapi.so
 
 WORKDIR /go/mx-chain-go-devnet/cmd/node
 RUN go build -v -ldflags="-X main.appVersion=$(git --git-dir /workspace/mx-chain-devnet-config/.git describe --tags --long --dirty --always)"
