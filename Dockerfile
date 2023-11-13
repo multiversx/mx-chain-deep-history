@@ -79,6 +79,7 @@ COPY --from=builder "/go/mx-chain-go-devnet/cmd/node/node" "/devnet/node/"
 COPY --from=builder "/go/mx-chain-go-mainnet/cmd/node/node" "/mainnet/node/"
 
 COPY --from=builder "/go/mx-chain-go-testnet/cmd/node/libwasmer_linux_amd64.so" "/testnet/node/"
+COPY --from=builder "/go/mx-chain-go-testnet/cmd/node/libvmexeccapi.so" "/testnet/node/"
 COPY --from=builder "/go/mx-chain-go-devnet/cmd/node/libwasmer_linux_amd64.so" "/devnet/node/"
 COPY --from=builder "/go/mx-chain-go-mainnet/cmd/node/libwasmer_linux_amd64.so" "/mainnet/node/"
 
