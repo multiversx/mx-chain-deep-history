@@ -7,6 +7,7 @@ ARG PROXY_TESTNET_TAG=v1.1.41
 ARG PROXY_DEVNET_TAG=v1.1.39
 ARG PROXY_MAINNET_TAG=v1.1.39
 
+# Install Python dependencies, necessary for "adjust_binary.py" and "adjust_observer_src.py"
 RUN apt-get update && apt-get -y install python3-pip && pip3 install toml --break-system-packages
 
 # Clone repositories:
@@ -22,6 +23,23 @@ RUN git clone https://github.com/multiversx/mx-chain-go --branch=$(cat /workspac
 RUN git clone https://github.com/multiversx/mx-chain-proxy-go.git --branch=${PROXY_TESTNET_TAG} --single-branch --depth=1 mx-chain-proxy-go-testnet
 RUN git clone https://github.com/multiversx/mx-chain-proxy-go.git --branch=${PROXY_DEVNET_TAG} --single-branch --depth=1 mx-chain-proxy-go-devnet
 RUN git clone https://github.com/multiversx/mx-chain-proxy-go.git --branch=${PROXY_MAINNET_TAG} --single-branch --depth=1 mx-chain-proxy-go-mainnet
+
+# Adjust node source code
+COPY "adjust_observer_src.py" /workspace/
+RUN python3 /workspace/adjust_observer_src.py --src=/go/mx-chain-go-testnet --max-headers-to-request-in-advance=150 && \
+    python3 /workspace/adjust_observer_src.py --src=/go/mx-chain-go-devnet --max-headers-to-request-in-advance=150 && \
+    python3 /workspace/adjust_observer_src.py --src=/go/mx-chain-go-mainnet --max-headers-to-request-in-advance=150
+
+# Adjust node configuration files
+COPY "prefs_observer.toml" /workspace/mx-chain-testnet-config/prefs.toml
+COPY "prefs_observer.toml" /workspace/mx-chain-devnet-config/prefs.toml
+COPY "prefs_observer.toml" /workspace/mx-chain-mainnet-config/prefs.toml
+
+# Adjust proxy configuration files
+COPY "adjust_proxy_config.py" /workspace/
+RUN python3 /workspace/adjust_proxy_config.py --network=testnet --file=/go/mx-chain-proxy-go-testnet/cmd/proxy/config/config.toml && \
+    python3 /workspace/adjust_proxy_config.py --network=devnet --file=/go/mx-chain-proxy-go-devnet/cmd/proxy/config/config.toml && \
+    python3 /workspace/adjust_proxy_config.py --network=mainnet --file=/go/mx-chain-proxy-go-mainnet/cmd/proxy/config/config.toml
 
 # Build node and proxy
 WORKDIR /go/mx-chain-go-testnet/cmd/node
@@ -44,18 +62,6 @@ RUN go build
 
 WORKDIR /go/mx-chain-proxy-go-mainnet/cmd/proxy
 RUN go build
-
-# Adjust configuration files
-COPY "adjust_config.py" /workspace/
-RUN python3 /workspace/adjust_config.py --mode=main --file=/workspace/mx-chain-testnet-config/config.toml && \
-    python3 /workspace/adjust_config.py --mode=prefs --file=/workspace/mx-chain-testnet-config/prefs.toml && \
-    python3 /workspace/adjust_config.py --mode=main --file=/workspace/mx-chain-devnet-config/config.toml && \
-    python3 /workspace/adjust_config.py --mode=prefs --file=/workspace/mx-chain-devnet-config/prefs.toml && \
-    python3 /workspace/adjust_config.py --mode=main --file=/workspace/mx-chain-mainnet-config/config.toml && \
-    python3 /workspace/adjust_config.py --mode=prefs --file=/workspace/mx-chain-mainnet-config/prefs.toml && \
-    python3 /workspace/adjust_config.py --mode=proxy --network=testnet --file=/go/mx-chain-proxy-go-testnet/cmd/proxy/config/config.toml && \
-    python3 /workspace/adjust_config.py --mode=proxy --network=devnet --file=/go/mx-chain-proxy-go-devnet/cmd/proxy/config/config.toml && \
-    python3 /workspace/adjust_config.py --mode=proxy --network=mainnet --file=/go/mx-chain-proxy-go-mainnet/cmd/proxy/config/config.toml
 
 # ===== SECOND STAGE ======
 FROM ubuntu:22.04

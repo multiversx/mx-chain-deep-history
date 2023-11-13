@@ -1,0 +1,15 @@
+[Preferences]
+   FullArchive = true
+
+   OverridableConfigTomlValues = [
+       { File = "config.toml", Path = "GeneralSettings.StartInEpochEnabled", Value = "false" },
+       { File = "config.toml", Path = "GeneralSettings.SyncProcessTimeInMillis", Value = "5000" },
+       { File = "config.toml", Path = "DbLookupExtensions.Enabled", Value = "true" },
+       { File = "config.toml", Path = "StateTriesConfig.AccountsStatePruningEnabled", Value = "false" },
+       { File = "config.toml", Path = "StateTriesConfig.SnapshotsEnabled", Value = "true" },
+       { File = "config.toml", Path = "StoragePruning.ObserverCleanOldEpochsData", Value = "false" },
+       { File = "config.toml", Path = "StoragePruning.AccountsTrieCleanOldEpochsData", Value = "false" },
+       { File = "config.toml", Path = "PeerStatePruningEnabled.PeerStatePruningEnabled", Value = "true" },
+       { File = "config.toml", Path = "WebServerAntiflood.SimultaneousRequests", Value = "256" },
+       { File = "config.toml", Path = "WebServerAntiflood.TrieOperationsDeadlineMilliseconds", Value = "300000" }
+   ]
