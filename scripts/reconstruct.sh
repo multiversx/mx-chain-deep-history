@@ -56,6 +56,7 @@ run_import_db() {
         return 1
     fi
 
+    # TODO: specify ports!
     docker run -d \
         --user $(id -u):$(id -g) \
         --name deep-history-reconstruct-${MX_NETWORK}-${MX_SHARD} \
