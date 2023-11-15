@@ -56,13 +56,13 @@ RUN go build -v -ldflags="-X main.appVersion=$(git --git-dir /workspace/mx-chain
 RUN cp /go/pkg/mod/github.com/multiversx/$(cat /go/mx-chain-go-mainnet/go.mod | grep mx-chain-vm-v | sort -n | tail -n -1| awk -F '/' '{print$3}'| sed 's/ /@/g')/wasmer/libwasmer_linux_amd64.so /go/mx-chain-go-mainnet/cmd/node/libwasmer_linux_amd64.so
 
 WORKDIR /go/mx-chain-proxy-go-testnet/cmd/proxy
-RUN go build
+RUN go build -v -ldflags="-X main.appVersion=$(git --git-dir /go/mx-chain-proxy-go-testnet/.git describe --tags --long --dirty --always)"
 
 WORKDIR /go/mx-chain-proxy-go-devnet/cmd/proxy
-RUN go build
+RUN go build -v -ldflags="-X main.appVersion=$(git --git-dir /go/mx-chain-proxy-go-devnet/.git describe --tags --long --dirty --always)"
 
 WORKDIR /go/mx-chain-proxy-go-mainnet/cmd/proxy
-RUN go build
+RUN go build -v -ldflags="-X main.appVersion=$(git --git-dir /go/mx-chain-proxy-go-mainnet/.git describe --tags --long --dirty --always)"
 
 # ===== SECOND STAGE ======
 FROM ubuntu:22.04

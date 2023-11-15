@@ -1,6 +1,6 @@
 import sys
 from argparse import ArgumentParser
-from typing import List
+from typing import Any, Dict, List
 
 import toml
 
@@ -15,6 +15,15 @@ def main(cli_args: List[str]):
     network = parsed_args.network
     data = toml.load(file)
 
+    adjust_connected_observers(network, data)
+
+    with open(file, "w") as f:
+        toml.dump(data, f)
+
+    print(f"Configuration adjusted: network = {network}, file = {file}")
+
+
+def adjust_connected_observers(network: str, data: Dict[str, Any]):
     if network == "testnet":
         data["Observers"] = [
             {
@@ -34,7 +43,10 @@ def main(cli_args: List[str]):
                 "Address": "http://24.0.0.13:8080"
             },
         ]
-    elif network == "devnet":
+
+        return
+
+    if network == "devnet":
         data["Observers"] = [
             {
                 "ShardId": 0,
@@ -53,7 +65,10 @@ def main(cli_args: List[str]):
                 "Address": "http://23.0.0.13:8080"
             },
         ]
-    elif network == "mainnet":
+
+        return
+
+    if network == "mainnet":
         data["Observers"] = [
             {
                 "ShardId": 0,
@@ -72,13 +87,10 @@ def main(cli_args: List[str]):
                 "Address": "http://22.0.0.13:8080"
             },
         ]
-    else:
-        raise Exception(f"Unknown network: {network}")
 
-    with open(file, "w") as f:
-        toml.dump(data, f)
+        return
 
-    print(f"Configuration adjusted: network = {network}, file = {file}")
+    raise Exception(f"Unknown network: {network}")
 
 
 if __name__ == "__main__":
