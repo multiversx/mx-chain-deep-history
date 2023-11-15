@@ -7,6 +7,7 @@ ARG PROXY_TESTNET_TAG=v1.1.41
 ARG PROXY_DEVNET_TAG=v1.1.39
 ARG PROXY_MAINNET_TAG=v1.1.39
 
+# Install Python dependencies, necessary for "adjust_binary.py" and "adjust_observer_src.py"
 RUN apt-get update && apt-get -y install python3-pip && pip3 install toml --break-system-packages
 
 # Clone repositories:
@@ -23,10 +24,28 @@ RUN git clone https://github.com/multiversx/mx-chain-proxy-go.git --branch=${PRO
 RUN git clone https://github.com/multiversx/mx-chain-proxy-go.git --branch=${PROXY_DEVNET_TAG} --single-branch --depth=1 mx-chain-proxy-go-devnet
 RUN git clone https://github.com/multiversx/mx-chain-proxy-go.git --branch=${PROXY_MAINNET_TAG} --single-branch --depth=1 mx-chain-proxy-go-mainnet
 
+# Adjust node source code
+COPY "adjust_observer_src.py" /workspace/
+RUN python3 /workspace/adjust_observer_src.py --src=/go/mx-chain-go-testnet --max-headers-to-request-in-advance=150 && \
+    python3 /workspace/adjust_observer_src.py --src=/go/mx-chain-go-devnet --max-headers-to-request-in-advance=150 && \
+    python3 /workspace/adjust_observer_src.py --src=/go/mx-chain-go-mainnet --max-headers-to-request-in-advance=150
+
+# Adjust node configuration files
+COPY "prefs_observer.toml" /workspace/mx-chain-testnet-config/prefs.toml
+COPY "prefs_observer.toml" /workspace/mx-chain-devnet-config/prefs.toml
+COPY "prefs_observer.toml" /workspace/mx-chain-mainnet-config/prefs.toml
+
+# Adjust proxy configuration files
+COPY "adjust_proxy_config.py" /workspace/
+RUN python3 /workspace/adjust_proxy_config.py --network=testnet --file=/go/mx-chain-proxy-go-testnet/cmd/proxy/config/config.toml && \
+    python3 /workspace/adjust_proxy_config.py --network=devnet --file=/go/mx-chain-proxy-go-devnet/cmd/proxy/config/config.toml && \
+    python3 /workspace/adjust_proxy_config.py --network=mainnet --file=/go/mx-chain-proxy-go-mainnet/cmd/proxy/config/config.toml
+
 # Build node and proxy
 WORKDIR /go/mx-chain-go-testnet/cmd/node
 RUN go build -v -ldflags="-X main.appVersion=$(git --git-dir /workspace/mx-chain-testnet-config/.git describe --tags --long --dirty --always)"
 RUN cp /go/pkg/mod/github.com/multiversx/$(cat /go/mx-chain-go-testnet/go.mod | grep mx-chain-vm-v | sort -n | tail -n -1| awk -F '/' '{print$3}'| sed 's/ /@/g')/wasmer/libwasmer_linux_amd64.so /go/mx-chain-go-testnet/cmd/node/libwasmer_linux_amd64.so
+RUN cp /go/pkg/mod/github.com/multiversx/$(cat /go/mx-chain-go-testnet/go.mod | grep mx-chain-vm-go | sort -n | tail -n -1| awk -F '/' '{print$3}'| sed 's/ /@/g')/wasmer2/libvmexeccapi.so /go/mx-chain-go-testnet/cmd/node/libvmexeccapi.so
 
 WORKDIR /go/mx-chain-go-devnet/cmd/node
 RUN go build -v -ldflags="-X main.appVersion=$(git --git-dir /workspace/mx-chain-devnet-config/.git describe --tags --long --dirty --always)"
@@ -37,25 +56,13 @@ RUN go build -v -ldflags="-X main.appVersion=$(git --git-dir /workspace/mx-chain
 RUN cp /go/pkg/mod/github.com/multiversx/$(cat /go/mx-chain-go-mainnet/go.mod | grep mx-chain-vm-v | sort -n | tail -n -1| awk -F '/' '{print$3}'| sed 's/ /@/g')/wasmer/libwasmer_linux_amd64.so /go/mx-chain-go-mainnet/cmd/node/libwasmer_linux_amd64.so
 
 WORKDIR /go/mx-chain-proxy-go-testnet/cmd/proxy
-RUN go build
+RUN go build -v -ldflags="-X main.appVersion=$(git --git-dir /go/mx-chain-proxy-go-testnet/.git describe --tags --long --dirty --always)"
 
 WORKDIR /go/mx-chain-proxy-go-devnet/cmd/proxy
-RUN go build
+RUN go build -v -ldflags="-X main.appVersion=$(git --git-dir /go/mx-chain-proxy-go-devnet/.git describe --tags --long --dirty --always)"
 
 WORKDIR /go/mx-chain-proxy-go-mainnet/cmd/proxy
-RUN go build
-
-# Adjust configuration files
-COPY "adjust_config.py" /workspace/
-RUN python3 /workspace/adjust_config.py --mode=main --file=/workspace/mx-chain-testnet-config/config.toml && \
-    python3 /workspace/adjust_config.py --mode=prefs --file=/workspace/mx-chain-testnet-config/prefs.toml && \
-    python3 /workspace/adjust_config.py --mode=main --file=/workspace/mx-chain-devnet-config/config.toml && \
-    python3 /workspace/adjust_config.py --mode=prefs --file=/workspace/mx-chain-devnet-config/prefs.toml && \
-    python3 /workspace/adjust_config.py --mode=main --file=/workspace/mx-chain-mainnet-config/config.toml && \
-    python3 /workspace/adjust_config.py --mode=prefs --file=/workspace/mx-chain-mainnet-config/prefs.toml && \
-    python3 /workspace/adjust_config.py --mode=proxy --network=testnet --file=/go/mx-chain-proxy-go-testnet/cmd/proxy/config/config.toml && \
-    python3 /workspace/adjust_config.py --mode=proxy --network=devnet --file=/go/mx-chain-proxy-go-devnet/cmd/proxy/config/config.toml && \
-    python3 /workspace/adjust_config.py --mode=proxy --network=mainnet --file=/go/mx-chain-proxy-go-mainnet/cmd/proxy/config/config.toml
+RUN go build -v -ldflags="-X main.appVersion=$(git --git-dir /go/mx-chain-proxy-go-mainnet/.git describe --tags --long --dirty --always)"
 
 # ===== SECOND STAGE ======
 FROM ubuntu:22.04
@@ -72,6 +79,7 @@ COPY --from=builder "/go/mx-chain-go-devnet/cmd/node/node" "/devnet/node/"
 COPY --from=builder "/go/mx-chain-go-mainnet/cmd/node/node" "/mainnet/node/"
 
 COPY --from=builder "/go/mx-chain-go-testnet/cmd/node/libwasmer_linux_amd64.so" "/testnet/node/"
+COPY --from=builder "/go/mx-chain-go-testnet/cmd/node/libvmexeccapi.so" "/testnet/node/"
 COPY --from=builder "/go/mx-chain-go-devnet/cmd/node/libwasmer_linux_amd64.so" "/devnet/node/"
 COPY --from=builder "/go/mx-chain-go-mainnet/cmd/node/libwasmer_linux_amd64.so" "/mainnet/node/"
 

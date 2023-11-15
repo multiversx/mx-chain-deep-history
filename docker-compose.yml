@@ -623,6 +623,171 @@ services:
       - squad-devnet
       - squad-devnet-proxy
 
+  deep-history-observer-testnet-0:
+    ulimits:
+      nproc: 65535
+    image: multiversx/deep-history:latest
+    container_name: deep-history-observer-testnet-0
+    ports:
+      - "3080:8080"
+      - "37370:37373"
+    volumes:
+      - ${DEEP_HISTORY_WORKSPACE}/testnet/node-0:/data
+    working_dir: "/testnet/node"
+    environment:
+      - LD_LIBRARY_PATH=/testnet/node
+    entrypoint:
+      [
+        "/testnet/node/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=0",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-0",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
+        "--no-key"
+      ]
+    networks:
+      deep-history-squad-testnet:
+        ipv4_address: 24.0.0.10
+    restart: always
+    profiles:
+      - squad-testnet
+      - squad-testnet-0
+
+  deep-history-observer-testnet-1:
+    ulimits:
+      nproc: 65535
+    image: multiversx/deep-history:latest
+    container_name: deep-history-observer-testnet-1
+    ports:
+      - "3081:8080"
+      - "37371:37373"
+    volumes:
+      - ${DEEP_HISTORY_WORKSPACE}/testnet/node-1:/data
+    working_dir: "/testnet/node"
+    environment:
+      - LD_LIBRARY_PATH=/testnet/node
+    entrypoint:
+      [
+        "/testnet/node/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=1",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-1",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
+        "--no-key"
+      ]
+    networks:
+      deep-history-squad-testnet:
+        ipv4_address: 24.0.0.11
+    restart: always
+    profiles:
+      - squad-testnet
+      - squad-testnet-1
+
+  deep-history-observer-testnet-2:
+    ulimits:
+      nproc: 65535
+    image: multiversx/deep-history:latest
+    container_name: deep-history-observer-testnet-2
+    ports:
+      - "3082:8080"
+      - "37372:37373"
+    volumes:
+      - ${DEEP_HISTORY_WORKSPACE}/testnet/node-2:/data
+    working_dir: "/testnet/node"
+    environment:
+      - LD_LIBRARY_PATH=/testnet/node
+    entrypoint:
+      [
+        "/testnet/node/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=2",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-2",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
+        "--no-key"
+      ]
+    networks:
+      deep-history-squad-testnet:
+        ipv4_address: 24.0.0.12
+    restart: always
+    profiles:
+      - squad-testnet
+      - squad-testnet-2
+
+  deep-history-observer-testnet-metachain:
+    ulimits:
+      nproc: 65535
+    image: multiversx/deep-history:latest
+    container_name: deep-history-observer-testnet-metachain
+    ports:
+      - "3083:8080"
+      - "37373:37373"
+    volumes:
+      - ${DEEP_HISTORY_WORKSPACE}/testnet/node-metachain:/data
+    working_dir: "/testnet/node"
+    environment:
+      - LD_LIBRARY_PATH=/testnet/node
+    entrypoint:
+      [
+        "/testnet/node/node",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG",
+        "--log-logger-name",
+        "--rest-api-interface=0.0.0.0:8080",
+        "--destination-shard-as-observer=metachain",
+        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-metachain",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
+        "--no-key"
+      ]
+    networks:
+      deep-history-squad-testnet:
+        ipv4_address: 24.0.0.13
+    restart: always
+    profiles:
+      - squad-testnet
+      - squad-testnet-metachain
+
+  deep-history-proxy-testnet:
+    ulimits:
+      nproc: 65535
+    image: multiversx/deep-history:latest
+    container_name: deep-history-proxy-testnet
+    ports:
+      - "10090:8080"
+    volumes:
+      - ${DEEP_HISTORY_WORKSPACE}/testnet/proxy:/data
+    working_dir: "/testnet/proxy"
+    entrypoint:
+      [
+        "/testnet/proxy/proxy",
+        "--working-directory=/data",
+        "--log-save",
+        "--log-level=*:DEBUG"
+      ]
+    networks:
+      deep-history-squad-testnet:
+        ipv4_address: 24.0.0.100
+    restart: always
+    profiles:
+      - squad-testnet
+      - squad-testnet-proxy
+
 networks:
   deep-history-reconstruction-mainnet:
     name: "deep-history-reconstruction-mainnet"
@@ -644,3 +809,8 @@ networks:
     ipam:
       config:
         - subnet: 23.0.0.0/24
+  deep-history-squad-testnet:
+    name: "deep-history-squad-testnet"
+    ipam:
+      config:
+        - subnet: 24.0.0.0/24
