@@ -7,7 +7,6 @@ ARG PROXY_TESTNET_TAG=v1.1.42
 ARG PROXY_DEVNET_TAG=v1.1.39
 ARG PROXY_MAINNET_TAG=v1.1.39
 
-
 # Install Python dependencies, necessary for "adjust_binary.py" and "adjust_observer_src.py"
 RUN apt-get update && apt-get -y install python3-pip && pip3 install toml --break-system-packages
 
