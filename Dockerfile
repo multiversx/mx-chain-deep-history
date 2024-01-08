@@ -86,7 +86,7 @@ COPY --from=builder "/go/mx-chain-go-mainnet/cmd/node/libwasmer_linux_amd64.so" 
 
 COPY --from=builder "/go/mx-chain-go-testnet/cmd/node/libvmexeccapi.so" "/testnet/node/"
 COPY --from=builder "/go/mx-chain-go-devnet/cmd/node/libvmexeccapi.so" "/devnet/node/"
-COPY --from=builder "/go/mx-chain-go-devnet/cmd/node/libvmexeccapi.so" "/mainnet/node/"
+COPY --from=builder "/go/mx-chain-go-mainnet/cmd/node/libvmexeccapi.so" "/mainnet/node/"
 
 # Copy proxy (config, binary):
 COPY --from=builder "/go/mx-chain-proxy-go-testnet/cmd/proxy/config" "/testnet/proxy/config/"
