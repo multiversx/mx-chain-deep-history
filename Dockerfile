@@ -24,12 +24,6 @@ RUN git clone https://github.com/multiversx/mx-chain-proxy-go.git --branch=${PRO
 RUN git clone https://github.com/multiversx/mx-chain-proxy-go.git --branch=${PROXY_DEVNET_TAG} --single-branch --depth=1 mx-chain-proxy-go-devnet
 RUN git clone https://github.com/multiversx/mx-chain-proxy-go.git --branch=${PROXY_MAINNET_TAG} --single-branch --depth=1 mx-chain-proxy-go-mainnet
 
-# Adjust node source code
-COPY "adjust_observer_src.py" /workspace/
-RUN python3 /workspace/adjust_observer_src.py --src=/go/mx-chain-go-testnet --max-headers-to-request-in-advance=150 && \
-    python3 /workspace/adjust_observer_src.py --src=/go/mx-chain-go-devnet --max-headers-to-request-in-advance=150 && \
-    python3 /workspace/adjust_observer_src.py --src=/go/mx-chain-go-mainnet --max-headers-to-request-in-advance=150
-
 # Adjust node configuration files
 COPY "prefs_observer.toml" /workspace/mx-chain-testnet-config/prefs.toml
 COPY "prefs_observer.toml" /workspace/mx-chain-devnet-config/prefs.toml
