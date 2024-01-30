@@ -2,7 +2,6 @@ version: '3'
 
 services:
   deep-history-observer-mainnet-0:
-    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -38,7 +37,6 @@ services:
       - squad-mainnet-0
 
   deep-history-observer-mainnet-1:
-    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -74,7 +72,6 @@ services:
       - squad-mainnet-1
 
   deep-history-observer-mainnet-2:
-    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -110,7 +107,6 @@ services:
       - squad-mainnet-2
 
   deep-history-observer-mainnet-metachain:
-    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -146,7 +142,6 @@ services:
       - squad-mainnet-metachain
 
   deep-history-proxy-mainnet:
-    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -172,7 +167,6 @@ services:
       - squad-mainnet-proxy
 
   deep-history-observer-devnet-0:
-    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -206,7 +200,6 @@ services:
       - squad-devnet-0
 
   deep-history-observer-devnet-1:
-    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -240,7 +233,6 @@ services:
       - squad-devnet-1
 
   deep-history-observer-devnet-2:
-    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -274,7 +266,6 @@ services:
       - squad-devnet-2
 
   deep-history-observer-devnet-metachain:
-    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
@@ -308,7 +299,6 @@ services:
       - squad-devnet-metachain
 
   deep-history-proxy-devnet:
-    user: ${DOCKER_USER}
     ulimits:
       nproc: 65535
     image: multiversx/deep-history:latest
