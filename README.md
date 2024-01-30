@@ -1,5 +1,7 @@
 # Deep-history Observing Squad
 
+## For integrators
+
 See [docs.multiversx.com](https://docs.multiversx.com/integrators/deep-history-squad).
 
 ## For contributors
