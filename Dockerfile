@@ -91,9 +91,6 @@ COPY --from=builder "/go/mx-chain-proxy-go-testnet/cmd/proxy/proxy" "/testnet/pr
 COPY --from=builder "/go/mx-chain-proxy-go-devnet/cmd/proxy/proxy" "/devnet/proxy/"
 COPY --from=builder "/go/mx-chain-proxy-go-mainnet/cmd/proxy/proxy" "/mainnet/proxy/"
 
-# Copy bootstrap script:
-COPY "./bootstrap.py" "/bootstrap.py"
-
 EXPOSE 8080
 
 LABEL config-testnet=${CONFIG_TESTNET_TAG}

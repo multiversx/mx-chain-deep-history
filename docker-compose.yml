@@ -1,298 +1,6 @@
 version: '3'
 
 services:
-  deep-history-reconstruction-bootstrap:
-    ulimits:
-      nproc: 65535
-    user: ${DOCKER_USER}
-    tty: true
-    image: multiversx/deep-history:latest
-    container_name: deep-history-bootstrap
-    volumes:
-      - ${DEEP_HISTORY_WORKSPACE}:/workspace
-    working_dir: "/"
-    entrypoint:
-      [
-        "python3.10",
-        "/bootstrap.py",
-        "--workspace",
-        "/workspace"
-      ]
-    profiles:
-      - bootstrap
-
-  deep-history-reconstruction-mainnet-0:
-    ulimits:
-      nproc: 65535
-    user: ${DOCKER_USER}
-    image: multiversx/deep-history:latest
-    container_name: deep-history-reconstruction-mainnet-0
-    ports:
-      - "4080:8080"
-      - "47370:37373"
-    volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-0:/data
-    working_dir: "/mainnet/node"
-    environment:
-      - LD_LIBRARY_PATH=/mainnet/node
-    entrypoint:
-      [
-        "/mainnet/node/node",
-        "--working-directory=/data",
-        "--log-save",
-        "--log-level=*:DEBUG",
-        "--log-logger-name",
-        "--rest-api-interface=0.0.0.0:8080",
-        "--destination-shard-as-observer=0",
-        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-0",
-        "--import-db=/data/import-db",
-        "--import-db-no-sig-check"
-      ]
-    networks:
-      deep-history-reconstruction-mainnet:
-        ipv4_address: 20.0.0.10
-    profiles:
-      - reconstruction-mainnet
-      - reconstruction-mainnet-0
-
-  deep-history-reconstruction-mainnet-1:
-    ulimits:
-      nproc: 65535
-    user: ${DOCKER_USER}
-    image: multiversx/deep-history:latest
-    container_name: deep-history-reconstruction-mainnet-1
-    ports:
-      - "4081:8080"
-      - "47371:37373"
-    volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-1:/data
-    working_dir: "/mainnet/node"
-    environment:
-      - LD_LIBRARY_PATH=/mainnet/node
-    entrypoint:
-      [
-        "/mainnet/node/node",
-        "--working-directory=/data",
-        "--log-save",
-        "--log-level=*:DEBUG",
-        "--log-logger-name",
-        "--rest-api-interface=0.0.0.0:8080",
-        "--destination-shard-as-observer=1",
-        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-1",
-        "--import-db=/data/import-db",
-        "--import-db-no-sig-check"
-      ]
-    networks:
-      deep-history-reconstruction-mainnet:
-        ipv4_address: 20.0.0.11
-    profiles:
-      - reconstruction-mainnet
-      - reconstruction-mainnet-1
-
-  deep-history-reconstruction-mainnet-2:
-    ulimits:
-      nproc: 65535
-    user: ${DOCKER_USER}
-    image: multiversx/deep-history:latest
-    container_name: deep-history-reconstruction-mainnet-2
-    ports:
-      - "4082:8080"
-      - "47372:37373"
-    volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-2:/data
-    working_dir: "/mainnet/node"
-    environment:
-      - LD_LIBRARY_PATH=/mainnet/node
-    entrypoint:
-      [
-        "/mainnet/node/node",
-        "--working-directory=/data",
-        "--log-save",
-        "--log-level=*:DEBUG",
-        "--log-logger-name",
-        "--rest-api-interface=0.0.0.0:8080",
-        "--destination-shard-as-observer=2",
-        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-2",
-        "--import-db=/data/import-db",
-        "--import-db-no-sig-check"
-      ]
-    networks:
-      deep-history-reconstruction-mainnet:
-        ipv4_address: 20.0.0.12
-    profiles:
-      - reconstruction-mainnet
-      - reconstruction-mainnet-2
-
-  deep-history-reconstruction-mainnet-metachain:
-    ulimits:
-      nproc: 65535
-    user: ${DOCKER_USER}
-    image: multiversx/deep-history:latest
-    container_name: deep-history-reconstruction-mainnet-metachain
-    ports:
-      - "4083:8080"
-      - "47373:37373"
-    volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-metachain:/data
-    working_dir: "/mainnet/node"
-    environment:
-      - LD_LIBRARY_PATH=/mainnet/node
-    entrypoint:
-      [
-        "/mainnet/node/node",
-        "--working-directory=/data",
-        "--log-save",
-        "--log-level=*:DEBUG",
-        "--log-logger-name",
-        "--rest-api-interface=0.0.0.0:8080",
-        "--destination-shard-as-observer=metachain",
-        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-metachain",
-        "--import-db=/data/import-db",
-        "--import-db-no-sig-check"
-      ]
-    networks:
-      deep-history-reconstruction-mainnet:
-        ipv4_address: 20.0.0.13
-    profiles:
-      - reconstruction-mainnet
-      - reconstruction-mainnet-metachain
-
-  deep-history-reconstruction-devnet-0:
-    ulimits:
-      nproc: 65535
-    user: ${DOCKER_USER}
-    image: multiversx/deep-history:latest
-    container_name: deep-history-reconstruction-devnet-0
-    ports:
-      - "5080:8080"
-      - "57370:37373"
-    volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-0:/data
-    working_dir: "/devnet/node"
-    environment:
-      - LD_LIBRARY_PATH=/devnet/node
-    entrypoint:
-      [
-        "/devnet/node/node",
-        "--working-directory=/data",
-        "--log-save",
-        "--log-level=*:DEBUG",
-        "--log-logger-name",
-        "--rest-api-interface=0.0.0.0:8080",
-        "--destination-shard-as-observer=0",
-        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-0",
-        "--import-db=/data/import-db",
-        "--import-db-no-sig-check"
-      ]
-    networks:
-      deep-history-reconstruction-devnet:
-        ipv4_address: 21.0.0.10
-    profiles:
-      - reconstruction-devnet
-      - reconstruction-devnet-0
-
-  deep-history-reconstruction-devnet-1:
-    ulimits:
-      nproc: 65535
-    user: ${DOCKER_USER}
-    image: multiversx/deep-history:latest
-    container_name: deep-history-reconstruction-devnet-1
-    ports:
-      - "5081:8080"
-      - "57371:37373"
-    volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-1:/data
-    working_dir: "/devnet/node"
-    environment:
-      - LD_LIBRARY_PATH=/devnet/node
-    entrypoint:
-      [
-        "/devnet/node/node",
-        "--working-directory=/data",
-        "--log-save",
-        "--log-level=*:DEBUG",
-        "--log-logger-name",
-        "--rest-api-interface=0.0.0.0:8080",
-        "--destination-shard-as-observer=1",
-        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-1",
-        "--import-db=/data/import-db",
-        "--import-db-no-sig-check"
-      ]
-    networks:
-      deep-history-reconstruction-devnet:
-        ipv4_address: 21.0.0.11
-    profiles:
-      - reconstruction-devnet
-      - reconstruction-devnet-1
-
-  deep-history-reconstruction-devnet-2:
-    ulimits:
-      nproc: 65535
-    user: ${DOCKER_USER}
-    image: multiversx/deep-history:latest
-    container_name: deep-history-reconstruction-devnet-2
-    ports:
-      - "5082:8080"
-      - "57372:37373"
-    volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-2:/data
-    working_dir: "/devnet/node"
-    environment:
-      - LD_LIBRARY_PATH=/devnet/node
-    entrypoint:
-      [
-        "/devnet/node/node",
-        "--working-directory=/data",
-        "--log-save",
-        "--log-level=*:DEBUG",
-        "--log-logger-name",
-        "--rest-api-interface=0.0.0.0:8080",
-        "--destination-shard-as-observer=2",
-        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-2",
-        "--import-db=/data/import-db",
-        "--import-db-no-sig-check"
-      ]
-    networks:
-      deep-history-reconstruction-devnet:
-        ipv4_address: 21.0.0.12
-    profiles:
-      - reconstruction-devnet
-      - reconstruction-devnet-2
-
-  deep-history-reconstruction-devnet-metachain:
-    ulimits:
-      nproc: 65535
-    user: ${DOCKER_USER}
-    image: multiversx/deep-history:latest
-    container_name: deep-history-reconstruction-devnet-metachain
-    ports:
-      - "5083:8080"
-      - "57373:37373"
-    volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-metachain:/data
-    working_dir: "/devnet/node"
-    environment:
-      - LD_LIBRARY_PATH=/devnet/node
-    entrypoint:
-      [
-        "/devnet/node/node",
-        "--working-directory=/data",
-        "--log-save",
-        "--log-level=*:DEBUG",
-        "--log-logger-name",
-        "--rest-api-interface=0.0.0.0:8080",
-        "--destination-shard-as-observer=metachain",
-        "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-metachain",
-        "--import-db=/data/import-db",
-        "--import-db-no-sig-check"
-      ]
-    networks:
-      deep-history-reconstruction-devnet:
-        ipv4_address: 21.0.0.13
-    profiles:
-      - reconstruction-devnet
-      - reconstruction-devnet-metachain
-
   deep-history-observer-mainnet-0:
     ulimits:
       nproc: 65535
@@ -302,7 +10,7 @@ services:
       - "1080:8080"
       - "17370:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-0:/data
+      - ${DEEP_HISTORY_DATA}/mainnet/node-0:/data
     working_dir: "/mainnet/node"
     environment:
       - LD_LIBRARY_PATH=/mainnet/node
@@ -337,7 +45,7 @@ services:
       - "1081:8080"
       - "17371:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-1:/data
+      - ${DEEP_HISTORY_DATA}/mainnet/node-1:/data
     working_dir: "/mainnet/node"
     environment:
       - LD_LIBRARY_PATH=/mainnet/node
@@ -372,7 +80,7 @@ services:
       - "1082:8080"
       - "17372:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-2:/data
+      - ${DEEP_HISTORY_DATA}/mainnet/node-2:/data
     working_dir: "/mainnet/node"
     environment:
       - LD_LIBRARY_PATH=/mainnet/node
@@ -407,7 +115,7 @@ services:
       - "1083:8080"
       - "17373:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/mainnet/node-metachain:/data
+      - ${DEEP_HISTORY_DATA}/mainnet/node-metachain:/data
     working_dir: "/mainnet/node"
     environment:
       - LD_LIBRARY_PATH=/mainnet/node
@@ -441,7 +149,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/mainnet/proxy:/data
+      - ${DEEP_HISTORY_DATA}/mainnet/proxy:/data
     working_dir: "/mainnet/proxy"
     entrypoint:
       [
@@ -467,7 +175,7 @@ services:
       - "2080:8080"
       - "27370:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-0:/data
+      - ${DEEP_HISTORY_DATA}/devnet/node-0:/data
     working_dir: "/devnet/node"
     environment:
       - LD_LIBRARY_PATH=/devnet/node
@@ -481,8 +189,6 @@ services:
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=0",
         "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-0",
-        "--serialize-snapshots",
-        "--disable-consensus-watchdog",
         "--no-key"
       ]
     networks:
@@ -502,7 +208,7 @@ services:
       - "2081:8080"
       - "27371:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-1:/data
+      - ${DEEP_HISTORY_DATA}/devnet/node-1:/data
     working_dir: "/devnet/node"
     environment:
       - LD_LIBRARY_PATH=/devnet/node
@@ -516,8 +222,6 @@ services:
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=1",
         "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-1",
-        "--serialize-snapshots",
-        "--disable-consensus-watchdog",
         "--no-key"
       ]
     networks:
@@ -537,7 +241,7 @@ services:
       - "2082:8080"
       - "27372:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-2:/data
+      - ${DEEP_HISTORY_DATA}/devnet/node-2:/data
     working_dir: "/devnet/node"
     environment:
       - LD_LIBRARY_PATH=/devnet/node
@@ -551,8 +255,6 @@ services:
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=2",
         "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-2",
-        "--serialize-snapshots",
-        "--disable-consensus-watchdog",
         "--no-key"
       ]
     networks:
@@ -572,7 +274,7 @@ services:
       - "2083:8080"
       - "27373:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/devnet/node-metachain:/data
+      - ${DEEP_HISTORY_DATA}/devnet/node-metachain:/data
     working_dir: "/devnet/node"
     environment:
       - LD_LIBRARY_PATH=/devnet/node
@@ -586,8 +288,6 @@ services:
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=metachain",
         "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-metachain",
-        "--serialize-snapshots",
-        "--disable-consensus-watchdog",
         "--no-key"
       ]
     networks:
@@ -606,7 +306,7 @@ services:
     ports:
       - "9090:8080"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/devnet/proxy:/data
+      - ${DEEP_HISTORY_DATA}/devnet/proxy:/data
     working_dir: "/devnet/proxy"
     entrypoint:
       [
@@ -789,16 +489,6 @@ services:
       - squad-testnet-proxy
 
 networks:
-  deep-history-reconstruction-mainnet:
-    name: "deep-history-reconstruction-mainnet"
-    ipam:
-      config:
-        - subnet: 20.0.0.0/24
-  deep-history-reconstruction-devnet:
-    name: "deep-history-reconstruction-devnet"
-    ipam:
-      config:
-        - subnet: 21.0.0.0/24
   deep-history-squad-mainnet:
     name: "deep-history-squad-mainnet"
     ipam:

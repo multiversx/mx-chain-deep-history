@@ -4,7 +4,7 @@
 
 See [docs.multiversx.com](https://docs.multiversx.com/integrators/deep-history-squad).
 
-## For contributors (developers)
+## For contributors
 
 ### Build the Docker images
 
