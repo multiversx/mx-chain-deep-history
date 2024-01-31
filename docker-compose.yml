@@ -332,7 +332,7 @@ services:
       - "3080:8080"
       - "37370:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/testnet/node-0:/data
+      - ${DEEP_HISTORY_DATA}/testnet/node-0:/data
     working_dir: "/testnet/node"
     environment:
       - LD_LIBRARY_PATH=/testnet/node
@@ -367,7 +367,7 @@ services:
       - "3081:8080"
       - "37371:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/testnet/node-1:/data
+      - ${DEEP_HISTORY_DATA}/testnet/node-1:/data
     working_dir: "/testnet/node"
     environment:
       - LD_LIBRARY_PATH=/testnet/node
@@ -402,7 +402,7 @@ services:
       - "3082:8080"
       - "37372:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/testnet/node-2:/data
+      - ${DEEP_HISTORY_DATA}/testnet/node-2:/data
     working_dir: "/testnet/node"
     environment:
       - LD_LIBRARY_PATH=/testnet/node
@@ -437,7 +437,7 @@ services:
       - "3083:8080"
       - "37373:37373"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/testnet/node-metachain:/data
+      - ${DEEP_HISTORY_DATA}/testnet/node-metachain:/data
     working_dir: "/testnet/node"
     environment:
       - LD_LIBRARY_PATH=/testnet/node
@@ -471,7 +471,7 @@ services:
     ports:
       - "10090:8080"
     volumes:
-      - ${DEEP_HISTORY_WORKSPACE}/testnet/proxy:/data
+      - ${DEEP_HISTORY_DATA}/testnet/proxy:/data
     working_dir: "/testnet/proxy"
     entrypoint:
       [
