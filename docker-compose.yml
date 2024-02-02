@@ -18,6 +18,7 @@ services:
       [
         "/mainnet/node/node",
         "--working-directory=/data",
+        "--operation-mode=historical-balances",
         "--log-save",
         "--log-level=*:DEBUG",
         "--log-logger-name",
@@ -53,6 +54,7 @@ services:
       [
         "/mainnet/node/node",
         "--working-directory=/data",
+        "--operation-mode=historical-balances",
         "--log-save",
         "--log-level=*:DEBUG",
         "--log-logger-name",
@@ -88,6 +90,7 @@ services:
       [
         "/mainnet/node/node",
         "--working-directory=/data",
+        "--operation-mode=historical-balances",
         "--log-save",
         "--log-level=*:DEBUG",
         "--log-logger-name",
@@ -123,6 +126,7 @@ services:
       [
         "/mainnet/node/node",
         "--working-directory=/data",
+        "--operation-mode=historical-balances",
         "--log-save",
         "--log-level=*:DEBUG",
         "--log-logger-name",
@@ -183,12 +187,15 @@ services:
       [
         "/devnet/node/node",
         "--working-directory=/data",
+        "--operation-mode=historical-balances",
         "--log-save",
         "--log-level=*:DEBUG",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=0",
         "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-0",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
         "--no-key"
       ]
     networks:
@@ -216,12 +223,15 @@ services:
       [
         "/devnet/node/node",
         "--working-directory=/data",
+        "--operation-mode=historical-balances",
         "--log-save",
         "--log-level=*:DEBUG",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=1",
         "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-1",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
         "--no-key"
       ]
     networks:
@@ -249,12 +259,15 @@ services:
       [
         "/devnet/node/node",
         "--working-directory=/data",
+        "--operation-mode=historical-balances",
         "--log-save",
         "--log-level=*:DEBUG",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=2",
         "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-2",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
         "--no-key"
       ]
     networks:
@@ -282,12 +295,15 @@ services:
       [
         "/devnet/node/node",
         "--working-directory=/data",
+        "--operation-mode=historical-balances",
         "--log-save",
         "--log-level=*:DEBUG",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=metachain",
         "--display-name=${DISPLAY_NAME_BASE:-DeepHistory}-metachain",
+        "--serialize-snapshots",
+        "--disable-consensus-watchdog",
         "--no-key"
       ]
     networks:
@@ -340,6 +356,7 @@ services:
       [
         "/testnet/node/node",
         "--working-directory=/data",
+        "--operation-mode=historical-balances",
         "--log-save",
         "--log-level=*:DEBUG",
         "--log-logger-name",
@@ -375,6 +392,7 @@ services:
       [
         "/testnet/node/node",
         "--working-directory=/data",
+        "--operation-mode=historical-balances",
         "--log-save",
         "--log-level=*:DEBUG",
         "--log-logger-name",
@@ -410,6 +428,7 @@ services:
       [
         "/testnet/node/node",
         "--working-directory=/data",
+        "--operation-mode=historical-balances",
         "--log-save",
         "--log-level=*:DEBUG",
         "--log-logger-name",
@@ -445,6 +464,7 @@ services:
       [
         "/testnet/node/node",
         "--working-directory=/data",
+        "--operation-mode=historical-balances",
         "--log-save",
         "--log-level=*:DEBUG",
         "--log-logger-name",
