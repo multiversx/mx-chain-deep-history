@@ -19,7 +19,7 @@ def main():
 
     args = parser.parse_args()
 
-    data_folder = Path(args.input_folder).expanduser()
+    data_folder = Path(args.data_folder).expanduser()
     archival_folder = Path(args.archival_folder).expanduser()
     network = args.network
     epochs = parse_epochs_arg(args.epochs)
