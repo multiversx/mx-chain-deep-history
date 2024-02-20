@@ -17,9 +17,9 @@ RUN git clone https://github.com/multiversx/mx-chain-devnet-config --branch=${CO
 RUN git clone https://github.com/multiversx/mx-chain-mainnet-config --branch=${CONFIG_MAINNET_TAG} --single-branch --depth=1
 
 WORKDIR /go
-RUN git clone https://github.com/multiversx/mx-chain-go --branch=vm-query-logs --single-branch mx-chain-go-testnet
-RUN git clone https://github.com/multiversx/mx-chain-go --branch=vm-query-logs --single-branch mx-chain-go-devnet
-RUN git clone https://github.com/multiversx/mx-chain-go --branch=vm-query-logs --single-branch mx-chain-go-mainnet
+RUN git clone https://github.com/multiversx/mx-chain-go --branch=$(cat /workspace/mx-chain-testnet-config/binaryVersion | sed 's/tags\///') --single-branch mx-chain-go-testnet
+RUN git clone https://github.com/multiversx/mx-chain-go --branch=$(cat /workspace/mx-chain-devnet-config/binaryVersion | sed 's/tags\///') --single-branch mx-chain-go-devnet
+RUN git clone https://github.com/multiversx/mx-chain-go --branch=$(cat /workspace/mx-chain-mainnet-config/binaryVersion | sed 's/tags\///') --single-branch mx-chain-go-mainnet
 RUN git clone https://github.com/multiversx/mx-chain-proxy-go.git --branch=${PROXY_TESTNET_TAG} --single-branch --depth=1 mx-chain-proxy-go-testnet
 RUN git clone https://github.com/multiversx/mx-chain-proxy-go.git --branch=${PROXY_DEVNET_TAG} --single-branch --depth=1 mx-chain-proxy-go-devnet
 RUN git clone https://github.com/multiversx/mx-chain-proxy-go.git --branch=${PROXY_MAINNET_TAG} --single-branch --depth=1 mx-chain-proxy-go-mainnet
