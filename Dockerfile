@@ -1,11 +1,11 @@
 FROM golang:1.20.7 as builder
 
-ARG CONFIG_TESTNET_TAG=T1.6.15.0
-ARG CONFIG_DEVNET_TAG=D1.6.15.0
-ARG CONFIG_MAINNET_TAG=v1.6.15.0
-ARG PROXY_TESTNET_TAG=v1.1.43
-ARG PROXY_DEVNET_TAG=v1.1.43
-ARG PROXY_MAINNET_TAG=v1.1.43
+ARG CONFIG_TESTNET_TAG=T1.6.16.0
+ARG CONFIG_DEVNET_TAG=D1.6.16.0
+ARG CONFIG_MAINNET_TAG=v1.6.16.0
+ARG PROXY_TESTNET_TAG=v1.1.44
+ARG PROXY_DEVNET_TAG=v1.1.44
+ARG PROXY_MAINNET_TAG=v1.1.44
 
 # Install Python dependencies, necessary for "adjust_binary.py" and "adjust_observer_src.py"
 RUN apt-get update && apt-get -y install python3-pip && pip3 install toml --break-system-packages

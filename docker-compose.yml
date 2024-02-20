@@ -4,6 +4,7 @@ services:
   deep-history-observer-mainnet-0:
     ulimits:
       nproc: 65535
+    user: ${DOCKER_USER}
     image: multiversx/deep-history:latest
     container_name: deep-history-observer-mainnet-0
     ports:
@@ -20,7 +21,7 @@ services:
         "--working-directory=/data",
         "--operation-mode=historical-balances",
         "--log-save",
-        "--log-level=*:DEBUG",
+        "--log-level=*:DEBUG,process/smartcontract.queryService:TRACE",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=0",
@@ -40,6 +41,7 @@ services:
   deep-history-observer-mainnet-1:
     ulimits:
       nproc: 65535
+    user: ${DOCKER_USER}
     image: multiversx/deep-history:latest
     container_name: deep-history-observer-mainnet-1
     ports:
@@ -56,7 +58,7 @@ services:
         "--working-directory=/data",
         "--operation-mode=historical-balances",
         "--log-save",
-        "--log-level=*:DEBUG",
+        "--log-level=*:DEBUG,process/smartcontract.queryService:TRACE",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=1",
@@ -76,6 +78,7 @@ services:
   deep-history-observer-mainnet-2:
     ulimits:
       nproc: 65535
+    user: ${DOCKER_USER}
     image: multiversx/deep-history:latest
     container_name: deep-history-observer-mainnet-2
     ports:
@@ -92,7 +95,7 @@ services:
         "--working-directory=/data",
         "--operation-mode=historical-balances",
         "--log-save",
-        "--log-level=*:DEBUG",
+        "--log-level=*:DEBUG,process/smartcontract.queryService:TRACE",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=2",
@@ -112,6 +115,7 @@ services:
   deep-history-observer-mainnet-metachain:
     ulimits:
       nproc: 65535
+    user: ${DOCKER_USER}
     image: multiversx/deep-history:latest
     container_name: deep-history-observer-mainnet-metachain
     ports:
@@ -128,7 +132,7 @@ services:
         "--working-directory=/data",
         "--operation-mode=historical-balances",
         "--log-save",
-        "--log-level=*:DEBUG",
+        "--log-level=*:DEBUG,process/smartcontract.queryService:TRACE",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=metachain",
@@ -148,6 +152,7 @@ services:
   deep-history-proxy-mainnet:
     ulimits:
       nproc: 65535
+    user: ${DOCKER_USER}
     image: multiversx/deep-history:latest
     container_name: deep-history-proxy-mainnet
     ports:
@@ -173,6 +178,7 @@ services:
   deep-history-observer-devnet-0:
     ulimits:
       nproc: 65535
+    user: ${DOCKER_USER}
     image: multiversx/deep-history:latest
     container_name: deep-history-observer-devnet-0
     ports:
@@ -189,7 +195,7 @@ services:
         "--working-directory=/data",
         "--operation-mode=historical-balances",
         "--log-save",
-        "--log-level=*:DEBUG",
+        "--log-level=*:DEBUG,process/smartcontract.queryService:TRACE",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=0",
@@ -209,6 +215,7 @@ services:
   deep-history-observer-devnet-1:
     ulimits:
       nproc: 65535
+    user: ${DOCKER_USER}
     image: multiversx/deep-history:latest
     container_name: deep-history-observer-devnet-1
     ports:
@@ -225,7 +232,7 @@ services:
         "--working-directory=/data",
         "--operation-mode=historical-balances",
         "--log-save",
-        "--log-level=*:DEBUG",
+        "--log-level=*:DEBUG,process/smartcontract.queryService:TRACE",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=1",
@@ -245,6 +252,7 @@ services:
   deep-history-observer-devnet-2:
     ulimits:
       nproc: 65535
+    user: ${DOCKER_USER}
     image: multiversx/deep-history:latest
     container_name: deep-history-observer-devnet-2
     ports:
@@ -261,7 +269,7 @@ services:
         "--working-directory=/data",
         "--operation-mode=historical-balances",
         "--log-save",
-        "--log-level=*:DEBUG",
+        "--log-level=*:DEBUG,process/smartcontract.queryService:TRACE",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=2",
@@ -281,6 +289,7 @@ services:
   deep-history-observer-devnet-metachain:
     ulimits:
       nproc: 65535
+    user: ${DOCKER_USER}
     image: multiversx/deep-history:latest
     container_name: deep-history-observer-devnet-metachain
     ports:
@@ -297,7 +306,7 @@ services:
         "--working-directory=/data",
         "--operation-mode=historical-balances",
         "--log-save",
-        "--log-level=*:DEBUG",
+        "--log-level=*:DEBUG,process/smartcontract.queryService:TRACE",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=metachain",
@@ -317,6 +326,7 @@ services:
   deep-history-proxy-devnet:
     ulimits:
       nproc: 65535
+    user: ${DOCKER_USER}
     image: multiversx/deep-history:latest
     container_name: deep-history-proxy-devnet
     ports:
@@ -342,6 +352,7 @@ services:
   deep-history-observer-testnet-0:
     ulimits:
       nproc: 65535
+    user: ${DOCKER_USER}
     image: multiversx/deep-history:latest
     container_name: deep-history-observer-testnet-0
     ports:
@@ -358,7 +369,7 @@ services:
         "--working-directory=/data",
         "--operation-mode=historical-balances",
         "--log-save",
-        "--log-level=*:DEBUG",
+        "--log-level=*:DEBUG,process/smartcontract.queryService:TRACE",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=0",
@@ -378,6 +389,7 @@ services:
   deep-history-observer-testnet-1:
     ulimits:
       nproc: 65535
+    user: ${DOCKER_USER}
     image: multiversx/deep-history:latest
     container_name: deep-history-observer-testnet-1
     ports:
@@ -394,7 +406,7 @@ services:
         "--working-directory=/data",
         "--operation-mode=historical-balances",
         "--log-save",
-        "--log-level=*:DEBUG",
+        "--log-level=*:DEBUG,process/smartcontract.queryService:TRACE",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=1",
@@ -414,6 +426,7 @@ services:
   deep-history-observer-testnet-2:
     ulimits:
       nproc: 65535
+    user: ${DOCKER_USER}
     image: multiversx/deep-history:latest
     container_name: deep-history-observer-testnet-2
     ports:
@@ -430,7 +443,7 @@ services:
         "--working-directory=/data",
         "--operation-mode=historical-balances",
         "--log-save",
-        "--log-level=*:DEBUG",
+        "--log-level=*:DEBUG,process/smartcontract.queryService:TRACE",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=2",
@@ -450,6 +463,7 @@ services:
   deep-history-observer-testnet-metachain:
     ulimits:
       nproc: 65535
+    user: ${DOCKER_USER}
     image: multiversx/deep-history:latest
     container_name: deep-history-observer-testnet-metachain
     ports:
@@ -466,7 +480,7 @@ services:
         "--working-directory=/data",
         "--operation-mode=historical-balances",
         "--log-save",
-        "--log-level=*:DEBUG",
+        "--log-level=*:DEBUG,process/smartcontract.queryService:TRACE",
         "--log-logger-name",
         "--rest-api-interface=0.0.0.0:8080",
         "--destination-shard-as-observer=metachain",
@@ -486,6 +500,7 @@ services:
   deep-history-proxy-testnet:
     ulimits:
       nproc: 65535
+    user: ${DOCKER_USER}
     image: multiversx/deep-history:latest
     container_name: deep-history-proxy-testnet
     ports:
