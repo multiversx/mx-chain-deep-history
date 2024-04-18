@@ -1,13 +1,3 @@
-# Deep-history Observing Squad
+This repository has been deprecated.
 
-## For integrators
-
-See [docs.multiversx.com](https://docs.multiversx.com/integrators/deep-history-squad).
-
-## For contributors
-
-### Build the Docker images
-
-```
-docker image build --network=host . -t multiversx/deep-history:latest -f ./Dockerfile
-```
+The information and step-by-step instructions for setting up a deep-history observing squad has been moved [here](https://docs.multiversx.com/integrators/deep-history-squad).
