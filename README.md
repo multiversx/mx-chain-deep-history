@@ -1,1 +1,3 @@
-This repository has been deprecated, for documentation regarding deep-history observing squads, see [docs.multiversx.com](https://docs.multiversx.com/integrators/deep-history-squad).
+This repository has been deprecated.
+
+The information and step-by-step instructions for setting up a deep-history observing squad has been moved [here](https://docs.multiversx.com/integrators/deep-history-squad).
